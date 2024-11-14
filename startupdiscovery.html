@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash - Startup Discovery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .discovery-interface {
+            height: 100%;
+            display: flex;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(28, 28, 30, 0.6);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 24px;
+        }
+
+        .search-container {
+            margin-bottom: 24px;
+        }
+
+        .search-bar {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-size: 14px;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar:focus {
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(78, 205, 196, 0.3);
+        }
+
+        .filter-section {
+            margin-bottom: 24px;
+        }
+
+        .filter-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #4ECDC4;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .filter-option.active {
+            background: rgba(78, 205, 196, 0.15);
+            color: #4ECDC4;
+        }
+
+        .filter-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(4px);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .view-options {
+            display: flex;
+            gap: 12px;
+        }
+
+        .view-option {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .view-option.active {
+            background: rgba(78, 205, 196, 0.15);
+            color: #4ECDC4;
+        }
+
+        .startup-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .startup-card {
+            background: rgba(28, 28, 30, 0.6);
+            border-radius: 16px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+
+        .startup-card:hover {
+            transform: translateY(-4px);
+            background: rgba(28, 28, 30, 0.8);
+            border-color: rgba(78, 205, 196, 0.3);
+        }
+
+        .startup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .startup-info h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .startup-category {
+            font-size: 13px;
+            color: #888;
+        }
+
+        .match-score {
+            background: rgba(78, 205, 196, 0.15);
+            color: #4ECDC4;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .startup-description {
+            color: #888;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .startup-metrics {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .metric {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #888;
+        }
+
+        .metric strong {
+            color: #fff;
+            margin-right: 4px;
+        }
+
+        .startup-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.05);
+            color: #888;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .tag:hover {
+            background: rgba(78, 205, 196, 0.1);
+            color: #4ECDC4;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+
+        .badge.trending {
+            background: rgba(255, 107, 107, 0.1);
+            color: #FF6B6B;
+        }
+
+        .badge.verified {
+            background: rgba(78, 205, 196, 0.1);
+            color: #4ECDC4;
+        }
+@media screen and (max-width: 1024px) {
+    .discovery-interface {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    .filter-options {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="discovery-interface">
+        <aside class="sidebar">
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Search startups...">
+            </div>
+
+            <div class="filter-section">
+                <h3 class="filter-title">Industry</h3>
+                <div class="filter-options">
+                    <div class="filter-option active">AI & Machine Learning</div>
+                    <div class="filter-option">FinTech</div>
+                    <div class="filter-option">HealthTech</div>
+                    <div class="filter-option">Enterprise SaaS</div>
+                    <div class="filter-option">CleanTech</div>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3 class="filter-title">Stage</h3>
+                <div class="filter-options">
+                    <div class="filter-option">Pre-seed</div>
+                    <div class="filter-option active">Seed</div>
+                    <div class="filter-option">Series A</div>
+                    <div class="filter-option">Series B+</div>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3 class="filter-title">Traction</h3>
+                <div class="filter-options">
+                    <div class="filter-option active">High Growth</div>
+                    <div class="filter-option">Product-Market Fit</div>
+                    <div class="filter-option">Early Validation</div>
+                    <div class="filter-option">Revenue Growing</div>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3 class="filter-title">Location</h3>
+                <div class="filter-options">
+                    <div class="filter-option">Global</div>
+                    <div class="filter-option active">North America</div>
+                    <div class="filter-option">Europe</div>
+                    <div class="filter-option">Asia Pacific</div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="view-options">
+                    <div class="view-option active">Best Matches</div>
+                    <div class="view-option">Recent</div>
+                    <div class="view-option">Trending</div>
+                </div>
+            </div>
+
+            <div class="startup-grid">
+                <div class="startup-card">
+                    <div class="startup-header">
+                        <div class="startup-info">
+                            <h3>TechFlow AI <span class="badge verified">Verified</span></h3>
+                            <div class="startup-category">AI/ML • Enterprise</div>
+                        </div>
+                        <div class="match-score">94%</div>
+                    </div>
+                    <p class="startup-description">
+                        AI-powered workflow automation platform revolutionizing enterprise productivity with advanced machine learning algorithms.
+                    </p>
+                    <div class="startup-metrics">
+                        <div class="metric"><strong>3x</strong>Growth</div>
+                        <div class="metric"><strong>$2.5M</strong>ARR</div>
+                        <div class="metric"><strong>95%</strong>Retention</div>
+                    </div>
+                    <div class="startup-tags">
+                        <span class="tag">Enterprise AI</span>
+                        <span class="tag">Workflow Automation</span>
+                        <span class="tag">B2B SaaS</span>
+                    </div>
+                </div>
+
+                <div class="startup-card">
+                    <div class="startup-header">
+                        <div class="startup-info">
+                            <h3>HealthSync <span class="badge trending">Trending</span></h3>
+                            <div class="startup-category">HealthTech • AI</div>
+                        </div>
+                        <div class="match-score">92%</div>
+                    </div>
+                    <p class="startup-description">
+                        Next-generation health monitoring platform using AI for predictive analytics and personalized care recommendations.
+                    </p>
+                    <div class="startup-metrics">
+                        <div class="metric"><strong>4x</strong>Growth</div>
+                        <div class="metric"><strong>$1.8M</strong>ARR</div>
+                        <div class="metric"><strong>92%</strong>Retention</div>
+                    </div>
+                    <div class="startup-tags">
+                        <span class="tag">Health AI</span>
+                        <span class="tag">Predictive Analytics</span>
+                        <span class="tag">Digital Health</span>
+                    </div>
+                </div>
+
+                <div class="startup-card">
+                    <div class="startup-header">
+                        <div class="startup-info">
+                            <h3>FinSecure</h3>
+                            <div class="startup-category">FinTech • Security</div>
+                        </div>
+                        <div class="match-score">88%</div>
+                    </div>
+                    <p class="startup-description">
+                        Enterprise-grade blockchain security solutions protecting financial institutions with advanced cryptographic systems.
+                    </p>
+                    <div class="startup-metrics">
+                        <div class="metric"><strong>2.5x</strong>Growth</div>
+                        <div class="metric"><strong>$3.2M</strong>ARR</div>
+                        <div class="metric"><strong>98%</strong>Retention</div>
+                    </div>
+                    <div class="startup-tags">
+                        <span class="tag">Blockchain</span>
+                        <span class="tag">Security</span>
+                        <span class="tag">Enterprise</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

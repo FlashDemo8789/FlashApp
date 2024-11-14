@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash - AI-Powered Venture Capital</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            line-height: 1.5;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+            padding: 1rem 2rem;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 24px;
+            color: #888;
+            margin-bottom: 2rem;
+        }
+
+        .section {
+            padding: 8rem 2rem;
+            text-align: center;
+        }
+
+        .section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            font-size: 40px;
+            margin-bottom: 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 1rem;
+            color: #4ECDC4;
+        }
+
+        .feature-card p {
+            color: #888;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-top: 2rem;
+            transition: transform 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        .stats-section {
+            background: #1a1a1a;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-item h3 {
+            font-size: 48px;
+            color: #4ECDC4;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            color: #888;
+        }
+        @media only screen and (max-width:800px) {
+  /* For tablets: */
+  .nav {
+    width: 100%;
+    padding: 0;
+  }
+}
+@media only screen and (max-width:500px) {
+  /* For mobile phones: */
+  .nav {
+    width: 100%;
+    padding:15px;
+  }  
+  .nav-links {
+    padding-left: 30px;
+    overflow: auto;
+    white-space: nowrap;
+  }
+    
+}
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-content">
+            <div class="logo">
+                <a href="https://flash.zone/index.html">
+                    <img src="favicon.ico" alt="Flash" width="70" height="60">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="https://anirudhbhanot.github.io/FlashApp/PlatformPage.html">Platform</a>
+                <a href="https://anirudhbhanot.github.io/FlashApp/TechnologyPage.html">Technology</a>
+                <a href="https://anirudhbhanot.github.io/FlashApp/AboutPage.html">About</a>
+                <a href="https://anirudhbhanot.github.io/FlashApp/ContactPage.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>The Future of Venture Capital</h1>
+            <p>Powered by Startup DNA Analysis™ Technology</p>
+            <a href="#demo" class="cta-button">Request Demo</a>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-content">
+            <h2>Revolutionizing Startup Analysis</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>AI-Powered Insights</h3>
+                    <p>Our quantum matching system analyzes 47,000+ data points to provide unparalleled startup intelligence.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Market Fit Assessment</h3>
+                    <p>Advanced algorithms evaluate product-market fit with up to 94% accuracy.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Team Analysis</h3>
+                    <p>Comprehensive evaluation of founding teams using multi-head attention models.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section stats-section">
+        <div class="section-content">
+            <h2>Platform Performance</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>85%+</h3>
+                    <p>Prediction Accuracy</p>
+                </div>
+                <div class="stat-item">
+                    <h3>47K+</h3>
+                    <p>Data Points Analyzed</p>
+                </div>
+                <div class="stat-item">
+                    <h3>99.9%</h3>
+                    <p>Platform Uptime</p>
+                </div>
+                <div class="stat-item">
+                    <h3>500ms</h3>
+                    <p>Analysis Speed</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

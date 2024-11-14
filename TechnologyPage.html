@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash - Technology</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            line-height: 1.5;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+            padding: 1rem 2rem;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        .tech-hero {
+            padding-top: 120px;
+            padding-bottom: 60px;
+            text-align: center;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+        }
+
+        .tech-hero h1 {
+            font-size: 48px;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tech-hero p {
+            font-size: 20px;
+            color: #888;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .tech-overview {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .overview-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: transform 0.3s;
+        }
+
+        .overview-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .overview-card h3 {
+            color: #4ECDC4;
+            font-size: 24px;
+            margin-bottom: 1rem;
+        }
+
+        .overview-card p {
+            color: #888;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            color: #aaa;
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: "•";
+            color: #FF6B6B;
+            position: absolute;
+            left: 0;
+        }
+
+        .architecture-section {
+            max-width: 1200px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+        }
+
+        .arch-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .arch-header h2 {
+            font-size: 36px;
+            color: #4ECDC4;
+            margin-bottom: 1rem;
+        }
+
+        .arch-header p {
+            color: #888;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .arch-diagram {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .layer-section {
+            margin-bottom: 4rem;
+        }
+
+        .layer-section h3 {
+            color: #FF6B6B;
+            font-size: 24px;
+            margin-bottom: 1.5rem;
+        }
+
+        .layer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .layer-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+        }
+
+        .layer-card h4 {
+            color: #4ECDC4;
+            margin-bottom: 1rem;
+        }
+
+        .tech-diagram {
+            width: 100%;
+            height: 100%;
+        }
+
+        .performance-section {
+            max-width: 1200px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .performance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .performance-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+
+        .performance-card h3 {
+            font-size: 36px;
+            color: #4ECDC4;
+            margin-bottom: 0.5rem;
+        }
+
+        .performance-card p {
+            color: #888;
+        }
+                @media only screen and (max-width:800px) {
+  /* For tablets: */
+  .nav {
+    width: 100%;
+    padding: 0;
+  }
+}
+@media only screen and (max-width:500px) {
+  /* For mobile phones: */
+  .nav {
+    width: 100%;
+    padding:15px;
+  }  
+  .nav-links {
+    padding-left: 30px;
+    overflow: auto;
+    white-space: nowrap;
+  }
+    
+}
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-content">
+            <div class="logo">
+                <a href="https://flash.zone/index.html">
+                    <img src="favicon.ico" alt="Flash" width="70" height="60">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="https://anirudhbhanot.github.io/FlashApp/index.html">Home</a>
+                <a href="https://anirudhbhanot.github.io/FlashApp/PlatformPage.html">Platform</a>
+                <a href="https://anirudhbhanot.github.io/FlashApp/TechnologyPage.html">Technology</a>
+                <a href="https://anirudhbhanot.github.io/FlashApp/AboutPage.html">About</a>
+                <a href="https://anirudhbhanot.github.io/FlashApp/ContactPage.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="tech-hero">
+        <h1>Our Technology</h1>
+        <p>Powered by advanced AI and machine learning, our Startup DNA Analysis™ technology processes over 47,000 data points to deliver unparalleled insights.</p>
+    </section>
+
+    <section class="tech-overview">
+        <div class="overview-grid">
+            <div class="overview-card">
+                <h3>Data Collection Layer</h3>
+                <p>Comprehensive data gathering from multiple sources to build a complete picture of startup potential.</p>
+                <ul class="feature-list">
+                    <li>Real-time web scraping</li>
+                    <li>API integrations with major platforms</li>
+                    <li>Social media analysis</li>
+                    <li>Patent database monitoring</li>
+                    <li>Academic publication tracking</li>
+                </ul>
+            </div>
+
+            <div class="overview-card">
+                <h3>AI Processing Engine</h3>
+                <p>State-of-the-art machine learning models for deep analysis and pattern recognition.</p>
+                <ul class="feature-list">
+                    <li>Natural Language Processing</li>
+                    <li>Sentiment Analysis</li>
+                    <li>Technical Capability Assessment</li>
+                    <li>Growth Pattern Recognition</li>
+                    <li>Market Trend Analysis</li>
+                </ul>
+            </div>
+
+            <div class="overview-card">
+                <h3>Quantum Matching System</h3>
+                <p>Advanced neural networks for optimal startup-investor matching.</p>
+                <ul class="feature-list">
+                    <li>47,000+ feature analysis</li>
+                    <li>Multi-layer neural networks</li>
+                    <li>Real-time compatibility scoring</li>
+                    <li>Dynamic learning system</li>
+                    <li>Predictive analytics</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="architecture-section">
+        <div class="arch-header">
+            <h2>System Architecture</h2>
+            <p>Our multi-layered architecture ensures robust, scalable, and efficient processing of startup data.</p>
+        </div>
+
+        <div class="arch-diagram">
+            <svg class="tech-diagram" viewBox="0 0 800 400">
+                <!-- System Architecture Diagram -->
+                <defs>
+                    <linearGradient id="gradientBg" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#FF6B6B;stop-opacity:0.2" />
+                        <stop offset="100%" style="stop-color:#4ECDC4;stop-opacity:0.2" />
+                    </linearGradient>
+                </defs>
+
+                <!-- Background -->
+                <rect width="800" height="400" fill="url(#gradientBg)" rx="10"/>
+
+                <!-- Layers -->
+                <g transform="translate(50, 50)">
+                    <!-- Data Collection Layer -->
+                    <rect width="700" height="60" fill="rgba(255,107,107,0.2)" rx="5"/>
+                    <text x="20" y="35" fill="#FF6B6B" font-size="16">Data Collection Layer</text>
+                    
+                    <!-- Processing Layer -->
+                    <rect y="80" width="700" height="60" fill="rgba(78,205,196,0.2)" rx="5"/>
+                    <text x="20" y="115" fill="#4ECDC4" font-size="16">Processing Layer</text>
+                    
+                    <!-- Feature Engineering Layer -->
+                    <rect y="160" width="700" height="60" fill="rgba(255,107,107,0.2)" rx="5"/>
+                    <text x="20" y="195" fill="#FF6B6B" font-size="16">Feature Engineering Layer</text>
+                    
+                    <!-- AI Model Layer -->
+                    <rect y="240" width="700" height="60" fill="rgba(78,205,196,0.2)" rx="5"/>
+                    <text x="20" y="275" fill="#4ECDC4" font-size="16">AI Model Layer</text>
+
+                    <!-- Connecting Lines -->
+                    <line x1="350" y1="60" x2="350" y2="80" stroke="#666" stroke-width="2"/>
+                    <line x1="350" y1="140" x2="350" y2="160" stroke="#666" stroke-width="2"/>
+                    <line x1="350" y1="220" x2="350" y2="240" stroke="#666" stroke-width="2"/>
+                </g>
+            </svg>
+        </div>
+
+        <div class="layer-section">
+            <h3>Data Processing Pipeline</h3>
+            <div class="layer-grid">
+                <div class="layer-card">
+                    <h4>Collection</h4>
+                    <ul class="feature-list">
+                        <li>Public data scrapers</li>
+                        <li>API integrations</li>
+                        <li>Real-time monitoring</li>
+                    </ul>
+                </div>
+                <div class="layer-card">
+                    <h4>Processing</h4>
+                    <ul class="feature-list">
+                        <li>Text processing</li>
+                        <li>Numerical analysis</li>
+                        <li>Entity extraction</li>
+                    </ul>
+                </div>
+                <div class="layer-card">
+                    <h4>Engineering</h4>
+                    <ul class="feature-list">
+                        <li>Feature extraction</li>
+                        <li>Pattern recognition</li>
+                        <li>Metric calculation</li>
+                    </ul>
+                </div>
+                <div class="layer-card">
+                    <h4>Modeling</h4>
+                    <ul class="feature-list">
+                        <li>Neural networks</li>
+                        <li>Predictive analytics</li>
+                        <li>Classification models</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="performance-section">
+        <h2 style="font-size: 36px; color: #4ECDC4; margin-bottom: 2rem;">Performance Metrics</h2>
+        <div class="performance-grid">
+            <div class="performance-card">
+                <h3>500ms</h3>
+                <p>Average Response Time</p>
+            </div>
+            <div class="performance-card">
+                <h3>99.9%</h3>
+                <p>System Uptime</p>
+            </div>
+            <div class="performance-card">
+                <h3>85%+</h3>
+                <p>Prediction Accuracy</p>
+            </div>
+            <div class="performance-card">
+                <h3>1000+</h3>
+                <p>Concurrent Users</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

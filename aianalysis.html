@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash - AI Analysis Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        .analysis-dashboard {
+            min-height: 100vh;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: grid;
+            grid-template-columns: 260px 1fr;
+        }
+
+        /* Navigation Sidebar */
+        .dashboard-nav {
+            background: rgba(28, 28, 30, 0.6);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .nav-header {
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .company-logo {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .company-logo .verified {
+            background: #4ECDC4;
+            color: #000;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+
+        .company-meta {
+            font-size: 13px;
+            color: #888;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .nav-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .nav-section {
+            padding: 12px 16px;
+            border-radius: 12px;
+            color: #888;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-section.active {
+            background: rgba(78, 205, 196, 0.15);
+            color: #4ECDC4;
+        }
+
+        .nav-section:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+        }
+
+        /* Main Content Area */
+        .dashboard-content {
+            padding: 24px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .action-button {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-button.primary {
+            background: rgba(78, 205, 196, 0.15);
+            color: #4ECDC4;
+        }
+
+        .action-button.secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: #888;
+        }
+
+        /* Key Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .metric-card {
+            background: rgba(28, 28, 30, 0.6);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(78, 205, 196, 0.3);
+        }
+
+        .metric-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .metric-title {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .metric-trend {
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .trend-up {
+            color: #4ECDC4;
+        }
+
+        .trend-down {
+            color: #FF6B6B;
+        }
+
+        .metric-value {
+            font-size: 28px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .metric-chart {
+            height: 40px;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4ECDC4, #FF6B6B);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        /* Analysis Grid */
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+
+        .analysis-card {
+            background: rgba(28, 28, 30, 0.6);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            color: #4ECDC4;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .card-action {
+            color: #888;
+            font-size: 13px;
+            padding: 4px 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .card-action.active {
+            background: rgba(78, 205, 196, 0.15);
+            color: #4ECDC4;
+        }
+
+        /* Charts and Visualizations */
+        .chart-container {
+            height: 300px;
+            position: relative;
+        }
+
+        .chart-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .grid-line {
+            width: 100%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .chart-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #4ECDC4 0%, #FF6B6B 100%);
+            transform-origin: left;
+            animation: chartLine 2s ease-out forwards;
+        }
+
+        @keyframes chartLine {
+            from {
+                transform: scaleX(0);
+            }
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        /* Data Points */
+        .data-point {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #4ECDC4;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .data-line {
+            position: absolute;
+            height: 2px;
+            background: rgba(78, 205, 196, 0.3);
+            transform-origin: left;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            background: rgba(28, 28, 30, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 12px;
+            color: #fff;
+            pointer-events: none;
+            transform: translate(-50%, -100%);
+            margin-top: -8px;
+            z-index: 100;
+        }
+
+        /* Insights List */
+        .insights-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .insight-item {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .insight-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .insight-icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(78, 205, 196, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4ECDC4;
+        }
+
+        .insight-content h4 {
+            color: #fff;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .insight-content p {
+            color: #888;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* Status Indicators */
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-badge.positive {
+            background: rgba(78, 205, 196, 0.1);
+            color: #4ECDC4;
+        }
+
+        .status-badge.warning {
+            background: rgba(255, 184, 108, 0.1);
+            color: #FFB86C;
+        }
+
+        .status-badge.negative {
+            background: rgba(255, 107, 107, 0.1);
+            color: #FF6B6B;
+        }
+        @media screen and (max-width: 1024px) {
+    .chart-container {
+        height: 160px;
+    }
+    
+    .insights-list {
+        grid-template-columns: 1fr;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="analysis-dashboard">
+        <!-- Navigation Sidebar -->
+        <nav class="dashboard-nav">
+            <div class="nav-header">
+                <div class="company-logo">
+                    TechFlow AI
+                    <span class="verified">✓</span>
+                </div>
+                <div class="company-meta">
+                    <span>AI/ML • Series A</span>
+                    <span>San Francisco, CA</span>
+                    <span>Last updated: Real-time</span>
+                </div>
+            </div>
+
+            <div class="nav-sections">
+                <div class="nav-section active">
+                    <span>Overview</span>
+                </div>
+                <div class="nav-section">
+                    <span>Market Analysis</span>
+                </div>
+                <div class="nav-section">
+                    <span>Team Analysis</span>
+                </div>
+                <div class="nav-section">
+                    <span>Financial Health</span>
+                </div>
+                <div class="nav-section">
+                    <span>Risk Assessment</span>
+                </div>
+                <div class="nav-section">
+                    <span>Technology Stack</span>
+                </div>
+                <div class="nav-section">
+                    <span>Customer Analytics</span>
+                </div>
+                <div class="nav-section">
+                    <span>Investment Potential</span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="dashboard-content">
+            <div class="content-header">
+                <h1 class="header-title">AI Analysis Dashboard</h1>
+                <div class="header-actions">
+                    <button class="action-button secondary">Export Report</button>
+                    <button class="action-button primary">Schedule Demo</button>
+                </div>
+            </div>
+
+            <!-- Key Metrics -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-title">Market Fit Score</span>
+                        <span class="metric-trend trend-up">↑ 2.3%</span>
+                    </div>
+                    <div class="metric-value">94%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 94%"></div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-title">Team Score</span>
+                        <span class="metric-trend trend-up">↑ 1.5%</span>
+                    </div>
+                    <div class="metric-value">88%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 88%"></div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-title">Growth Potential</span>
+                        <span class="metric-trend trend-up">↑ 3.1%</span>
+                    </div>
+                    <div class="metric-value">92%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 92%"></div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <span class="metric-title">Risk Level</span>
+                        <span class="metric-trend trend-down">↓ 1.2%</span>
+                    </div>
+                    <div class="metric-value">Low</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 30%"></div>

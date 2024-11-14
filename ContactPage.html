@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash - Contact Us</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            line-height: 1.5;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+            padding: 1rem 2rem;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        .contact-hero {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            color: #888;
+            margin-bottom: 2rem;
+        }
+
+        .contact-section {
+            padding: 4rem 2rem;
+            background: #000;
+        }
+
+        .contact-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: #4ECDC4;
+            margin-bottom: 0.5rem;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #4ECDC4;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: #fff;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+            width: 100%;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: transform 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-card h3 {
+            color: #4ECDC4;
+            margin-bottom: 1rem;
+            font-size: 20px;
+        }
+
+        .info-card p {
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+
+        .office-locations {
+            margin-top: 4rem;
+            padding: 4rem 2rem;
+            background: #080808;
+        }
+
+        .locations-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .locations-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .locations-header h2 {
+            font-size: 36px;
+            color: #4ECDC4;
+            margin-bottom: 1rem;
+        }
+
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .location-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: transform 0.3s;
+        }
+
+        .location-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .location-card h3 {
+            color: #4ECDC4;
+            margin-bottom: 0.5rem;
+            font-size: 24px;
+        }
+
+        .location-card h4 {
+            color: #FF6B6B;
+            margin-bottom: 1rem;
+            font-size: 16px;
+        }
+
+        .location-card p {
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+
+        .social-section {
+            padding: 4rem 2rem;
+            background: #000;
+            text-align: center;
+        }
+
+        .social-links {
+            max-width: 600px;
+            margin: 2rem auto;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .social-link {
+            color: #888;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 16px;
+        }
+
+        .social-link:hover {
+            color: #4ECDC4;
+        }
+
+        footer {
+            background: #080808;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+                @media only screen and (max-width:800px) {
+  /* For tablets: */
+  .nav {
+    width: 100%;
+    padding: 0;
+  }
+}
+@media only screen and (max-width:500px) {
+  /* For mobile phones: */
+  .nav {
+    width: 100%;
+    padding:15px;
+  }  
+  .nav-links {
+    padding-left: 30px;
+    overflow: auto;
+    white-space: nowrap;
+  }
+    
+}
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-content">
+            <div class="logo">
+                <a href="https://flash.zone/index.html">
+                    <img src="favicon.ico" alt="Flash" width="70" height="60">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="https://anirudhbhanot.github.io/FlashApp/index.html">Home</a>
+                <a href="https://anirudhbhanot.github.io/FlashApp/PlatformPage.html">Platform</a>
+                <a href="https://anirudhbhanot.github.io/FlashApp/TechnologyPage.html">Technology</a>
+                <a href="https://anirudhbhanot.github.io/FlashApp/AboutPage.html">About</a>
+                <a href="https://anirudhbhanot.github.io/FlashApp/ContactPage.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="contact-hero">
+        <div class="hero-content">
+            <h1>Get in Touch</h1>
+            <p>Have questions? We're here to help transform your investment journey with AI-powered insights.</p>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="contact-grid">
+            <div class="contact-form">
+                <h2 style="color: #4ECDC4; margin-bottom: 2rem; font-size: 24px;">Send Us a Message</h2>
+                <form>
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" placeholder="Your full name">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="Your email address">
+                    </div>
+                    <div class="form-group">
+                        <label>I am a</label>
+                        <select>
+                            <option>Select your role</option>
+                            <option>Startup Founder</option>
+                            <option>Investor</option>
+                            <option>Corporate Partner</option>
+                            <option>Press/Media</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea placeholder="How can we help you?"></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Send Message</button>
+                </form>
+            </div>
+
+            <div class="contact-info">
+                <div class="info-card">
+                    <h3>General Inquiries</h3>
+                    <p>Email: info@flash.zone</p>
+                    <p>Phone: +1 (415) 555-0123</p>
+                </div>
+                <div class="info-card">
+                    <h3>Startups</h3>
+                    <p>Email: startups@flash.zone</p>
+                    <p>Schedule a demo of our AI-powered platform</p>
+                </div>
+                <div class="info-card">
+                    <h3>Investors</h3>
+                    <p>Email: investors@flash.zone</p>
+                    <p>Learn about our startup analysis technology</p>
+                </div>
+                <div class="info-card">
+                    <h3>Press & Media</h3>
+                    <p>Email: press@flash.zone</p>
+                    <p>Get the latest updates and press materials</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="office-locations">
+        <div class="locations-content">
+            <div class="locations-header">
+                <h2>Our Offices</h2>
+                <p style="color: #888;">Visit us at one of our global locations</p>
+            </div>
+            <div class="locations-grid">
+                <div class="location-card">
+                    <h3>New York</h3>
+                    <h4>Global Headquarters</h4>
+                    <p>1350 Avenue of the Americas</p>
+                    <p>New York, NY 10019</p>
+                    <p style="margin-top: 1rem; color: #FF6B6B;">+1 (415) 555-0123</p>
+                </div>
+                <div class="location-card">
+                    <h3>Bangalore</h3>
+                    <h4>Technology & Innovation Hub</h4>
+                    <p>89, 23rd Cross Btm Layout Stage 2</p>
+                    <p>Bengaluru, 560076</p>
+                    <p style="margin-top: 1rem; color: #FF6B6B;">+1 (212) 555-0123</p>
+                </div>
+                <div class="location-card">
+                    <h3>Tokyo</h3>
+                    <h4>Asia Pacific Operations</h4>
+                    <p>Shibuya Scramble Square</p>
+                    <p>2-24-1 Shibuya, Shibuya-ku, Tokyo</p>
+                    <p style="margin-top: 1rem; color: #FF6B6B;">+44 20 7123 4567</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="social-section">
+        <h2 style="color: #4ECDC4; margin-bottom: 1rem;">Connect With Us</h2>
+        <p style="color: #888; margin-bottom: 2rem;">Stay updated with our latest news and insights</p>
+        <div class="social-links">
+            <a href="#" class="social-link">LinkedIn</a>
+            <a href="#" class="social-link">Twitter</a>
+            <a href="#" class="social-link">Medium</a>
+            <a href="#" class="social-link">GitHub</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="logo" style="margin-bottom: 2rem;">Flash</div>
+            <p style="color: #888; margin-bottom: 2rem;">Building the future of venture capital through AI</p>
+            <div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem;">
+                <a href="#" style="color: #888; text-decoration: none;">Terms</a>
+                <a href="#" style="color: #888; text-decoration: none;">Privacy</a>
+                <a href="#" style="color: #888; text-decoration: none;">Support</a>
+            </div>
+            <p style="color: #666;">© 2024 Flash. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

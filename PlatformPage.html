@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash - Platform</title>
+    <style>
+        /* Including previous styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            line-height: 1.5;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+            padding: 1rem 2rem;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        .platform-hero {
+            padding-top: 120px;
+            padding-bottom: 60px;
+            text-align: center;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+        }
+
+        .platform-hero h1 {
+            font-size: 48px;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .platform-hero p {
+            font-size: 20px;
+            color: #888;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .platform-features {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        .feature-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 6rem;
+            gap: 4rem;
+        }
+
+        .feature-row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .feature-text {
+            flex: 1;
+        }
+
+        .feature-image {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .feature-text h2 {
+            font-size: 36px;
+            margin-bottom: 1rem;
+            color: #4ECDC4;
+        }
+
+        .feature-text p {
+            color: #888;
+            font-size: 18px;
+            margin-bottom: 2rem;
+        }
+
+        .feature-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            color: #FF6B6B;
+            font-size: 24px;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .cta-section {
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+                @media only screen and (max-width:800px) {
+  /* For tablets: */
+  .nav {
+    width: 100%;
+    padding: 0;
+  }
+}
+@media only screen and (max-width:500px) {
+  /* For mobile phones: */
+  .nav {
+    width: 100%;
+    padding:15px;
+  }  
+  .nav-links {
+    padding-left: 30px;
+    overflow: auto;
+    white-space: nowrap;
+  }    
+}
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-content">
+            <div class="logo">
+                <a href="https://flash.zone/index.html">
+                    <img src="favicon.ico" alt="Flash" width="70" height="60">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="https://anirudhbhanot.github.io/FlashApp/index.html">Home</a>
+                <a href="https://anirudhbhanot.github.io/FlashApp/PlatformPage.html">Platform</a>
+                <a href="https://anirudhbhanot.github.io/FlashApp/TechnologyPage.html">Technology</a>
+                <a href="https://anirudhbhanot.github.io/FlashApp/AboutPage.html">About</a>
+                <a href="https://anirudhbhanot.github.io/FlashApp/ContactPage.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="platform-hero">
+        <h1>Unlock the Power of Startup DNA</h1>
+        <p>Flash's AI-powered platform provides unparalleled startup analysis, discovery, and investor matching.</p>
+    </section>
+
+    <div class="platform-features">
+        <div class="feature-row">
+            <div class="feature-text">
+                <h2>Startup Discovery</h2>
+                <p>Our AI-powered discovery engine continuously scans and analyzes the startup ecosystem to identify promising opportunities before they become obvious.</p>
+                <div class="feature-stats">
+                    <div class="stat-card">
+                        <h3>Real-time</h3>
+                        <p>Continuous monitoring of startup performance and market dynamics</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Smart Filters</h3>
+                        <p>Advanced filters based on industry, stage, traction, and potential</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Personalized</h3>
+                        <p>Tailored recommendations based on investor preferences</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Predictive</h3>
+                        <p>AI-powered forecasting of future market trends</p>
+                    </div>
+                </div>
+            </div>
+            <div class="feature-image">
+                <a href="https://flash.zone/startupdiscovery.html">Startup Discovery Interface</a>
+            </div>
+        </div>
+
+        <div class="feature-row">
+            <div class="feature-text">
+                <h2>AI Analysis</h2>
+                <p>Our Startup DNA Analysis™ technology provides deep insights into startup potential, team capabilities, and market opportunities.</p>
+                <div class="feature-stats">
+                    <div class="stat-card">
+                        <h3>47,000+ Data Points</h3>
+                        <p>Comprehensive analysis across multiple dimensions</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>85%+ Accuracy</h3>
+                        <p>Industry-leading prediction accuracy</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Real-time Monitoring</h3>
+                        <p>Continuous updates on startup performance</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Custom Insights</h3>
+                        <p>Tailored analysis based on investor priorities</p>
+                    </div>
+                </div>
+            </div>
+            <div class="feature-image">
+                <a href="https://flash.zone/aianalysis.html">AI Analysis Dashboard</a>
+            </div>
+        </div>
+
+        <div class="feature-row">
+            <div class="feature-text">
+                <h2>Investor Matching</h2>
+                <p>Quantum matching system connects startups with their ideal investors based on investment thesis, portfolio fit, and value-add potential.</p>
+                <div class="feature-stats">
+                    <div class="stat-card">
+                        <h3>Smart Matching</h3>
+                        <p>AI-powered investor-startup matching</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Rich Insights</h3>
+                        <p>Detailed compatibility analysis and recommendations</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Continuous Learning</h3>
+                        <p>Dynamic system updates based on user feedback</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Time Savings</h3>
+                        <p>Streamlined deal sourcing and due diligence</p>
+                    </div>
+                </div>
+            </div>
+            <div class="feature-image">
+                <a href="https://flash.zone/investormatching.html">Investor Matching Interface</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="cta-section">
+        <a href="#" class="cta-button">Request Demo</a>
+    </section>
+</body>
+</html>

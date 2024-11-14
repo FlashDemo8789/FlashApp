@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash - About Us</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+        }
+
+         .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+            padding: 1rem 2rem;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        .about-page {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .hero-section {
+            padding: 180px 24px 100px;
+            text-align: center;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+        }
+
+        .hero-title {
+            font-size: 56px;
+            margin-bottom: 24px;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: #888;
+            max-width: 800px;
+            margin: 0 auto 48px;
+            line-height: 1.6;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 64px;
+            margin-top: 48px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 36px;
+            color: #4ECDC4;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: #888;
+            font-size: 16px;
+        }
+
+        .mission-section {
+            padding: 100px 24px;
+            background: #1a1a1a;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 36px;
+            color: #4ECDC4;
+            margin-bottom: 24px;
+        }
+
+        .mission-text {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 20px;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        .team-section {
+            padding: 100px 24px;
+            background: #000;
+        }
+
+        .team-grid {
+            max-width: 1200px;
+            margin: 48px auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+        }
+
+        .team-member {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 32px;
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .member-photo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 24px;
+            border-radius: 60px;
+            overflow: hidden;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+        }
+
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .member-info {
+            text-align: center;
+        }
+
+        .member-name {
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .member-role {
+            color: #4ECDC4;
+            font-size: 16px;
+            margin-bottom: 16px;
+        }
+
+        .member-bio {
+            color: #888;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .member-highlights {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .highlight-item {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .highlight-item::before {
+            content: "•";
+            color: #4ECDC4;
+        }
+
+        .values-section {
+            padding: 100px 24px;
+            background: #1a1a1a;
+        }
+
+        .values-grid {
+            max-width: 1200px;
+            margin: 48px auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+        }
+
+        .value-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 32px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .value-icon {
+            font-size: 32px;
+            margin-bottom: 24px;
+        }
+
+        .value-title {
+            color: #4ECDC4;
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+
+        .value-description {
+            color: #888;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+                @media only screen and (max-width:800px) {
+  /* For tablets: */
+  .nav {
+    width: 100%;
+    padding: 0;
+  }
+}
+@media only screen and (max-width:500px) {
+  /* For mobile phones: */
+  .nav {
+    width: 100%;
+    padding:15px;
+  }  
+  .nav-links {
+    padding-left: 30px;
+    overflow: auto;
+    white-space: nowrap;
+  }    
+}
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-content">
+            <div class="logo">
+                <a href="https://flash.zone/index.html">
+                    <img src="favicon.ico" alt="Flash" width="70" height="60">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="https://anirudhbhanot.github.io/FlashApp/index.html">Home</a>
+                <a href="https://anirudhbhanot.github.io/FlashApp/PlatformPage.html">Platform</a>
+                <a href="https://anirudhbhanot.github.io/FlashApp/TechnologyPage.html">Technology</a>
+                <a href="https://anirudhbhanot.github.io/FlashApp/AboutPage.html">About</a>
+                <a href="https://anirudhbhanot.github.io/FlashApp/ContactPage.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+    <div class="about-page">
+        <section class="hero-section">
+            <h1 class="hero-title">Revolutionizing Venture Capital</h1>
+            <p class="hero-subtitle">
+                Using AI and data analytics to transform how great ideas get funded. Flash combines cutting-edge technology with deep industry expertise to identify and nurture the most promising startups.
+            </p>
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-value">47K+</div>
+                    <div class="stat-label">Data Points Analyzed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">85%+</div>
+                    <div class="stat-label">Prediction Accuracy</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">500+</div>
+                    <div class="stat-label">Startups Analyzed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">$50M+</div>
+                    <div class="stat-label">Investments Facilitated</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mission-section">
+            <h2 class="section-title">Our Mission</h2>
+            <p class="mission-text">
+                We're revolutionizing venture capital by leveraging advanced AI technology to identify and nurture the most promising startups. Our mission is to create a more efficient, data-driven investment ecosystem that benefits both investors and founders.
+            </p>
+        </section>
+
+        <section class="team-section">
+            <h2 class="section-title" style="text-align: center;">Leadership Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="/api/placeholder/120/120" alt="Syed Faraaz">
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Syed Faraaz</h3>
+                        <div class="member-role">CEO</div>
+                        <p class="member-bio">
+                            Serial entrepreneur with a proven track record of successful startups and exits in the technology sector. Expert in strategic growth and business development.
+                        </p>
+                        <div class="member-highlights">
+                            <div class="highlight-item">Multiple successful exits</div>
+                            <div class="highlight-item">Technology industry veteran</div>
+                            <div class="highlight-item">Strategic business development expert</div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="/api/placeholder/120/120" alt="Palchen">
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Palchen</h3>
+                        <div class="member-role">COO</div>
+                        <p class="member-bio">
+                            SaaS operations expert with 7 years of consulting experience. Specialized in scaling operations and optimizing business processes.
+                        </p>
+                        <div class="member-highlights">
+                            <div class="highlight-item">7 years SaaS consulting</div>
+                            <div class="highlight-item">Operations optimization expert</div>
+                            <div class="highlight-item">Business process specialist</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="/api/placeholder/120/120" alt="Nagendra">
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Nagendra</h3>
+                        <div class="member-role">CTO</div>
+                        <p class="member-bio">
+                            AI research leader with a PhD in Machine Learning from MIT. Pioneer in developing advanced algorithms and predictive analytics systems.
+                        </p>
+                        <div class="member-highlights">
+                            <div class="highlight-item">Led groundbreaking AI research teams</div>
+                            <div class="highlight-item">Developed pioneering algorithms</div>
+                            <div class="highlight-item">Technical architecture expert</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="/api/placeholder/120/120" alt="Kshiti">
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Kshiti</h3>
+                        <div class="member-role">CFO</div>
+                        <p class="member-bio">
+                            Former Senior Manager at KPMG with extensive experience in financial management and strategy. Expert in tech company financials and IPO preparations.
+                        </p>
+                        <div class="member-highlights">
+                            <div class="highlight-item">Led tech IPO preparations</div>
+                            <div class="highlight-item">Financial strategy expert</div>
+                            <div class="highlight-item">Risk management specialist</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="/api/placeholder/120/120" alt="Catherine">
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Catherine</h3>
+                        <div class="member-role">Head of Legal & Compliance</div>
+                        <p class="member-bio">
+                            Legal technology expert with 20 years of experience in legal department operations. Specialized in regulatory compliance for tech companies.
+                        </p>
+                        <div class="member-highlights">
+                            <div class="highlight-item">20 years legal experience</div>
+                            <div class="highlight-item">Regulatory compliance expert</div>
+                            <div class="highlight-item">Risk management specialist</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="/api/placeholder/120/120" alt="Amer">
+                    </div>
+                    <div class="member-info">
+                        <h3 class="member-name">Amer</h3>
+                        <div class="member-role">Head of Marketing</div>
+                        <p class="member-bio">
+                            Digital marketing strategist with 10 years of experience in the Indian market. Expert in growth marketing and brand development.
+                        </p>
+                        <div class="member-highlights">
+                            <div class="highlight-item">10 years digital marketing experience</div>
+                            <div class="highlight-item">Growth marketing specialist</div>
+                            <div class="highlight-item">Brand development expert</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="values-section">
+            <h2 class="section-title" style="text-align: center;">Our Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">🎯</div>
+                    <h3 class="value-title">Innovation</h3>
+                    <p class="value-description">
+                        Pushing the boundaries of what's possible in venture capital through cutting-edge technology
+                    </p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🤝</div>
+                    <h3 class="value-title">Transparency</h3>
+                    <p class="value-description">
+                        Building trust through clear, data-driven insights and open communication
+                    </p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">⭐</div>
+                    <h3 class="value-title">Excellence</h3>
+                    <p class="value-description">
+                        Maintaining the highest standards in our technology and service
+                    </p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🌍</div>
+                    <h3 class="value-title">Impact</h3>
+                    <p class="value-description">
+                        Creating meaningful change in how great ideas get funded
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
