@@ -4,259 +4,394 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flash - AI-Powered Venture Capital</title>
+    <!-- Importing GSAP for advanced animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Three.js for 3D effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Typed.js for typing animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
     <style>
+        /* Core Styles */
+        :root {
+            --primary: #4ECDC4;
+            --secondary: #FF6B6B;
+            --dark: #000;
+            --light: #fff;
+            --gray: #888;
+            --gradient: linear-gradient(45deg, var(--secondary), var(--primary));
+            --blur: rgba(255, 255, 255, 0.1);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
 
         body {
-            background-color: #000;
-            color: #fff;
-            line-height: 1.5;
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
         }
 
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+        }
+
+        .bg-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            background: var(--gradient);
+            filter: blur(50px);
+            opacity: 0.1;
+            animation: shapeMove 20s infinite;
+        }
+
+        /* Dynamic Navigation */
         .nav {
             position: fixed;
             top: 0;
+            left: 0;
             width: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(20px);
-            z-index: 100;
-            padding: 1rem 2rem;
+            z-index: 1000;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .nav-content {
-            max-width: 1200px;
+        .nav-container {
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 1.5rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 0 0 20px 20px;
+            transform: translateY(-100%);
+            animation: slideDown 1s forwards;
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-decoration: none;
+            position: relative;
         }
 
         .nav-links {
             display: flex;
-            gap: 1rem;
+            gap: 2rem;
         }
 
-        .nav-links a {
-            color: #fff;
+        .nav-link {
+            color: var(--light);
             text-decoration: none;
-            font-size: 14px;
-            opacity: 0.8;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
             transition: opacity 0.3s;
+            z-index: -1;
         }
 
-        .nav-links a:hover {
-            opacity: 1;
+        .nav-link:hover::before {
+            opacity: 0.1;
         }
 
+        /* Hero Section */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
             padding: 2rem;
-            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+            position: relative;
+            overflow: hidden;
         }
 
         .hero-content {
-            max-width: 800px;
-        }
-
-        .hero h1 {
-            font-size: 56px;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 24px;
-            color: #888;
-            margin-bottom: 2rem;
-        }
-
-        .section {
-            padding: 8rem 2rem;
-            text-align: center;
-        }
-
-        .section-content {
             max-width: 1200px;
-            margin: 0 auto;
+            text-align: center;
+            z-index: 1;
         }
 
-        .section h2 {
-            font-size: 40px;
-            margin-bottom: 2rem;
+        .hero-title {
+            font-size: 4rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(30px);
         }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--gray);
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
         }
 
-        .feature-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 2rem;
-            transition: transform 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .feature-card h3 {
-            font-size: 24px;
-            margin-bottom: 1rem;
-            color: #4ECDC4;
-        }
-
-        .feature-card p {
-            color: #888;
-        }
-
-        .cta-button {
+        .hero-cta {
             display: inline-block;
             padding: 1rem 2rem;
-            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
-            color: #fff;
+            background: var(--gradient);
+            color: var(--light);
             text-decoration: none;
             border-radius: 30px;
-            font-weight: 600;
-            margin-top: 2rem;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(30px);
             transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .cta-button:hover {
-            transform: scale(1.05);
+        .hero-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-100%) skewX(-15deg);
+            transition: transform 0.5s;
         }
 
-        .stats-section {
-            background: #1a1a1a;
+        .hero-cta:hover {
+            transform: translateY(-2px);
         }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
+        .hero-cta:hover::before {
+            transform: translateX(100%) skewX(-15deg);
         }
 
-        .stat-item h3 {
-            font-size: 48px;
-            color: #4ECDC4;
-            margin-bottom: 0.5rem;
+        /* 3D Canvas */
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
         }
 
-        .stat-item p {
-            color: #888;
+        /* Mouse Trail Effect */
+        .cursor-trail {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 9999;
         }
-        @media only screen and (max-width:800px) {
-  /* For tablets: */
-  .nav {
-    width: 100%;
-    padding: 0;
-  }
-}
-@media only screen and (max-width:500px) {
-  /* For mobile phones: */
-  .nav {
-    width: 100%;
-    padding:15px;
-  }  
-  .nav-links {
-    padding-left: 30px;
-    overflow: auto;
-    white-space: nowrap;
-  }
-    
-}
+
+        /* Animations */
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shapeMove {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            50% {
+                transform: translate(100px, 100px) rotate(180deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
     <nav class="nav">
-        <div class="nav-content">
-            <div class="logo">
-                <a href="https://flash.zone/index.html">
-                    <img src="favicon.ico" alt="Flash" width="70" height="60">
-                </a>
-            </div>
+        <div class="nav-container">
+            <div class="nav-logo">Flash</div>
             <div class="nav-links">
-                <a href="https://flash.zone/PlatformPage.html">Platform</a>
-                <a href="https://flash.zone/TechnologyPage.html">Technology</a>
-                <a href="https://flash.zone/AboutPage.html">About</a>
-                <a href="https://flash.zone/ContactPage.html">Contact</a>
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#platform" class="nav-link">Platform</a>
+                <a href="#technology" class="nav-link">Technology</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </div>
         </div>
     </nav>
 
-    <section class="hero">
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="bg-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <canvas id="hero-canvas"></canvas>
         <div class="hero-content">
-            <h1>The Future of Venture Capital</h1>
-            <p>Powered by Startup DNA Analysis™ Technology</p>
-            <a href="#demo" class="cta-button">Request Demo</a>
+            <h1 class="hero-title">
+                <span class="typed-text"></span>
+            </h1>
+            <p class="hero-subtitle">Revolutionizing investment decisions with AI-powered analytics</p>
+            <a href="#platform" class="hero-cta">Explore Platform</a>
         </div>
     </section>
 
-    <section class="section">
-        <div class="section-content">
-            <h2>Revolutionizing Startup Analysis</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <h3>AI-Powered Insights</h3>
-                    <p>Our quantum matching system analyzes 47,000+ data points to provide unparalleled startup intelligence.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Market Fit Assessment</h3>
-                    <p>Advanced algorithms evaluate product-market fit with up to 94% accuracy.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Team Analysis</h3>
-                    <p>Comprehensive evaluation of founding teams using multi-head attention models.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Mouse Trail Effect -->
+    <div class="cursor-trail"></div>
 
-    <section class="section stats-section">
-        <div class="section-content">
-            <h2>Platform Performance</h2>
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <h3>85%+</h3>
-                    <p>Prediction Accuracy</p>
-                </div>
-                <div class="stat-item">
-                    <h3>47K+</h3>
-                    <p>Data Points Analyzed</p>
-                </div>
-                <div class="stat-item">
-                    <h3>99.9%</h3>
-                    <p>Platform Uptime</p>
-                </div>
-                <div class="stat-item">
-                    <h3>500ms</h3>
-                    <p>Analysis Speed</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <script>
+        // Initialize GSAP ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Typing Animation
+        new Typed('.typed-text', {
+            strings: ['The Future of^1000\nVenture Capital', 'AI-Powered^500\nInvestment Analytics', 'Data-Driven^500\nDecision Making'],
+            typeSpeed: 50,
+            backSpeed: 30,
+            backDelay: 1000,
+            startDelay: 500,
+            loop: true
+        });
+
+        // Hero Animations
+        gsap.to('.hero-title', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            delay: 0.5
+        });
+
+        gsap.to('.hero-subtitle', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            delay: 0.8
+        });
+
+        gsap.to('.hero-cta', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            delay: 1.1
+        });
+
+        // Mouse Trail Effect
+        const trail = document.querySelector('.cursor-trail');
+        let mouseX = 0;
+        let mouseY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            trail.style.opacity = 1;
+            trail.style.transform = translate(${mouseX - 10}px, ${mouseY - 10}px);
+        });
+
+        // 3D Background Animation
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({
+            canvas: document.querySelector('#hero-canvas'),
+            alpha: true
+        });
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.position.z = 5;
+
+        // Create particles
+        const geometry = new THREE.BufferGeometry();
+        const vertices = [];
+        const particleCount = 1000;
+
+        for (let i = 0; i < particleCount; i++) {
+            vertices.push(
+                Math.random() * 20 - 10,
+                Math.random() * 20 - 10,
+                Math.random() * 20 - 10
+            );
+        }
+
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+        const material = new THREE.PointsMaterial({
+            color: 0x4ECDC4,
+            size: 0.05
+        });
+
+        const particles = new THREE.Points(geometry, material);
+        scene.add(particles);
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            particles.rotation.x += 0.001;
+            particles.rotation.y += 0.001;
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
 </body>
 </html>
