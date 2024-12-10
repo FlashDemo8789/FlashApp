@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flash - AI-Powered Venture Capital</title>
-    <!-- Importing GSAP for advanced animations -->
+    <!-- Load scripts in correct order -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <!-- Three.js for 3D effects -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <!-- Typed.js for typing animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
     <style>
         /* Core Styles */
@@ -34,17 +32,19 @@
             background-color: var(--dark);
             color: var(--light);
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        /* Animated Background */
+        /* Fixed Animated Background */
         .animated-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: 0;
             background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+            overflow: hidden;
         }
 
         .bg-shapes {
@@ -56,13 +56,35 @@
 
         .shape {
             position: absolute;
-            background: var(--gradient);
+            width: 300px;
+            height: 300px;
             filter: blur(50px);
             opacity: 0.1;
             animation: shapeMove 20s infinite;
         }
 
-        /* Dynamic Navigation */
+        .shape:nth-child(1) {
+            top: 20%;
+            left: 20%;
+            animation-delay: 0s;
+            background: linear-gradient(45deg, var(--secondary), transparent);
+        }
+
+        .shape:nth-child(2) {
+            top: 50%;
+            left: 50%;
+            animation-delay: -5s;
+            background: linear-gradient(-45deg, var(--primary), transparent);
+        }
+
+        .shape:nth-child(3) {
+            top: 80%;
+            left: 30%;
+            animation-delay: -10s;
+            background: var(--gradient);
+        }
+
+        /* Enhanced Navigation */
         .nav {
             position: fixed;
             top: 0;
@@ -81,6 +103,7 @@
             align-items: center;
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-radius: 0 0 20px 20px;
             transform: translateY(-100%);
             animation: slideDown 1s forwards;
@@ -93,6 +116,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             position: relative;
+            cursor: pointer;
         }
 
         .nav-links {
@@ -127,7 +151,7 @@
             opacity: 0.1;
         }
 
-        /* Hero Section */
+        /* Optimized Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -136,12 +160,23 @@
             padding: 2rem;
             position: relative;
             overflow: hidden;
+            z-index: 1;
+        }
+
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
         }
 
         .hero-content {
             max-width: 1200px;
             text-align: center;
-            z-index: 1;
+            z-index: 2;
+            position: relative;
         }
 
         .hero-title {
@@ -150,6 +185,7 @@
             margin-bottom: 1.5rem;
             opacity: 0;
             transform: translateY(30px);
+            min-height: 9.6rem; /* Prevent layout shift during typing */
         }
 
         .hero-subtitle {
@@ -195,17 +231,7 @@
             transform: translateX(100%) skewX(-15deg);
         }
 
-        /* 3D Canvas */
-        #hero-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-
-        /* Mouse Trail Effect */
+        /* Enhanced Mouse Trail */
         .cursor-trail {
             position: fixed;
             width: 20px;
@@ -214,7 +240,7 @@
             border-radius: 50%;
             pointer-events: none;
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: all 0.3s ease;
             z-index: 9999;
         }
 
@@ -244,6 +270,7 @@
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 2.5rem;
+                min-height: 6rem;
             }
 
             .hero-subtitle {
@@ -252,6 +279,11 @@
 
             .nav-links {
                 display: none;
+            }
+
+            .shape {
+                width: 200px;
+                height: 200px;
             }
         }
     </style>
@@ -262,11 +294,11 @@
         <div class="nav-container">
             <div class="nav-logo">Flash</div>
             <div class="nav-links">
-                <a href="https://flash.zone/index.html">Home</a>
-                <a href="https://flash.zone/PlatformPage.html">Platform</a>
-                <a href="https://flash.zone/TechnologyPage.html">Technology</a>
-                <a href="https://flash.zone/AboutPage.html">About</a>
-                <a href="https://flash.zone/ContactPage.html">Contact</a>
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#platform" class="nav-link">Platform</a>
+                <a href="#technology" class="nav-link">Technology</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </div>
         </div>
     </nav>
@@ -292,46 +324,110 @@
         </div>
     </section>
 
-    <!-- Mouse Trail Effect -->
+    <!-- Mouse Trail -->
     <div class="cursor-trail"></div>
 
     <script>
-        // Initialize GSAP ScrollTrigger
-        gsap.registerPlugin(ScrollTrigger);
+        // Wait for all resources to load
+        window.addEventListener('load', () => {
+            // Initialize GSAP
+            gsap.registerPlugin(ScrollTrigger);
 
-        // Typing Animation
-        new Typed('.typed-text', {
-            strings: ['The Future of^1000\nVenture Capital', 'AI-Powered^500\nInvestment Analytics', 'Data-Driven^500\nDecision Making'],
-            typeSpeed: 50,
-            backSpeed: 30,
-            backDelay: 1000,
-            startDelay: 500,
-            loop: true
+            // Initialize Typed.js
+            new Typed('.typed-text', {
+                strings: ['The Future of^1000\nVenture Capital', 'AI-Powered^500\nInvestment Analytics', 'Data-Driven^500\nDecision Making'],
+                typeSpeed: 50,
+                backSpeed: 30,
+                backDelay: 1000,
+                startDelay: 500,
+                loop: true
+            });
+
+            // Hero Animations
+            gsap.to('.hero-title', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                delay: 0.5
+            });
+
+            gsap.to('.hero-subtitle', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                delay: 0.8
+            });
+
+            gsap.to('.hero-cta', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                delay: 1.1
+            });
+
+            // Initialize Three.js
+            const initThree = () => {
+                const canvas = document.querySelector('#hero-canvas');
+                if (!canvas) return;
+
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                const renderer = new THREE.WebGLRenderer({
+                    canvas: canvas,
+                    alpha: true,
+                    antialias: true
+                });
+
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                camera.position.z = 5;
+
+                // Create particles
+                const geometry = new THREE.BufferGeometry();
+                const vertices = [];
+                const particleCount = 1000;
+
+                for (let i = 0; i < particleCount; i++) {
+                    vertices.push(
+                        Math.random() * 20 - 10,
+                        Math.random() * 20 - 10,
+                        Math.random() * 20 - 10
+                    );
+                }
+
+                geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+                const material = new THREE.PointsMaterial({
+                    color: 0x4ECDC4,
+                    size: 0.05,
+                    transparent: true,
+                    opacity: 0.8
+                });
+
+                const particles = new THREE.Points(geometry, material);
+                scene.add(particles);
+
+                // Animation loop
+                const animate = () => {
+                    requestAnimationFrame(animate);
+                    particles.rotation.x += 0.0005;
+                    particles.rotation.y += 0.0005;
+                    renderer.render(scene, camera);
+                };
+
+                animate();
+
+                // Resize handler
+                window.addEventListener('resize', () => {
+                    camera.aspect = window.innerWidth / window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                });
+            };
+
+            initThree();
         });
 
-        // Hero Animations
-        gsap.to('.hero-title', {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            delay: 0.5
-        });
-
-        gsap.to('.hero-subtitle', {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            delay: 0.8
-        });
-
-        gsap.to('.hero-cta', {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            delay: 1.1
-        });
-
-        // Mouse Trail Effect
+        // Enhanced Mouse Trail
         const trail = document.querySelector('.cursor-trail');
         let mouseX = 0;
         let mouseY = 0;
@@ -343,54 +439,9 @@
             trail.style.transform = translate(${mouseX - 10}px, ${mouseY - 10}px);
         });
 
-        // 3D Background Animation
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({
-            canvas: document.querySelector('#hero-canvas'),
-            alpha: true
-        });
-
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        camera.position.z = 5;
-
-        // Create particles
-        const geometry = new THREE.BufferGeometry();
-        const vertices = [];
-        const particleCount = 1000;
-
-        for (let i = 0; i < particleCount; i++) {
-            vertices.push(
-                Math.random() * 20 - 10,
-                Math.random() * 20 - 10,
-                Math.random() * 20 - 10
-            );
-        }
-
-        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-        const material = new THREE.PointsMaterial({
-            color: 0x4ECDC4,
-            size: 0.05
-        });
-
-        const particles = new THREE.Points(geometry, material);
-        scene.add(particles);
-
-        // Animation loop
-        function animate() {
-            requestAnimationFrame(animate);
-            particles.rotation.x += 0.001;
-            particles.rotation.y += 0.001;
-            renderer.render(scene, camera);
-        }
-
-        animate();
-
-        // Resize handler
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
+        // Hide trail when mouse leaves window
+        document.addEventListener('mouseleave', () => {
+            trail.style.opacity = 0;
         });
     </script>
 </body>
