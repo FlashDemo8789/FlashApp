@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flash - Platform</title>
+    <title>Flash - Technology</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <style>
@@ -65,17 +65,22 @@
             color: #4ECDC4;
         }
 
-        .sub-hero {
+        .tech-hero {
             height: 60vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             position: relative;
-            padding-top: 80px;
+            padding: 80px 24px 0;
         }
 
-        .sub-hero h1 {
+        .tech-hero-content {
+            max-width: 800px;
+            z-index: 2;
+        }
+
+        .tech-hero h1 {
             font-size: 56px;
             background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
             -webkit-background-clip: text;
@@ -83,121 +88,195 @@
             margin-bottom: 24px;
         }
 
-        .platform-features {
+        .tech-hero p {
+            font-size: 20px;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        .tech-overview {
+            padding: 100px 24px;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .overview-grid {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-
-        .feature-row {
-            display: flex;
-            align-items: center;
-            gap: 4rem;
-            margin-bottom: 8rem;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .feature-row:nth-child(even) {
-            flex-direction: row-reverse;
-        }
-
-        .feature-text {
-            flex: 1;
-        }
-
-        .feature-text h2 {
-            font-size: 36px;
-            color: #4ECDC4;
-            margin-bottom: 1.5rem;
-        }
-
-        .feature-text p {
-            color: #888;
-            font-size: 18px;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-        }
-
-        .metrics-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
         }
 
-        .metric-card {
+        .overview-card {
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 1.5rem;
+            border-radius: 20px;
+            padding: 30px;
             transition: transform 0.3s ease;
         }
 
-        .metric-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.08);
+        .overview-card:hover {
+            transform: translateY(-10px);
         }
 
-        .metric-card h3 {
-            color: #FF6B6B;
-            font-size: 20px;
-            margin-bottom: 0.5rem;
+        .overview-card h3 {
+            color: #4ECDC4;
+            font-size: 24px;
+            margin-bottom: 20px;
         }
 
-        .metric-card p {
+        .overview-card p {
             color: #888;
-            font-size: 14px;
-            margin: 0;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
         }
 
-        .feature-image {
-            flex: 1;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .overview-card ul {
+            list-style: none;
+            color: #888;
+        }
+
+        .overview-card li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .overview-card li:before {
+            content: "•";
+            color: #4ECDC4;
+            position: absolute;
+            left: 0;
+        }
+
+        .architecture-section {
+            padding: 100px 24px;
+        }
+
+        .arch-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .arch-header h2 {
+            font-size: 36px;
+            color: #4ECDC4;
+            margin-bottom: 20px;
+        }
+
+        .arch-header p {
             color: #888;
             font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .arch-diagram {
+            max-width: 1000px;
+            margin: 0 auto 80px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+        }
+
+        .layer-section {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .layer-section h3 {
+            color: #4ECDC4;
+            font-size: 28px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .layer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .layer-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 24px;
+        }
+
+        .layer-card h4 {
+            color: #FF6B6B;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .layer-card ul {
+            list-style: none;
+            color: #888;
+        }
+
+        .layer-card li {
+            margin-bottom: 8px;
+            padding-left: 15px;
             position: relative;
-            overflow: hidden;
         }
 
-        .feature-image::before {
-            content: '';
+        .layer-card li:before {
+            content: "•";
+            color: #4ECDC4;
             position: absolute;
-            top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1));
-            opacity: 0;
-            transition: opacity 0.3s ease;
         }
 
-        .feature-image:hover::before {
-            opacity: 1;
+        .performance-section {
+            padding: 100px 24px;
+            background: rgba(255, 255, 255, 0.02);
+            text-align: center;
         }
 
-        #platform-canvas {
+        .performance-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .performance-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .performance-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .performance-card h3 {
+            font-size: 36px;
+            color: #4ECDC4;
+            margin-bottom: 15px;
+        }
+
+        .performance-card p {
+            color: #888;
+            font-size: 16px;
+        }
+
+        #tech-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: 1;
         }
 
         @media (max-width: 1024px) {
-            .feature-row {
-                flex-direction: column !important;
-                gap: 2rem;
-            }
-
-            .feature-image {
-                width: 100%;
-                height: 300px;
+            .overview-grid,
+            .layer-grid,
+            .performance-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -206,22 +285,20 @@
                 display: none;
             }
 
-            .sub-hero h1 {
+            .tech-hero h1 {
                 font-size: 40px;
             }
 
-            .feature-text h2 {
-                font-size: 28px;
-            }
-
-            .metrics-grid {
+            .overview-grid,
+            .layer-grid,
+            .performance-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <canvas id="platform-canvas"></canvas>
+    <canvas id="tech-canvas"></canvas>
 
     <nav class="nav">
         <div class="nav-content">
@@ -240,98 +317,128 @@
         </div>
     </nav>
 
-    <section class="sub-hero">
-        <h1>The Flash Platform</h1>
+    <section class="tech-hero">
+        <div class="tech-hero-content">
+            <h1>Our Technology</h1>
+            <p>Powered by advanced AI and machine learning, our Startup DNA Analysis™ technology processes over 47,000 data points to deliver unparalleled insights.</p>
+        </div>
     </section>
 
-    <div class="platform-features">
-        <div class="feature-row">
-            <div class="feature-text">
-                <h2>Startup Discovery</h2>
-                <p>Our AI-powered discovery engine continuously scans and analyzes the startup ecosystem to identify promising opportunities before they become obvious.</p>
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <h3>Real-time Analysis</h3>
-                        <p>Continuous monitoring of startup performance and market dynamics</p>
-                    </div>
-                    <div class="metric-card">
-                        <h3>Smart Filtering</h3>
-                        <p>Advanced filters based on industry, stage, traction, and potential</p>
-                    </div>
-                    <div class="metric-card">
-                        <h3>Personalized</h3>
-                        <p>Tailored recommendations based on investor preferences</p>
-                    </div>
-                    <div class="metric-card">
-                        <h3>Predictive</h3>
-                        <p>AI-powered forecasting of future market trends</p>
-                    </div>
-                </div>
+    <section class="tech-overview">
+        <div class="overview-grid">
+            <div class="overview-card">
+                <h3>Data Collection Layer</h3>
+                <p>Comprehensive data gathering from multiple sources to build a complete picture of startup potential.</p>
+                <ul>
+                    <li>Real-time web scraping</li>
+                    <li>API integrations with major platforms</li>
+                    <li>Social media analysis</li>
+                    <li>Patent database monitoring</li>
+                    <li>Academic publication tracking</li>
+                </ul>
             </div>
-            <div class="feature-image">
-                Startup Discovery Interface
+
+            <div class="overview-card">
+                <h3>AI Processing Engine</h3>
+                <p>State-of-the-art machine learning models for deep analysis and pattern recognition.</p>
+                <ul>
+                    <li>Natural Language Processing</li>
+                    <li>Sentiment Analysis</li>
+                    <li>Technical Capability Assessment</li>
+                    <li>Growth Pattern Recognition</li>
+                    <li>Market Trend Analysis</li>
+                </ul>
             </div>
+
+            <div class="overview-card">
+                <h3>Quantum Matching System</h3>
+                <p>Advanced neural networks for optimal startup-investor matching.</p>
+                <ul>
+                    <li>47,000+ feature analysis</li>
+                    <li>Multi-layer neural networks</li>
+                    <li>Real-time compatibility scoring</li>
+                    <li>Dynamic learning system</li>
+                    <li>Predictive analytics</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="architecture-section">
+        <div class="arch-header">
+            <h2>System Architecture</h2>
+            <p>Our multi-layered architecture ensures robust, scalable, and efficient processing of startup data.</p>
         </div>
 
-        <div class="feature-row">
-            <div class="feature-text">
-                <h2>AI Analysis</h2>
-                <p>Our Startup DNA Analysis™ technology provides deep insights into startup potential, team capabilities, and market opportunities.</p>
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <h3>47,000+ Data Points</h3>
-                        <p>Comprehensive analysis across multiple dimensions</p>
-                    </div>
-                    <div class="metric-card">
-                        <h3>85%+ Accuracy</h3>
-                        <p>Industry-leading prediction accuracy</p>
-                    </div>
-                    <div class="metric-card">
-                        <h3>Real-time Monitoring</h3>
-                        <p>Continuous updates on startup performance</p>
-                    </div>
-                    <div class="metric-card">
-                        <h3>Custom Insights</h3>
-                        <p>Tailored analysis based on investor priorities</p>
-                    </div>
+        <div class="layer-section">
+            <h3>Data Processing Pipeline</h3>
+            <div class="layer-grid">
+                <div class="layer-card">
+                    <h4>Collection</h4>
+                    <ul>
+                        <li>Public data scrapers</li>
+                        <li>API integrations</li>
+                        <li>Real-time monitoring</li>
+                    </ul>
                 </div>
-            </div>
-            <div class="feature-image">
-                AI Analysis Dashboard
-            </div>
-        </div>
 
-        <div class="feature-row">
-            <div class="feature-text">
-                <h2>Investor Matching</h2>
-                <p>Quantum matching system connects startups with their ideal investors based on investment thesis, portfolio fit, and value-add potential.</p>
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <h3>Smart Matching</h3>
-                        <p>AI-powered investor-startup matching</p>
-                    </div>
-                    <div class="metric-card">
-                        <h3>Rich Insights</h3>
-                        <p>Detailed compatibility analysis and recommendations</p>
-                    </div>
-                    <div class="metric-card">
-                        <h3>Continuous Learning</h3>
-                        <p>Dynamic system updates based on user feedback</p>
-                    </div>
-                    <div class="metric-card">
-                        <h3>Time Savings</h3>
-                        <p>Streamlined deal sourcing and due diligence</p>
-                    </div>
+                <div class="layer-card">
+                    <h4>Processing</h4>
+                    <ul>
+                        <li>Text processing</li>
+                        <li>Numerical analysis</li>
+                        <li>Entity extraction</li>
+                    </ul>
+                </div>
+
+                <div class="layer-card">
+                    <h4>Engineering</h4>
+                    <ul>
+                        <li>Feature extraction</li>
+                        <li>Pattern recognition</li>
+                        <li>Metric calculation</li>
+                    </ul>
+                </div>
+
+                <div class="layer-card">
+                    <h4>Modeling</h4>
+                    <ul>
+                        <li>Neural networks</li>
+                        <li>Predictive analytics</li>
+                        <li>Classification models</li>
+                    </ul>
                 </div>
             </div>
-            <div class="feature-image">
-                Investor Matching Interface
+        </div>
+    </section>
+
+    <section class="performance-section">
+        <h2 style="font-size: 36px; color: #4ECDC4; margin-bottom: 40px;">Performance Metrics</h2>
+        <div class="performance-grid">
+            <div class="performance-card">
+                <h3>500ms</h3>
+                <p>Average Response Time</p>
+            </div>
+
+            <div class="performance-card">
+                <h3>99.9%</h3>
+                <p>System Uptime</p>
+            </div>
+
+            <div class="performance-card">
+                <h3>85%+</h3>
+                <p>Prediction Accuracy</p>
+            </div>
+
+            <div class="performance-card">
+                <h3>1000+</h3>
+                <p>Concurrent Users</p>
             </div>
         </div>
-    </div>
+    </section>
 
     <script>
-        const canvas = document.getElementById('platform-canvas');
+        const canvas = document.getElementById('tech-canvas');
         const renderer = new THREE.WebGLRenderer({
             canvas,
             alpha: true
@@ -367,23 +474,6 @@
             renderer.render(scene, camera);
         }
         animate();
-
-        function reveal() {
-            const features = document.querySelectorAll('.feature-row');
-            
-            features.forEach((feature) => {
-                const rect = feature.getBoundingClientRect();
-                const viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
-                
-                if (rect.top <= viewHeight * 0.75) {
-                    feature.style.opacity = '1';
-                    feature.style.transform = 'translateY(0)';
-                }
-            });
-        }
-
-        window.addEventListener('scroll', reveal);
-        window.addEventListener('load', reveal);
 
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
