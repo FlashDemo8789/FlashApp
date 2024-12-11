@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash - Technology</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(78, 205, 196, 0.1);
+            color: #4ECDC4;
+        }
+
+        .tech-hero {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 80px 24px 0;
+        }
+
+        .tech-hero-content {
+            max-width: 800px;
+            z-index: 2;
+        }
+
+        .tech-hero h1 {
+            font-size: 56px;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 24px;
+        }
+
+        .tech-hero p {
+            font-size: 20px;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        .tech-overview {
+            padding: 100px 24px;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .overview-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .overview-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .overview-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .overview-card h3 {
+            color: #4ECDC4;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .overview-card p {
+            color: #888;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .overview-card ul {
+            list-style: none;
+            color: #888;
+        }
+
+        .overview-card li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .overview-card li:before {
+            content: "•";
+            color: #4ECDC4;
+            position: absolute;
+            left: 0;
+        }
+
+        .architecture-section {
+            padding: 100px 24px;
+        }
+
+        .arch-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .arch-header h2 {
+            font-size: 36px;
+            color: #4ECDC4;
+            margin-bottom: 20px;
+        }
+
+        .arch-header p {
+            color: #888;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .arch-diagram {
+            max-width: 1000px;
+            margin: 0 auto 80px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+        }
+
+        .layer-section {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .layer-section h3 {
+            color: #4ECDC4;
+            font-size: 28px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .layer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .layer-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 24px;
+        }
+
+        .layer-card h4 {
+            color: #FF6B6B;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .layer-card ul {
+            list-style: none;
+            color: #888;
+        }
+
+        .layer-card li {
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .layer-card li:before {
+            content: "•";
+            color: #4ECDC4;
+            position: absolute;
+            left: 0;
+        }
+
+        .performance-section {
+            padding: 100px 24px;
+            background: rgba(255, 255, 255, 0.02);
+            text-align: center;
+        }
+
+        .performance-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .performance-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .performance-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .performance-card h3 {
+            font-size: 36px;
+            color: #4ECDC4;
+            margin-bottom: 15px;
+        }
+
+        .performance-card p {
+            color: #888;
+            font-size: 16px;
+        }
+
+        #tech-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        @media (max-width: 1024px) {
+            .overview-grid,
+            .layer-grid,
+            .performance-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .tech-hero h1 {
+                font-size: 40px;
+            }
+
+            .overview-grid,
+            .layer-grid,
+            .performance-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="tech-canvas"></canvas>
+
+    <nav class="nav">
+        <div class="nav-content">
+            <div class="logo">Flash</div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="platform.html" class="nav-link">Platform</a>
+                <a href="technology.html" class="nav-link">Technology</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="tech-hero">
+        <div class="tech-hero-content">
+            <h1>Our Technology</h1>
+            <p>Powered by advanced AI and machine learning, our Startup DNA Analysis™ technology processes over 47,000 data points to deliver unparalleled insights.</p>
+        </div>
+    </section>
+
+    <section class="tech-overview">
+        <div class="overview-grid">
+            <div class="overview-card">
+                <h3>Data Collection Layer</h3>
+                <p>Comprehensive data gathering from multiple sources to build a complete picture of startup potential.</p>
+                <ul>
+                    <li>Real-time web scraping</li>
+                    <li>API integrations with major platforms</li>
+                    <li>Social media analysis</li>
+                    <li>Patent database monitoring</li>
+                    <li>Academic publication tracking</li>
+                </ul>
+            </div>
+
+            <div class="overview-card">
+                <h3>AI Processing Engine</h3>
+                <p>State-of-the-art machine learning models for deep analysis and pattern recognition.</p>
+                <ul>
+                    <li>Natural Language Processing</li>
+                    <li>Sentiment Analysis</li>
+                    <li>Technical Capability Assessment</li>
+                    <li>Growth Pattern Recognition</li>
+                    <li>Market Trend Analysis</li>
+                </ul>
+            </div>
+
+            <div class="overview-card">
+                <h3>Quantum Matching System</h3>
+                <p>Advanced neural networks for optimal startup-investor matching.</p>
+                <ul>
+                    <li>47,000+ feature analysis</li>
+                    <li>Multi-layer neural networks</li>
+                    <li>Real-time compatibility scoring</li>
+                    <li>Dynamic learning system</li>
+                    <li>Predictive analytics</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="architecture-section">
+        <div class="arch-header">
+            <h2>System Architecture</h2>
+            <p>Our multi-layered architecture ensures robust, scalable, and efficient processing of startup data.</p>
+        </div>
+
+        <div class="layer-section">
+            <h3>Data Processing Pipeline</h3>
+            <div class="layer-grid">
+                <div class="layer-card">
+                    <h4>Collection</h4>
+                    <ul>
+                        <li>Public data scrapers</li>
+                        <li>API integrations</li>
+                        <li>Real-time monitoring</li>
+                    </ul>
+                </div>
+
+                <div class="layer-card">
+                    <h4>Processing</h4>
+                    <ul>
+                        <li>Text processing</li>
+                        <li>Numerical analysis</li>
+                        <li>Entity extraction</li>
+                    </ul>
+                </div>
+
+                <div class="layer-card">
+                    <h4>Engineering</h4>
+                    <ul>
+                        <li>Feature extraction</li>
+                        <li>Pattern recognition</li>
+                        <li>Metric calculation</li>
+                    </ul>
+                </div>
+
+                <div class="layer-card">
+                    <h4>Modeling</h4>
+                    <ul>
+                        <li>Neural networks</li>
+                        <li>Predictive analytics</li>
+                        <li>Classification models</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="performance-section">
+        <h2 style="font-size: 36px; color: #4ECDC4; margin-bottom: 40px;">Performance Metrics</h2>
+        <div class="performance-grid">
+            <div class="performance-card">
+                <h3>500ms</h3>
+                <p>Average Response Time</p>
+            </div>
+
+            <div class="performance-card">
+                <h3>99.9%</h3>
+                <p>System Uptime</p>
+            </div>
+
+            <div class="performance-card">
+                <h3>85%+</h3>
+                <p>Prediction Accuracy</p>
+            </div>
+
+            <div class="performance-card">
+                <h3>1000+</h3>
+                <p>Concurrent Users</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const canvas = document.getElementById('tech-canvas');
+        const renderer = new THREE.WebGLRenderer({
+            canvas,
+            alpha: true
+        });
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 5;
+
+        const particlesGeometry = new THREE.BufferGeometry();
+        const count = 5000;
+        const positions = new Float32Array(count * 3);
+
+        for(let i = 0; i < count * 3; i++) {
+            positions[i] = (Math.random() - 0.5) * 10;
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.005,
+            color: '#4ECDC4'
+        });
+
+        const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particles);
+
+        function animate() {
+            requestAnimationFrame(animate);
+            particles.rotation.y += 0.001;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
