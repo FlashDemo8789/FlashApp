@@ -272,27 +272,23 @@
             z-index: 1;
         }
 
-        @media (max-width: 1024px) {
-            .overview-grid,
-            .layer-grid,
-            .performance-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .tech-hero h1 {
+            .hero-title {
                 font-size: 40px;
             }
+            
+            .hero-content p {
+                font-size: 20px;
+            }
 
-            .overview-grid,
-            .layer-grid,
-            .performance-grid {
-                grid-template-columns: 1fr;
+            .nav-link {
+                display: flex;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            .nav-link::-webkit-scrollbar {
+            display: none;
             }
         }
     </style>
