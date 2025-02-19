@@ -189,29 +189,31 @@
             z-index: -1;
         }
 
-        @media (max-width: 1024px) {
-            .feature-row {
-                flex-direction: column !important;
-                gap: 2rem;
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                right: 10px;
+                background: rgba(0, 0, 0, 0.9);
+                width: 200px;
+                padding: 1rem;
+                border-radius: 10px;
             }
 
-            .feature-image {
-                width: 100%;
-                height: 300px;
+            .nav-links.show {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 32px;
             }
         }
-
-        @media (max-width: 768px) {
-            .nav {
-    width: 100%;
-    padding:15px;
-  }  
-  .nav-links {
-    padding-left: 30px;
-    overflow: auto;
-    white-space: nowrap;
-  }
-
             .sub-hero h1 {
                 font-size: 40px;
             }
@@ -236,6 +238,7 @@
                     <img src="favicon.ico" alt="Flash" width="70" height="60">
                 </a>
             </div>
+            <div class="nav-toggle">&#9776;</div>
             <div class="nav-links">
                 <a href="https://flash.zone/index.html">Home</a>
                 <a href="https://flash.zone/PlatformPage.html">Platform</a>
