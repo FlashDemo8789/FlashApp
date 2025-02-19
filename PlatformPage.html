@@ -65,6 +65,12 @@
             color: #4ECDC4;
         }
 
+        .hamburger {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
         .sub-hero {
             height: 60vh;
             display: flex;
@@ -191,7 +197,7 @@
 
        @media (max-width: 768px) {
             .nav-links {
-                display: flex;
+                display: none;
                 flex-direction: column;
                 position: absolute;
                 top: 60px;
@@ -207,6 +213,10 @@
             }
 
             .nav-toggle {
+                display: block;
+            }
+
+           .hamburger {
                 display: block;
             }
 
@@ -226,6 +236,7 @@
                     <img src="favicon.ico" alt="Flash" width="70" height="60">
                 </a>
             </div>
+            <div class="hamburger" onclick="toggleMenu()">☰</div>
             
             <div class="nav-links">
                 <a href="https://flash.zone/index.html">Home</a>
