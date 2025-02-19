@@ -65,6 +65,12 @@
             color: #4ECDC4;
         }
 
+        .hamburger {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
         .tech-hero {
             height: 60vh;
             display: flex;
@@ -281,23 +287,26 @@
         }
 
         @media (max-width: 768px) {
-            .nav {
-    width: 100%;
-    padding:15px;
-  }  
-  .nav-links {
-    padding-left: 30px;
-    overflow: auto;
-    white-space: nowrap;
-  }
-
-            .tech-hero h1 {
-                font-size: 40px;
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background: rgba(0, 0, 0, 0.9);
+                position: absolute;
+                top: 60px;
+                right: 0;
+                width: 50%;
+                padding: 1rem;
             }
 
-            .overview-grid,
-            .layer-grid,
-            .performance-grid {
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .contact-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -313,6 +322,7 @@
                     <img src="favicon.ico" alt="Flash" width="70" height="60">
                 </a>
             </div>
+            <div class="hamburger" onclick="toggleMenu()">☰</div>
             <div class="nav-links">
                 <a href="https://flash.zone/index.html">Home</a>
                 <a href="https://flash.zone/PlatformPage.html">Platform</a>
@@ -444,48 +454,51 @@
     </section>
 
     <script>
-        const canvas = document.getElementById('tech-canvas');
-        const renderer = new THREE.WebGLRenderer({
-            canvas,
-            alpha: true
-        });
+        // const canvas = document.getElementById('tech-canvas');
+        // const renderer = new THREE.WebGLRenderer({
+        //     canvas,
+        //     alpha: true
+        // });
 
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        // renderer.setSize(window.innerWidth, window.innerHeight);
+        // renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 5;
+        // const scene = new THREE.Scene();
+        // const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        // camera.position.z = 5;
 
-        const particlesGeometry = new THREE.BufferGeometry();
-        const count = 5000;
-        const positions = new Float32Array(count * 3);
+        // const particlesGeometry = new THREE.BufferGeometry();
+        // const count = 5000;
+        // const positions = new Float32Array(count * 3);
 
-        for(let i = 0; i < count * 3; i++) {
-            positions[i] = (Math.random() - 0.5) * 10;
+        // for(let i = 0; i < count * 3; i++) {
+        //     positions[i] = (Math.random() - 0.5) * 10;
+        // }
+
+        // particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        // const particlesMaterial = new THREE.PointsMaterial({
+        //     size: 0.005,
+        //     color: '#4ECDC4'
+        // });
+
+        // const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+        // scene.add(particles);
+
+        // function animate() {
+        //     requestAnimationFrame(animate);
+        //     particles.rotation.y += 0.001;
+        //     renderer.render(scene, camera);
+        // }
+        // animate();
+
+        // window.addEventListener('resize', () => {
+        //     camera.aspect = window.innerWidth / window.innerHeight;
+        //     camera.updateProjectionMatrix();
+        //     renderer.setSize(window.innerWidth, window.innerHeight);
+        // });
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
         }
-
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        const particlesMaterial = new THREE.PointsMaterial({
-            size: 0.005,
-            color: '#4ECDC4'
-        });
-
-        const particles = new THREE.Points(particlesGeometry, particlesMaterial);
-        scene.add(particles);
-
-        function animate() {
-            requestAnimationFrame(animate);
-            particles.rotation.y += 0.001;
-            renderer.render(scene, camera);
-        }
-        animate();
-
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
     </script>
 </body>
 </html>
