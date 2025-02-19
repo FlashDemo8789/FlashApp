@@ -123,6 +123,12 @@
             opacity: 1;
   
         }
+
+      .hamburger {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
   
 
   
@@ -574,45 +580,30 @@
   
         }
   
-                @media only screen and (max-width:800px) {
-  
-  /* For tablets: */
-  
-  .nav {
-  
-    width: 100%;
-  
-    padding: 0;
-  
-  }
-  
-}
-  
-@media only screen and (max-width:500px) {
-  
-  /* For mobile phones: */
-  
-  .nav {
-  
-    width: 100%;
-  
-    padding:15px;
-  
-  }  
-  
-  .nav-links {
-  
-    padding-left: 30px;
-  
-    overflow: auto;
-  
-    white-space: nowrap;
-  
-  }
-  
-    
-  
-}
+                 @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background: rgba(0, 0, 0, 0.9);
+                position: absolute;
+                top: 60px;
+                right: 0;
+                width: 50%;
+                padding: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
   
     </style>
   
@@ -633,6 +624,8 @@
                 </a>
   
             </div>
+
+          <div class="hamburger" onclick="toggleMenu()">☰</div>
   
             <div class="nav-links">
   
@@ -891,6 +884,12 @@
         </div>
   
     </footer>
+
+  <script>
+    function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+  </script>
   
 </body>
   
