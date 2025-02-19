@@ -47,28 +47,22 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .nav-links {
+        .nav-link {
             display: flex;
             gap: 2rem;
-        }
-
-        .nav-links a{
-            color: #fff;
-            text-decoration: none;
             padding: 0.5rem 1rem;
             border-radius: 8px;
             transition: all 0.3s ease;
         }
 
-        .nav-links:hover {
-            background: rgba(78, 205, 196, 0.1);
-            color: #4ECDC4;
+        .nav-link a{
+            text-decoration: none;
+            color: #fff;
         }
 
-        .hamburger {
-            display: none;
-            font-size: 24px;
-            cursor: pointer;
+        .nav-link:hover {
+            background: rgba(78, 205, 196, 0.1);
+            color: #4ECDC4;
         }
 
         .hero {
@@ -284,24 +278,18 @@
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
-                flex-direction: column;
-                background: rgba(0, 0, 0, 0.9);
-                position: absolute;
-                top: 60px;
-                right: 0;
-                width: 50%;
-                padding: 1rem;
             }
 
-            .nav-links.active {
-                display: flex;
+            .hero h1 {
+                font-size: 40px;
             }
 
-            .hamburger {
-                display: block;
+            .stats-grid {
+                grid-template-columns: 1fr;
             }
 
-            .contact-grid {
+            .team-grid,
+            .values-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -312,13 +300,12 @@
 
     <nav class="nav">
         <div class="nav-content">
-             <div class="logo">
+            <div class="logo">
                 <a href="https://flash.zone/index.html">
                     <img src="favicon.ico" alt="Flash" width="70" height="60">
                 </a>
             </div>
-             <div class="hamburger" onclick="toggleMenu()">☰</div>
-            <div class="nav-links">
+            <div class="nav-link">
                 <a href="https://flash.zone/index.html">Home</a>
                 <a href="https://flash.zone/PlatformPage.html">Platform</a>
                 <a href="https://flash.zone/TechnologyPage.html">Technology</a>
@@ -489,51 +476,48 @@
     </section>
 
     <script>
-        // const canvas = document.getElementById('about-canvas');
-        // const renderer = new THREE.WebGLRenderer({
-        //     canvas,
-        //     alpha: true
-        // });
+        const canvas = document.getElementById('about-canvas');
+        const renderer = new THREE.WebGLRenderer({
+            canvas,
+            alpha: true
+        });
 
-        // renderer.setSize(window.innerWidth, window.innerHeight);
-        // renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        // const scene = new THREE.Scene();
-        // const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        // camera.position.z = 5;
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 5;
 
-        // const particlesGeometry = new THREE.BufferGeometry();
-        // const count = 5000;
-        // const positions = new Float32Array(count * 3);
+        const particlesGeometry = new THREE.BufferGeometry();
+        const count = 5000;
+        const positions = new Float32Array(count * 3);
 
-        // for(let i = 0; i < count * 3; i++) {
-        //     positions[i] = (Math.random() - 0.5) * 10;
-        // }
-
-        // particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        // const particlesMaterial = new THREE.PointsMaterial({
-        //     size: 0.005,
-        //     color: '#4ECDC4'
-        // });
-
-        // const particles = new THREE.Points(particlesGeometry, particlesMaterial);
-        // scene.add(particles);
-
-        // function animate() {
-        //     requestAnimationFrame(animate);
-        //     particles.rotation.y += 0.001;
-        //     renderer.render(scene, camera);
-        // }
-        // animate();
-
-        // window.addEventListener('resize', () => {
-        //     camera.aspect = window.innerWidth / window.innerHeight;
-        //     camera.updateProjectionMatrix();
-        //     renderer.setSize(window.innerWidth, window.innerHeight);
-        // });
-        function toggleMenu() {
-            document.querySelector('.nav-links').classList.toggle('active');
+        for(let i = 0; i < count * 3; i++) {
+            positions[i] = (Math.random() - 0.5) * 10;
         }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.005,
+            color: '#4ECDC4'
+        });
+
+        const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particles);
+
+        function animate() {
+            requestAnimationFrame(animate);
+            particles.rotation.y += 0.001;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
     </script>
 </body>
 </html>
