@@ -237,9 +237,15 @@
                 font-size: 20px;
             }
 
-            .nav-links {
-                display: none;
+            .nav-link {
+                display: flex;
+                overflow-x: auto;
+                white-space: nowrap;
             }
+
+            .nav-link::-webkit-scrollbar {
+            display: none;
+        }
         }
     </style>
 </head>
