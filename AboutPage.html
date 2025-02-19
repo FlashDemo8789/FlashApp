@@ -261,37 +261,24 @@
             z-index: 1;
         }
 
-        @media (max-width: 1024px) {
-            .mission-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .team-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .values-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero h1 {
+            .hero-title {
                 font-size: 40px;
             }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
+            
+            .hero-content p {
+                font-size: 20px;
             }
 
-            .team-grid,
-            .values-grid {
-                grid-template-columns: 1fr;
+            .nav-link {
+                display: flex;
+                overflow-x: auto;
+                white-space: nowrap;
             }
+
+            .nav-link::-webkit-scrollbar {
+            display: none;
+        }
         }
     </style>
 </head>
