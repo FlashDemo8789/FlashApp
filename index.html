@@ -79,6 +79,12 @@
             left: 100%;
         }
 
+        .hamburger {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
         /* Canvas and Particle Network */
         #particle-canvas {
             position: fixed;
@@ -230,6 +236,10 @@
             .hero-title {
                 font-size: 40px;
             }
+
+            .hamburger {
+                display: block;
+            }
             
             .hero-content p {
                 font-size: 20px;
@@ -252,6 +262,7 @@
                     <img src="favicon.ico" alt="Flash" width="70" height="60">
                 </a>
             </div>
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
             <div class="nav-links">
                 <a href="https://flash.zone/index.html">Home</a>
                 <a href="https://flash.zone/PlatformPage.html">Platform</a>
@@ -281,6 +292,9 @@
     </div>
 
     <script>
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
         // Initialize Three.js Scene
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
