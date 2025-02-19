@@ -268,7 +268,7 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <h1 class="hero-title">
-                <span class="typed-text"></span>
+                <span class="typed-text">The Future of Venture Capital</span>
             </h1>
             <p>Powered by Startup DNA Analysis™ Technology</p>
             <a href="" class="hero-cta">Request Demo</a>
@@ -281,54 +281,39 @@
     </div>
 
     <script>
-        // Initialize Three.js Scene
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const canvas = document.getElementById('platform-canvas');
         const renderer = new THREE.WebGLRenderer({
-            canvas: document.querySelector('#particle-canvas'),
+            canvas,
             alpha: true
         });
 
         renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.z = 5;
 
-        // Create Particle System
         const particlesGeometry = new THREE.BufferGeometry();
-        const particlesCnt = 5000;
-        const posArray = new Float32Array(particlesCnt * 3);
+        const count = 5000;
+        const positions = new Float32Array(count * 3);
 
-        for(let i = 0; i < particlesCnt * 3; i++) {
-            posArray[i] = (Math.random() - 0.5) * 10;
+        for(let i = 0; i < count * 3; i++) {
+            positions[i] = (Math.random() - 0.5) * 10;
         }
 
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
         const particlesMaterial = new THREE.PointsMaterial({
             size: 0.005,
             color: '#4ECDC4'
         });
 
-        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-        scene.add(particlesMesh);
+        const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particles);
 
-        // Mouse Movement Effect
-        let mouseX = 0;
-        let mouseY = 0;
-
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX / window.innerWidth - 0.5;
-            mouseY = e.clientY / window.innerHeight - 0.5;
-        });
-
-        // Animation Loop
         function animate() {
             requestAnimationFrame(animate);
-            particlesMesh.rotation.x += 0.0001;
-            particlesMesh.rotation.y += 0.0001;
-
-            // Interactive rotation based on mouse position
-            particlesMesh.rotation.x += mouseY * 0.01;
-            particlesMesh.rotation.y += mouseX * 0.01;
-
+            particles.rotation.y += 0.001;
             renderer.render(scene, camera);
         }
         animate();
