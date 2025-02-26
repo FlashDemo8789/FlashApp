@@ -1,510 +1,1530 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flash - About Us</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="About FlashDNA Infinity - Pioneering venture investment analysis using advanced mathematics and AI">
+  <title>FlashDNA Infinity - About</title>
 
-        body {
-            background: #000;
-            color: #fff;
-            overflow-x: hidden;
-        }
+  <!-- Essential Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" defer></script>
 
-        .nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-        }
+  <!-- Fonts -->
+  <style>
+    /* ---------------------------------------
+       FONTS
+    ---------------------------------------- */
+    @font-face {
+      font-family: 'Monument Extended';
+      src: url('https://cdnjs.cloudflare.com/ajax/libs/monospace/0.1.0/MonumentExtended-Regular.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
 
-        .nav-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    @font-face {
+      font-family: 'Inter';
+      src: url('https://cdnjs.cloudflare.com/ajax/libs/inter-ui/3.19.3/Inter.var.woff2') format('woff2');
+      font-weight: 100 900;
+      font-display: swap;
+    }
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    @font-face {
+      font-family: 'Neue Montreal';
+      src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-brands-400.woff2') format('woff2');
+      font-weight: 300 700;
+      font-display: swap;
+    }
 
-        .nav-link {
-            display: flex;
-            gap: 2rem;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
+    /* ---------------------------------------
+       CSS VARIABLES
+    ---------------------------------------- */
+    :root {
+      /* Color palette */
+      --pure-white: #FFFFFF;
+      --off-white: #F5F5F5;
+      --light-gray: #AAAAAA;
+      --mid-gray: #555555;
+      --dark-gray: #222222;
+      --pure-black: #000000;
+      
+      /* Transparency values */
+      --gray-90: rgba(255, 255, 255, 0.9);
+      --gray-70: rgba(255, 255, 255, 0.7);
+      --gray-50: rgba(255, 255, 255, 0.5);
+      --gray-30: rgba(255, 255, 255, 0.3);
+      --gray-10: rgba(255, 255, 255, 0.1);
+      --gray-05: rgba(255, 255, 255, 0.05);
+      
+      /* Typography */
+      --font-heading: 'Monument Extended', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      
+      /* Animation */
+      --transition-bezier: cubic-bezier(0.165, 0.84, 0.44, 1);
+      --transition-fast: 0.3s;
+      --transition-medium: 0.5s;
+      --transition-slow: 0.8s;
+    }
 
-        .nav-link a{
-            text-decoration: none;
-            color: #fff;
-        }
+    /* ---------------------------------------
+       GLOBAL RESETS
+    ---------------------------------------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .nav-link:hover {
-            background: rgba(78, 205, 196, 0.1);
-            color: #4ECDC4;
-        }
+    body {
+      font-family: var(--font-body, 'Inter'), sans-serif;
+      background-color: var(--pure-black);
+      color: var(--pure-white);
+      overflow-x: hidden;
+      cursor: none; /* Hide OS cursor for custom cursor */
+      height: 100vh;
+      width: 100vw;
+      transition: background-color var(--transition-medium) ease, color var(--transition-medium) ease;
+    }
 
-        .hero {
-            height: 60vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            padding: 80px 24px 0;
-        }
+    /* Mobile devices keep default cursor */
+    @media (pointer: coarse) {
+      body {
+        cursor: auto;
+      }
+      .cursor-container {
+        display: none;
+      }
+    }
 
-        .hero-content {
-            max-width: 800px;
-            z-index: 2;
-        }
+    /* ---------------------------------------
+       NOISE OVERLAY
+    ---------------------------------------- */
+    .noise {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJub2lzZSIgeD0iMCIgeT0iMCIgd2lkdGg9IjMwMCUiIGhlaWdodD0iMzAwJSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuNzUiIG51bU9jdGF2ZXM9IjQiIHN0aXRjaFRpbGVzPSJzdGl0Y2giIHJlc3VsdD0ibm9pc2UiLz48ZmVDb2xvck1hdHJpeCB0eXBlPSJzYXR1cmF0ZSIgdmFsdWVzPSIwIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMDAiIGZpbHRlcj0idXJsKCNub2lzZSkiIG9wYWNpdHk9IjAuMDUiLz48L3N2Zz4=');
+      pointer-events: none;
+      opacity: 0.04;
+      z-index: 1;
+      mix-blend-mode: overlay;
+    }
 
-        .hero h1 {
-            font-size: 56px;
-            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 24px;
-        }
+    /* ---------------------------------------
+       3D WIREFRAME CONTAINER
+    ---------------------------------------- */
+    #wireframe-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      perspective: 1000px;
+      z-index: 0;
+    }
 
-        .hero p {
-            font-size: 20px;
-            color: #888;
-            line-height: 1.6;
-        }
+    /* ---------------------------------------
+       CUSTOM ADVANCED CURSOR
+    ---------------------------------------- */
+    .cursor-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10000;
+    }
+    .cursor-dot {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background-color: var(--pure-white);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: difference;
+      transition: width var(--transition-fast), height var(--transition-fast);
+      z-index: 10001;
+    }
+    .cursor-circle {
+      position: fixed;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--gray-30);
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      transition: all var(--transition-fast) ease-out;
+      z-index: 10000;
+    }
+    .cursor-trail {
+      position: fixed;
+      width: 2px;
+      height: 2px;
+      background-color: var(--gray-50);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: opacity 1s ease;
+      z-index: 9999;
+    }
 
-        .section {
-            padding: 100px 24px;
-            position: relative;
-        }
+    /* ---------------------------------------
+       MAIN CONTAINER + LAYOUT
+    ---------------------------------------- */
+    .container {
+      height: 100vh;
+      width: 100vw;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      grid-template-columns: 50px 1fr 50px;
+      grid-template-areas:
+        "sidebar-left header sidebar-right"
+        "sidebar-left main sidebar-right"
+        "sidebar-left footer sidebar-right";
+      transition: opacity var(--transition-fast) ease;
+    }
 
-        .section:nth-child(even) {
-            background: rgba(255, 255, 255, 0.02);
-        }
+    /* Media query for mobile devices */
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 20px 1fr 20px;
+      }
+      
+      .sidebar-text {
+        display: none;
+      }
+    }
 
-        .section-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    .sidebar-left, .sidebar-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .sidebar-left {
+      grid-area: sidebar-left;
+    }
+    .sidebar-right {
+      grid-area: sidebar-right;
+    }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
+    .sidebar-text {
+      position: absolute;
+      white-space: nowrap;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transform-origin: center;
+      color: var(--light-gray);
+      transition: color var(--transition-medium) ease;
+    }
+    .sidebar-left .sidebar-text {
+      transform: rotate(-90deg) translateX(-50%);
+      left: 25px;
+    }
+    .sidebar-right .sidebar-text {
+      transform: rotate(90deg) translateX(50%);
+      right: 25px;
+    }
 
-        .section-header h2 {
-            font-size: 36px;
-            color: #4ECDC4;
-            margin-bottom: 20px;
-        }
+    .header {
+      grid-area: header;
+      padding: 30px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
 
-        .mission-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
+    .logo {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      letter-spacing: -0.03em;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .logo-text {
+      position: relative;
+      overflow: hidden;
+      color: white;
+      display: inline-block;
+      padding: 10px 0;
+    }
+    .logo-link{
+      text-decoration: none;
+    }
+    .logo-text::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--pure-white);
+      transform: translateX(-100%);
+      animation: logo-reveal 1.5s var(--transition-bezier) forwards;
+    }
+    @keyframes logo-reveal {
+      0% { transform: translateX(-100%); }
+      50% { transform: translateX(0); }
+      51% { transform: translateX(0); }
+      100% { transform: translateX(100%); }
+    }
 
-        .mission-text {
-            color: #888;
-            font-size: 18px;
-            line-height: 1.6;
-        }
+    .nav-toggle {
+      width: 30px;
+      height: 30px;
+      position: relative;
+      cursor: pointer;
+      z-index: 1000;
+      /* Add focus styles for accessibility */
+      outline: none;
+    }
+    .nav-toggle:focus-visible {
+      box-shadow: 0 0 0 2px var(--pure-white);
+    }
+    .nav-toggle span {
+      width: 100%;
+      height: 2px;
+      background-color: var(--pure-white);
+      position: absolute;
+      left: 0;
+      transition: all var(--transition-fast) ease;
+    }
+    .nav-toggle span:nth-child(1) {
+      top: 8px;
+    }
+    .nav-toggle span:nth-child(2) {
+      top: 16px;
+    }
+    .nav-toggle span:nth-child(3) {
+      top: 24px;
+    }
+    .nav-toggle.active span:nth-child(1) {
+      transform: rotate(45deg);
+      top: 14px;
+    }
+    .nav-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .nav-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg);
+      top: 14px;
+    }
 
-        .mission-text h2 {
-            color: #4ECDC4;
-            font-size: 36px;
-            margin-bottom: 24px;
-        }
+    /* Circle clipped navigation overlay */
+    .navigation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: var(--pure-black);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      clip-path: circle(0% at calc(100% - 65px) 65px);
+      transition: clip-path 1s var(--transition-bezier);
+    }
+    .navigation.active {
+      clip-path: circle(150% at calc(100% - 65px) 65px);
+    }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-        }
+    /* Mobile navigation adjustments */
+    @media (max-width: 768px) {
+      .navigation {
+        clip-path: circle(0% at calc(100% - 45px) 45px);
+      }
+      .navigation.active {
+        clip-path: circle(150% at calc(100% - 45px) 45px);
+      }
+    }
 
-        .stat-item {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
+    .nav-links {
+      list-style: none;
+      text-align: center;
+    }
+    .nav-links li {
+      margin: 30px 0;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all var(--transition-medium) var(--transition-bezier);
+    }
+    .navigation.active .nav-links li {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: calc(0.1s * var(--i));
+    }
+    .nav-links a {
+      font-family: var(--font-heading);
+      font-size: 5vw;
+      color: var(--pure-white);
+      text-decoration: none;
+      position: relative;
+      display: inline-block;
+      transition: all var(--transition-fast) ease;
+      overflow: hidden;
+    }
+    
+    /* Mobile navigation text size adjustment */
+    @media (max-width: 768px) {
+      .nav-links a {
+        font-size: 8vw;
+      }
+    }
+    
+    .nav-links a::before {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      color: var(--pure-black);
+      background-color: var(--pure-white);
+      overflow: hidden;
+      white-space: nowrap;
+      transition: width var(--transition-fast) ease;
+    }
+    .nav-links a:hover::before,
+    .nav-links a:focus::before {
+      width: 100%;
+    }
 
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
+    .main {
+      grid-area: main;
+      position: relative;
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 0;
+      max-height: calc(100vh - 120px);
+    }
 
-        .stat-item h3 {
-            font-size: 36px;
-            color: #4ECDC4;
-            margin-bottom: 10px;
-        }
+    /* ---------------------------------------
+       ABOUT PAGE SPECIFIC STYLES
+    ---------------------------------------- */
+    .about-content {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      z-index: 3;
+      position: relative;
+      padding: 20px;
+    }
 
-        .stat-item p {
-            color: #888;
-            font-size: 16px;
-        }
+    /* About header */
+    .about-header {
+      position: relative;
+      overflow: hidden;
+      padding: 40px 0;
+      margin-bottom: 60px;
+    }
 
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-        }
+    .about-title {
+      font-family: var(--font-heading);
+      font-size: calc(3vw + 1rem);
+      line-height: 1.2;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .team-member {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
+    .about-title span {
+      display: block;
+      opacity: 0;
+      transform: translateY(100%);
+      animation: title-reveal 0.8s var(--transition-bezier) forwards;
+      animation-delay: 0.5s;
+    }
 
-        .team-member:hover {
-            transform: translateY(-10px);
-        }
+    @keyframes title-reveal {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        .member-photo {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 20px;
-            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
-            border-radius: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            color: #fff;
-        }
+    .about-subtitle {
+      font-family: var(--font-body);
+      font-size: 1.2rem;
+      color: var(--light-gray);
+      line-height: 1.6;
+      margin-bottom: 30px;
+      max-width: 800px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fade-in 0.8s var(--transition-bezier) forwards;
+      animation-delay: 1s;
+    }
 
-        .team-member h3 {
-            font-size: 24px;
-            color: #fff;
-            margin-bottom: 10px;
-        }
+    @keyframes fade-in {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        .team-member h4 {
-            font-size: 16px;
-            color: #4ECDC4;
-            margin-bottom: 15px;
-        }
+    /* Company story section */
+    .story-section {
+      margin-bottom: 80px;
+    }
 
-        .team-member p {
-            color: #888;
-            font-size: 14px;
-            line-height: 1.6;
-        }
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      margin-bottom: 30px;
+      position: relative;
+      display: inline-block;
+    }
 
-        .values-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 2px;
+      background-color: var(--pure-white);
+    }
 
-        .value-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
+    .story-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
 
-        .value-card:hover {
-            transform: translateY(-10px);
-        }
+    @media (max-width: 900px) {
+      .story-content {
+        grid-template-columns: 1fr;
+      }
+    }
 
-        .value-icon {
-            font-size: 32px;
-            color: #4ECDC4;
-            margin-bottom: 20px;
-        }
+    .story-text {
+      color: var(--light-gray);
+      line-height: 1.8;
+    }
 
-        .value-card h3 {
-            font-size: 24px;
-            color: #fff;
-            margin-bottom: 15px;
-        }
+    .story-text p {
+      margin-bottom: 20px;
+    }
 
-        .value-card p {
-            color: #888;
-            font-size: 16px;
-            line-height: 1.6;
-        }
+    .story-timeline {
+      position: relative;
+      height: 300px;
+      background-color: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
 
-        #about-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
+    /* Mission and values */
+    .mission-section {
+      margin-bottom: 80px;
+    }
 
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 40px;
-            }
-            
-            .hero-content p {
-                font-size: 20px;
-            }
+    .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+    }
 
-            .nav-link {
-                display: flex;
-                overflow-x: auto;
-                white-space: nowrap;
-            }
+    .mission-card {
+      background-color: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 2px;
+      transition: all var(--transition-medium) var(--transition-bezier);
+    }
 
-            .nav-link::-webkit-scrollbar {
-            display: none;
-            }
-        }
-    </style>
+    .mission-card:hover {
+      transform: translateY(-10px);
+      background-color: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .mission-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--pure-white), transparent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.8s var(--transition-bezier);
+    }
+
+    .mission-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .mission-title {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    .mission-text {
+      color: var(--light-gray);
+      line-height: 1.6;
+    }
+
+    /* Team section */
+    .team-section {
+      margin-bottom: 80px;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .team-member {
+      background-color: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 2px;
+      transition: all var(--transition-medium) var(--transition-bezier);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .team-member:hover {
+      transform: translateY(-10px);
+      background-color: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .member-avatar {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .avatar-svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .member-name {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+
+    .member-title {
+      color: var(--light-gray);
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .member-bio {
+      color: var(--light-gray);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .member-expertise {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .expertise-tag {
+      font-size: 0.7rem;
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 5px 10px;
+      border-radius: 2px;
+      color: var(--pure-white);
+    }
+
+    /* Dynamic grid background */
+    .grid-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+    }
+    
+    .grid-line {
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+    
+    .grid-horizontal {
+      width: 100%;
+      height: 1px;
+      transform: scaleX(0);
+      transform-origin: 0 0;
+    }
+    
+    .grid-vertical {
+      height: 100%;
+      width: 1px;
+      transform: scaleY(0);
+      transform-origin: 0 0;
+    }
+
+    /* Dynamic noise canvas */
+    #noise-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.05;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Progress bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background-color: var(--pure-white);
+      z-index: 999;
+      opacity: 0.7;
+      transform-origin: 0 0;
+      transform: scaleX(0);
+    }
+
+    /* DARK/LIGHT MODE SWITCH */
+    .mode-switch {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--pure-white);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 100;
+      transition: all var(--transition-fast) ease;
+      outline: none;
+    }
+    
+    .mode-switch:focus-visible {
+      box-shadow: 0 0 0 3px var(--light-gray);
+    }
+    
+    .mode-switch::before {
+      content: '';
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background-color: var(--pure-black);
+      transition: all var(--transition-fast) ease;
+    }
+    
+    .mode-switch.light-mode {
+      background-color: var(--pure-black);
+    }
+    
+    .mode-switch.light-mode::before {
+      background-color: var(--pure-white);
+    }
+
+    /* LIGHT MODE OVERRIDES */
+    body.light-mode {
+      background-color: var(--pure-white);
+      color: var(--pure-black);
+    }
+    
+    body.light-mode .cursor-dot,
+    body.light-mode .cursor-circle {
+      background-color: var(--pure-black);
+      border-color: var(--pure-black);
+    }
+    
+    body.light-mode .navigation {
+      background-color: var(--pure-white);
+    }
+    
+    body.light-mode .nav-toggle span {
+      background-color: var(--pure-black);
+    }
+    
+    body.light-mode .nav-links a {
+      color: var(--pure-black);
+    }
+    
+    body.light-mode .nav-links a::before {
+      color: var(--pure-white);
+      background-color: var(--pure-black);
+    }
+    
+    body.light-mode .grid-line {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+    
+    body.light-mode .sidebar-text {
+      color: var(--mid-gray);
+    }
+    
+    body.light-mode .team-member,
+    body.light-mode .mission-card {
+      background-color: rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    body.light-mode .team-member:hover,
+    body.light-mode .mission-card:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+    
+    body.light-mode .story-text,
+    body.light-mode .mission-text,
+    body.light-mode .member-bio,
+    body.light-mode .member-title,
+    body.light-mode .about-subtitle {
+      color: var(--mid-gray);
+    }
+    
+    body.light-mode .story-timeline {
+      background-color: rgba(0, 0, 0, 0.05);
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+    
+    body.light-mode .expertise-tag {
+      background-color: rgba(0, 0, 0, 0.05);
+      color: var(--pure-black);
+    }
+
+    /* Loading screen */
+    .loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--pure-black);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity var(--transition-slow) ease, visibility var(--transition-slow) ease;
+    }
+    
+    .loading-logo {
+      font-family: var(--font-heading);
+      font-size: 48px;
+      letter-spacing: -0.03em;
+      color: var(--pure-white);
+      position: relative;
+    }
+    
+    .loading-bar {
+      position: absolute;
+      bottom: -20px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background-color: var(--pure-white);
+      transition: width 1.5s var(--transition-bezier);
+    }
+    
+    .loading-screen.loaded {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    /* Skip to content link for accessibility */
+    .skip-link {
+      position: absolute;
+      top: -50px;
+      left: 10px;
+      padding: 10px;
+      background-color: var(--pure-white);
+      color: var(--pure-black);
+      z-index: 9999;
+      transition: top 0.3s ease;
+    }
+    
+    .skip-link:focus {
+      top: 10px;
+    }
+  </style>
 </head>
 <body>
-    <canvas id="about-canvas"></canvas>
+  <!-- Accessibility skip link -->
+  <a href="#main-content" class="skip-link">Skip to content</a>
 
-    <nav class="nav">
-        <div class="nav-content">
-            <div class="logo">
-                <a href="https://flash.zone/index.html">
-                    <img src="favicon.ico" alt="Flash" width="70" height="60">
-                </a>
-            </div>
-            <div class="nav-link">
-                <a href="https://flash.zone/index.html">Home</a>
-                <a href="https://flash.zone/PlatformPage.html">Platform</a>
-                <a href="https://flash.zone/TechnologyPage.html">Technology</a>
-                <a href="https://flash.zone/AboutPage.html">About</a>
-                <a href="https://flash.zone/ContactPage.html">Contact</a>
-            </div>
+  <!-- Loading screen -->
+  <div class="loading-screen">
+    <div class="loading-logo">
+      FLASH
+      <div class="loading-bar"></div>
+    </div>
+  </div>
+
+  <!-- Progress bar -->
+  <div class="progress-bar"></div>
+
+  <!-- Noise Overlay -->
+  <div class="noise"></div>
+
+  <!-- 3D Wireframe -->
+  <div id="wireframe-container"></div>
+
+  <!-- Advanced custom cursor -->
+  <div class="cursor-container">
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-circle" aria-hidden="true"></div>
+  </div>
+
+  <!-- Circle-clipped NAV -->
+  <div class="navigation" aria-hidden="true">
+    <ul class="nav-links">
+      <li style="--i:1;"><a href="/" data-text="HOME">HOME</a></li>
+      <li style="--i:2;"><a href="/platform" data-text="PLATFORM">PLATFORM</a></li>
+      <li style="--i:3;"><a href="/technology" data-text="TECHNOLOGY">TECHNOLOGY</a></li>
+      <li style="--i:4;"><a href="/about" data-text="ABOUT">ABOUT</a></li>
+      <li style="--i:5;"><a href="/contact" data-text="CONTACT">CONTACT</a></li>
+    </ul>
+  </div>
+
+  <!-- Main container -->
+  <div class="container">
+    <div class="sidebar-left">
+      <div class="sidebar-text">FLASH VENTURES — EST. 2025</div>
+    </div>
+
+    <header class="header">
+      <div class="logo" tabindex="0" aria-label="Flash logo">
+        <a class="logo-link" href="https://flash.zone/index.html">
+            <div class="logo-text">FLASH</div>
+        </a>
+      </div>
+      <div class="nav-toggle" tabindex="0" role="button" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </header>
+
+    <main class="main" id="main-content">
+      <!-- Dynamic noise canvas -->
+      <canvas id="noise-canvas"></canvas>
+
+      <!-- Dynamic grid background -->
+      <div class="grid-background"></div>
+
+      <!-- About content -->
+      <div class="about-content">
+        <!-- About Header -->
+        <div class="about-header">
+          <h1 class="about-title">
+            <span>About FlashDNA</span>
+          </h1>
+          <p class="about-subtitle">
+            We're a team of mathematicians, data scientists, and investment professionals pioneering new approaches to venture capital through advanced mathematics, high-performance computing, and artificial intelligence.
+          </p>
         </div>
-    </nav>
-
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Transforming Venture Capital</h1>
-            <p>We're bringing innovation to venture capital through advanced AI technology and data-driven insights.</p>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="mission-grid">
-            <div class="mission-text">
-                <h2>Our Mission</h2>
-                <p>Flash is revolutionizing venture capital by leveraging advanced AI technology to identify and nurture the most promising startups. We believe in creating a more efficient, transparent, and data-driven investment ecosystem.</p>
-                <br>
-                <p>Our mission is to democratize access to capital by removing human bias and providing objective, data-driven insights that help great ideas get the funding they deserve.</p>
+        
+        <!-- Company Story Section -->
+        <div class="story-section">
+          <h2 class="section-title">Our Story</h2>
+          <div class="story-content">
+            <div class="story-text">
+              <p>
+                FlashDNA began with a simple question: why do traditional venture capital firms rely on intuition and personal networks when evaluating startups, instead of applying rigorous mathematical models?
+              </p>
+              <p>
+                Founded in 2023 by a team of mathematicians and former VCs, FlashDNA emerged from research into the application of partial differential equations and chaos theory to startup growth dynamics. Our insight was that startups can be modeled as complex systems where a rigorous mathematical approach provides predictive power that traditional methods cannot match.
+              </p>
+              <p>
+                Our first model, using a Black-Scholes-style PDE approach to calculate startup meltdown probabilities, demonstrated 76% higher accuracy than traditional methods. This breakthrough led to rapid expansion of our research, incorporating fractal dimensions, chaos theory, agent-based modeling, and quantum-inspired probability calculations.
+              </p>
+              <p>
+                Today, our FlashDNA Infinity platform processes over 10,000 startup data points per evaluation, distilling complex mathematical insights into clear investment recommendations with unparalleled accuracy.
+              </p>
             </div>
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <h3>47K+</h3>
-                    <p>Data Points Analyzed</p>
-                </div>
-                <div class="stat-item">
-                    <h3>85%+</h3>
-                    <p>Prediction Accuracy</p>
-                </div>
-                <div class="stat-item">
-                    <h3>500ms</h3>
-                    <p>Analysis Speed</p>
-                </div>
-                <div class="stat-item">
-                    <h3>99.9%</h3>
-                    <p>System Uptime</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="section-content">
-            <div class="section-header">
-                <h2>Our Team</h2>
-                <p>Meet the visionaries and experts behind Flash's revolutionary technology</p>
-            </div>
-            <div class="team-grid">
-                <div class="team-member">
-                    <div class="member-photo">
-                        <img src="/api/placeholder/120/120" alt="S">
-                    </div>
-                    <div class="member-info">
-                        <h3 class="member-name">Syed Faraaz</h3>
-                        <div class="member-role">CEO</div>
-                        <p class="member-bio">
-                            Serial entrepreneur with a proven track record of successful startups and exits in the technology sector. Expert in strategic growth and business development.
-                        </p>
-                    </div>
-                </div>
-
+            <div class="story-timeline">
+              <svg viewBox="0 0 400 300" width="100%" height="100%">
+                <!-- Timeline line -->
+                <line x1="30" y1="20" x2="30" y2="280" stroke="#FFFFFF" stroke-width="2" />
                 
-                <div class="team-member">
-                    <div class="member-photo">
-                        <img src="/api/placeholder/120/120" alt="P">
-                    </div>
-                    <div class="member-info">
-                        <h3 class="member-name">Palchen</h3>
-                        <div class="member-role">COO</div>
-                        <p class="member-bio">
-                            SaaS operations expert with 7 years of consulting experience. Specialized in scaling operations and optimizing business processes.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="team-member">
-                    <div class="member-photo">
-                        <img src="/api/placeholder/120/120" alt="N">
-                    </div>
-                    <div class="member-info">
-                        <h3 class="member-name">Nagendra</h3>
-                        <div class="member-role">CTO</div>
-                        <p class="member-bio">
-                            Pioneer in developing advanced algorithms and predictive analytics systems.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="team-member">
-                    <div class="member-photo">
-                        <img src="/api/placeholder/120/120" alt="K">
-                    </div>
-                    <div class="member-info">
-                        <h3 class="member-name">Kshiti</h3>
-                        <div class="member-role">CFO</div>
-                        <p class="member-bio">
-                            Former Senior Manager at KPMG with extensive experience in financial management and strategy. Expert in tech company financials and IPO preparations.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="team-member">
-                    <div class="member-photo">
-                        <img src="/api/placeholder/120/120" alt="C">
-                    </div>
-                    <div class="member-info">
-                        <h3 class="member-name">Catherine</h3>
-                        <div class="member-role">Head of Legal & Compliance</div>
-                        <p class="member-bio">
-                            Legal technology expert with 20 years of experience in legal department operations. Specialized in regulatory compliance for tech companies.
-                        </p>
-                    </div>
-                </div>
+                <!-- Timeline nodes -->
+                <circle cx="30" cy="60" r="8" fill="#FFFFFF" />
+                <circle cx="30" cy="120" r="8" fill="#FFFFFF" />
+                <circle cx="30" cy="180" r="8" fill="#FFFFFF" />
+                <circle cx="30" cy="240" r="8" fill="#FFFFFF" />
                 
-                <div class="team-member">
-                    <div class="member-photo">
-                        <img src="/api/placeholder/120/120" alt="A">
-                    </div>
-                    <div class="member-info">
-                        <h3 class="member-name">Amer</h3>
-                        <div class="member-role">Head of Marketing</div>
-                        <p class="member-bio">
-                            Digital marketing strategist with 10 years of experience in the Indian market. Expert in growth marketing and brand development.
-                        </p>
-                    </div>
-                </div>
+                <!-- Timeline content -->
+                <text x="50" y="50" fill="#FFFFFF" font-family="var(--font-heading)" font-size="14">2023: Foundation</text>
+                <text x="50" y="70" fill="#AAAAAA" font-size="12">Initial PDE meltdown research begins</text>
+                
+                <text x="50" y="110" fill="#FFFFFF" font-family="var(--font-heading)" font-size="14">2023: First Breakthrough</text>
+                <text x="50" y="130" fill="#AAAAAA" font-size="12">76% higher accuracy with first model</text>
+                
+                <text x="50" y="170" fill="#FFFFFF" font-family="var(--font-heading)" font-size="14">2024: Platform Release</text>
+                <text x="50" y="190" fill="#AAAAAA" font-size="12">FlashDNA Infinity launched</text>
+                
+                <text x="50" y="230" fill="#FFFFFF" font-family="var(--font-heading)" font-size="14">2025: Quantum Integration</text>
+                <text x="50" y="250" fill="#AAAAAA" font-size="12">Quantum-inspired probability models</text>
+              </svg>
             </div>
-    </section>
-
-    <section class="section">
-        <div class="section-content">
-            <div class="section-header">
-                <h2>Our Values</h2>
-                <p>These principles guide everything we do at Flash</p>
-            </div>
-            <div class="values-grid">
-                <div class="value-card">
-                    <div class="value-icon">↗</div>
-                    <h3>Innovation First</h3>
-                    <p>We continuously push the boundaries of what's possible in venture capital through cutting-edge AI technology.</p>
-                </div>
-                <div class="value-card">
-                    <div class="value-icon">⚖</div>
-                    <h3>Transparency</h3>
-                    <p>We believe in building trust through clear, data-driven insights and open communication.</p>
-                </div>
-                <div class="value-card">
-                    <div class="value-icon">★</div>
-                    <h3>Excellence</h3>
-                    <p>We maintain the highest standards in our technology, service, and relationships.</p>
-                </div>
-                <div class="value-card">
-                    <div class="value-icon">⟳</div>
-                    <h3>Impact</h3>
-                    <p>We're committed to creating meaningful change in how great ideas get funded.</p>
-                </div>
-                <div class="value-card">
-                    <div class="value-icon">♦</div>
-                    <h3>Data-Driven</h3>
-                    <p>We base our decisions on robust analysis and quantitative insights.</p>
-                </div>
-            </div>
+          </div>
         </div>
-    </section>
+        
+        <!-- Mission & Values Section -->
+        <div class="mission-section">
+          <h2 class="section-title">Mission & Values</h2>
+          <div class="mission-grid">
+            <div class="mission-card">
+              <h3 class="mission-title">Our Mission</h3>
+              <p class="mission-text">
+                To transform venture capital through mathematical rigor, removing bias and increasing success rates for worthy innovations that might otherwise be overlooked.
+              </p>
+            </div>
+            
+            <div class="mission-card">
+              <h3 class="mission-title">Mathematical Truth</h3>
+              <p class="mission-text">
+                We believe that complex systems can be understood through mathematical models, and that data-driven insights lead to better investment decisions than intuition alone.
+              </p>
+            </div>
+            
+            <div class="mission-card">
+              <h3 class="mission-title">Radical Transparency</h3>
+              <p class="mission-text">
+                Our models and methodologies are transparent to our clients, allowing them to understand not just what we recommend, but why we recommend it.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Team Section -->
+        <div class="team-section">
+          <h2 class="section-title">Our Team</h2>
+          <div class="team-grid">
+            <!-- Team Member 1 -->
+            <div class="team-member">
+              <div class="member-avatar">
+                <svg class="avatar-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="45" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                  <path d="M30,30 L45,45 L30,60 L45,75 L60,60 L75,45 L60,30 L45,15 Z" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                  <circle cx="50" cy="50" r="15" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                </svg>
+              </div>
+              <h3 class="member-name">Syed Faraaz</h3>
+              <div class="member-title">CEO</div>
+              <p class="member-bio">
+                Serial entrepreneur with a proven track record of successful startups and exits in the technology sector. Expert in strategic growth and business development.
+              </p>
+              <div class="member-expertise">
+                <span class="expertise-tag">Mathematics</span>
+                <span class="expertise-tag">VC Strategy</span>
+                <span class="expertise-tag">PDE Systems</span>
+              </div>
+            </div>
+            
+            <!-- Team Member 2 -->
+            <div class="team-member">
+              <div class="member-avatar">
+                <svg class="avatar-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="10" y="10" width="80" height="80" rx="10" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                  <circle cx="35" cy="40" r="10" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                  <circle cx="65" cy="40" r="10" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                  <path d="M30,70 Q50,90 70,70" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                </svg>
+              </div>
+              <h3 class="member-name">Palchen</h3>
+              <div class="member-title">COO</div>
+              <p class="member-bio">
+                SaaS operations expert with 7 years of consulting experience. Specialized in scaling operations and optimizing business processes.
+              </p>
+              <div class="member-expertise">
+                <span class="expertise-tag">HPC</span>
+                <span class="expertise-tag">Quantum Computing</span>
+                <span class="expertise-tag">AI Architecture</span>
+              </div>
+            </div>
+            
+            <!-- Team Member 3 -->
+            <div class="team-member">
+              <div class="member-avatar">
+                <svg class="avatar-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <polygon points="50,10 90,50 50,90 10,50" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                  <line x1="50" y1="10" x2="50" y2="90" stroke="#FFFFFF" stroke-width="2" />
+                  <line x1="10" y1="50" x2="90" y2="50" stroke="#FFFFFF" stroke-width="2" />
+                  <circle cx="50" cy="50" r="20" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                </svg>
+              </div>
+              <h3 class="member-name">Nagendra</h3>
+              <div class="member-title">CTO</div>
+              <p class="member-bio">
+                Pioneer in developing advanced algorithms and predictive analytics systems.
+              </p>
+              <div class="member-expertise">
+                <span class="expertise-tag">Fractal Mathematics</span>
+                <span class="expertise-tag">Chaos Theory</span>
+                <span class="expertise-tag">Complex Systems</span>
+              </div>
+            </div>
+            
+            <!-- Team Member 4 -->
+            <div class="team-member">
+              <div class="member-avatar">
+                <svg class="avatar-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="40" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                  <path d="M30,70 C45,90 55,90 70,70" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                  <path d="M30,30 L40,40 L50,30 L60,40 L70,30" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                </svg>
+              </div>
+              <h3 class="member-name">Kshiti</h3>
+              <div class="member-title">CFO</div>
+              <p class="member-bio">
+                Former Senior Manager at KPMG with extensive experience in financial management and strategy. Expert in tech company financials and IPO preparations.
+              </p>
+              <div class="member-expertise">
+                <span class="expertise-tag">Investment Strategy</span>
+                <span class="expertise-tag">Exit Planning</span>
+                <span class="expertise-tag">Pattern Recognition</span>
+              </div>
+            </div>
+            
+            <!-- Team Member 5 -->
+            <div class="team-member">
+              <div class="member-avatar">
+                <svg class="avatar-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20,50 Q50,20 80,50 Q50,80 20,50" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                  <path d="M35,50 Q50,35 65,50 Q50,65 35,50" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                  <circle cx="50" cy="50" r="30" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="5,5" />
+                </svg>
+              </div>
+              <h3 class="member-name">Catherine</h3>
+              <div class="member-title">Head of Legal & Compliance</div>
+              <p class="member-bio">
+                Legal technology expert with 20 years of experience in legal department operations. Specialized in regulatory compliance for tech companies.
+              </p>
+              <div class="member-expertise">
+                <span class="expertise-tag">Natural Language Processing</span>
+                <span class="expertise-tag">Large Language Models</span>
+                <span class="expertise-tag">Semantic Analysis</span>
+              </div>
+            </div>
+            
+            <!-- Team Member 6 -->
+            <div class="team-member">
+              <div class="member-avatar">
+                <svg class="avatar-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="20" y1="30" x2="80" y2="30" stroke="#FFFFFF" stroke-width="2" />
+                  <line x1="20" y1="50" x2="80" y2="50" stroke="#FFFFFF" stroke-width="2" />
+                  <line x1="20" y1="70" x2="80" y2="70" stroke="#FFFFFF" stroke-width="2" />
+                  <circle cx="30" cy="30" r="5" fill="#FFFFFF" />
+                  <circle cx="50" cy="50" r="5" fill="#FFFFFF" />
+                  <circle cx="70" cy="70" r="5" fill="#FFFFFF" />
+                </svg>
+              </div>
+              <h3 class="member-name">Amer</h3>
+              <div class="member-title">Head of Marketing</div>
+              <p class="member-bio">
+                Digital marketing strategist with 10 years of experience in the Indian market. Expert in growth marketing and brand development.
+              </p>
+              <div class="member-expertise">
+                <span class="expertise-tag">Agent-Based Modeling</span>
+                <span class="expertise-tag">Reinforcement Learning</span>
+                <span class="expertise-tag">Emergent Behavior</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
 
-    <script>
-        const canvas = document.getElementById('about-canvas');
-        const renderer = new THREE.WebGLRenderer({
-            canvas,
-            alpha: true
+    <div class="sidebar-right">
+      <div class="sidebar-text">DIMENSIONAL QUANTUM ANALYTICS</div>
+    </div>
+  </div>
+
+  <!-- Dark/Light mode switch -->
+  <div class="mode-switch" tabindex="0" role="button" aria-label="Toggle dark and light mode"></div>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check if user prefers dark or light mode
+      const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const body = document.body;
+      const modeSwitch = document.querySelector('.mode-switch');
+      
+      // Apply user's system preference
+      if (!prefersDarkMode) {
+        body.classList.add('light-mode');
+        modeSwitch.classList.add('light-mode');
+      }
+      
+      /* ------------------------------------------------
+         LOADING SCREEN
+      ------------------------------------------------*/
+      const loadingScreen = document.querySelector('.loading-screen');
+      const loadingBar = document.querySelector('.loading-bar');
+      
+      // Simulate loading progress
+      let progress = 0;
+      const loadingInterval = setInterval(() => {
+        progress += Math.random() * 10;
+        if (progress >= 100) {
+          progress = 100;
+          clearTimeout(loadingInterval);
+          
+          // Hide loading screen after a short delay
+          setTimeout(() => {
+            loadingScreen.classList.add('loaded');
+          }, 500);
+        }
+        loadingBar.style.width = `${progress}%`;
+      }, 150);
+
+      /* ------------------------------------------------
+         SCROLL PROGRESS INDICATOR
+      ------------------------------------------------*/
+      const progressBar = document.querySelector('.progress-bar');
+      
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight;
+        const winHeight = window.innerHeight;
+        const scrollPercent = scrollTop / (docHeight - winHeight);
+        
+        progressBar.style.width = `${window.innerWidth * scrollPercent}px`;
+      });
+
+      /* ------------------------------------------------
+         ADVANCED CURSOR
+      ------------------------------------------------*/
+      const cursorDot = document.querySelector('.cursor-dot');
+      const cursorCircle = document.querySelector('.cursor-circle');
+      const cursorContainer = document.querySelector('.cursor-container');
+
+      // Only apply custom cursor on non-touch devices
+      if (!('ontouchstart' in window)) {
+        let mouseX = 0;
+        let mouseY = 0;
+        let dotX = 0;
+        let dotY = 0;
+        let circleX = 0;
+        let circleY = 0;
+        
+        // Use requestAnimationFrame for smoother cursor movement
+        function updateCursor() {
+          // Smooth follow with lerp (linear interpolation)
+          dotX += (mouseX - dotX) * 0.2;
+          dotY += (mouseY - dotY) * 0.2;
+          circleX += (mouseX - circleX) * 0.1;
+          circleY += (mouseY - circleY) * 0.1;
+          
+          cursorDot.style.transform = `translate(${dotX}px, ${dotY}px)`;
+          cursorCircle.style.transform = `translate(${circleX}px, ${circleY}px)`;
+          
+          requestAnimationFrame(updateCursor);
+        }
+        
+        document.addEventListener('mousemove', (e) => {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+          
+          // Create trail with throttling for performance
+          if (Math.random() > 0.7) {
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            cursorContainer.appendChild(trail);
+            
+            trail.style.left = `${mouseX}px`;
+            trail.style.top = `${mouseY}px`;
+            
+            setTimeout(() => {
+              trail.style.opacity = '0';
+              trail.style.transform = 'translate(-50%, -50%) scale(2)';
+              
+              // Remove from DOM after animation
+              setTimeout(() => {
+                trail.remove();
+              }, 1000);
+            }, 10);
+          }
         });
+        
+        // Start the animation loop
+        updateCursor();
 
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        // Interactive elements cursor effect
+        const interactiveEls = document.querySelectorAll('a, .nav-toggle, .team-member, .mission-card, .mode-switch, [tabindex="0"]');
+        interactiveEls.forEach(el => {
+          el.addEventListener('mouseenter', () => {
+            cursorDot.style.width = '12px';
+            cursorDot.style.height = '12px';
+            gsap.to(cursorCircle, {
+              scale: 1.5,
+              opacity: 0.7,
+              duration: 0.3,
+              ease: "power2.out"
+            });
+          });
+          
+          el.addEventListener('mouseleave', () => {
+            cursorDot.style.width = '8px';
+            cursorDot.style.height = '8px';
+            gsap.to(cursorCircle, {
+              scale: 1,
+              opacity: 1,
+              duration: 0.3,
+              ease: "power2.out"
+            });
+          });
+        });
+      }
 
+      /* ------------------------------------------------
+         NAVIGATION TOGGLE
+      ------------------------------------------------*/
+      const navToggle = document.querySelector('.nav-toggle');
+      const navigation = document.querySelector('.navigation');
+      
+      navToggle.addEventListener('click', toggleNav);
+      navToggle.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleNav();
+        }
+      });
+      
+      function toggleNav() {
+        navToggle.classList.toggle('active');
+        navigation.classList.toggle('active');
+        
+        // Update ARIA attributes
+        const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', !isExpanded);
+        navigation.setAttribute('aria-hidden', isExpanded);
+        
+        // Focus trap for keyboard navigation
+        if (!isExpanded) {
+          setTimeout(() => {
+            document.querySelector('.nav-links a').focus();
+          }, 100);
+        }
+      }
+      
+      // Close navigation when clicking outside
+      document.addEventListener('click', (e) => {
+        if (navigation.classList.contains('active') && 
+            !navigation.contains(e.target) && 
+            !navToggle.contains(e.target)) {
+          toggleNav();
+        }
+      });
+      
+      // Close navigation on escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navigation.classList.contains('active')) {
+          toggleNav();
+          navToggle.focus();
+        }
+      });
+
+      /* ------------------------------------------------
+         DYNAMIC GRID BACKGROUND
+      ------------------------------------------------*/
+      const gridBackground = document.querySelector('.grid-background');
+      const gridCount = {
+        horizontal: 10,
+        vertical: 10
+      };
+      
+      // Create grid with performance optimization
+      function createGrid() {
+        // Clear existing grid lines
+        gridBackground.innerHTML = '';
+        
+        // Create a document fragment for better performance
+        const fragment = document.createDocumentFragment();
+        
+        // Horizontal lines
+        for (let i = 1; i <= gridCount.horizontal; i++) {
+          const gridLine = document.createElement('div');
+          gridLine.classList.add('grid-line', 'grid-horizontal');
+          gridLine.style.top = `${(i * 100) / (gridCount.horizontal + 1)}%`;
+          fragment.appendChild(gridLine);
+        }
+        
+        // Vertical lines
+        for (let i = 1; i <= gridCount.vertical; i++) {
+          const gridLine = document.createElement('div');
+          gridLine.classList.add('grid-line', 'grid-vertical');
+          gridLine.style.left = `${(i * 100) / (gridCount.vertical + 1)}%`;
+          fragment.appendChild(gridLine);
+        }
+        
+        // Add all lines at once
+        gridBackground.appendChild(fragment);
+        
+        // Animate grid lines
+        const horizontalLines = document.querySelectorAll('.grid-horizontal');
+        const verticalLines = document.querySelectorAll('.grid-vertical');
+        
+        horizontalLines.forEach((line, index) => {
+          gsap.to(line, {
+            scaleX: 1,
+            duration: 1.5,
+            delay: 0.05 * index,
+            ease: "power3.inOut"
+          });
+        });
+        
+        verticalLines.forEach((line, index) => {
+          gsap.to(line, {
+            scaleY: 1,
+            duration: 1.5,
+            delay: 0.05 * index,
+            ease: "power3.inOut"
+          });
+        });
+      }
+      
+      // Create grid initially
+      createGrid();
+      
+      // Recreate grid on resize (with debounce)
+      let resizeTimeout;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(createGrid, 200);
+      });
+
+      /* ------------------------------------------------
+         DARK/LIGHT MODE TOGGLE
+      ------------------------------------------------*/
+      modeSwitch.addEventListener('click', toggleMode);
+      modeSwitch.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleMode();
+        }
+      });
+      
+      function toggleMode() {
+        body.classList.toggle('light-mode');
+        modeSwitch.classList.toggle('light-mode');
+        
+        const isLightMode = body.classList.contains('light-mode');
+        localStorage.setItem('lightMode', isLightMode);
+        
+        // Update ARIA label
+        modeSwitch.setAttribute('aria-label', 
+          isLightMode ? 'Switch to dark mode' : 'Switch to light mode'
+        );
+        
+        // Smooth transition effect
+        gsap.to('.container', {
+          opacity: 0.8,
+          duration: 0.2,
+          onComplete: () => {
+            gsap.to('.container', {
+              opacity: 1,
+              duration: 0.2
+            });
+          }
+        });
+      }
+      
+      // Set initial ARIA label
+      modeSwitch.setAttribute('aria-label', 
+        body.classList.contains('light-mode') ? 'Switch to dark mode' : 'Switch to light mode'
+      );
+
+      /* ------------------------------------------------
+         3D WIREFRAME IN BACKGROUND
+      ------------------------------------------------*/
+      if (typeof THREE !== 'undefined') {
+        // Create scene
         const scene = new THREE.Scene();
+        
+        // Create camera
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.z = 5;
-
-        const particlesGeometry = new THREE.BufferGeometry();
-        const count = 5000;
-        const positions = new Float32Array(count * 3);
-
-        for(let i = 0; i < count * 3; i++) {
-            positions[i] = (Math.random() - 0.5) * 10;
-        }
-
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        const particlesMaterial = new THREE.PointsMaterial({
-            size: 0.005,
-            color: '#4ECDC4'
+        
+        // Create renderer
+        const renderer = new THREE.WebGLRenderer({ 
+          alpha: true, 
+          antialias: true,
+          powerPreference: 'high-performance'
         });
-
-        const particles = new THREE.Points(particlesGeometry, particlesMaterial);
-        scene.add(particles);
-
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        
+        document.getElementById('wireframe-container').appendChild(renderer.domElement);
+        
+        // Complex geometry representing interconnected nodes
+        const geometry = new THREE.IcosahedronGeometry(2, 1);
+        const edges = new THREE.EdgesGeometry(geometry);
+        
+        // Material
+        const wireframeMaterial = new THREE.LineBasicMaterial({
+          color: 0xffffff,
+          transparent: true,
+          opacity: body.classList.contains('light-mode') ? 0.05 : 0.1
+        });
+        
+        const wireframe = new THREE.LineSegments(edges, wireframeMaterial);
+        scene.add(wireframe);
+        
+        // Animation loop
         function animate() {
-            requestAnimationFrame(animate);
-            particles.rotation.y += 0.001;
-            renderer.render(scene, camera);
+          requestAnimationFrame(animate);
+          
+          wireframe.rotation.x += 0.001;
+          wireframe.rotation.y += 0.002;
+          
+          // Responsive to scroll
+          const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+          wireframe.rotation.z = scrollPercent * Math.PI * 2;
+          wireframe.scale.setScalar(1 + scrollPercent * 0.5);
+          
+          renderer.render(scene, camera);
         }
+        
+        // Start animation
         animate();
-
+        
+        // Handle resize
         window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
         });
-    </script>
+      }
+    });
+  </script>
 </body>
 </html>
