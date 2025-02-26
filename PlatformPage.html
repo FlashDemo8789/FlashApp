@@ -247,6 +247,7 @@
       font-size: 24px;
       letter-spacing: -0.03em;
       position: relative;
+      color: white;
       overflow: hidden;
       cursor: pointer;
     }
@@ -255,6 +256,9 @@
       overflow: hidden;
       display: inline-block;
       padding: 10px 0;
+    }
+    .logo-link{
+      text-decoration: none;
     }
     .logo-text::before {
       content: '';
@@ -950,7 +954,9 @@
 
     <header class="header">
       <div class="logo" tabindex="0" aria-label="Flash logo">
-        <div class="logo-text">FLASH</div>
+        <a class="logo-link" href="https://flash.zone/index.html">
+            <div class="logo-text">FLASH</div>
+        </a>
       </div>
       <div class="nav-toggle" tabindex="0" role="button" aria-label="Toggle navigation menu" aria-expanded="false">
         <span></span>
