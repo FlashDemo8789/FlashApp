@@ -392,6 +392,7 @@
         "sidebar-left main sidebar-right"
         "sidebar-left footer sidebar-right";
       transition: opacity var(--transition-fast) ease;
+      overflow-x: hidden; /* Prevent horizontal scrolling */
     }
     
     @media (max-width: 768px) {
@@ -412,32 +413,27 @@
     .sidebar-left {
       grid-area: sidebar-left;
       border-right: 1px solid var(--gray-05);
+      position: fixed;
+      height: 100vh;
+      width: 80px;
+      left: 0;
+      top: 0;
     }
     
     .sidebar-right {
       grid-area: sidebar-right;
       border-left: 1px solid var(--gray-05);
+      position: fixed;
+      height: 100vh;
+      width: 80px;
+      right: 0;
+      top: 0;
     }
     
-    .sidebar-text {
-      position: absolute;
-      white-space: nowrap;
-      font-size: 12px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      transform-origin: center;
-      color: var(--light-gray);
-      transition: color var(--transition-medium) ease;
-    }
-    
-    .sidebar-left .sidebar-text {
-      transform: rotate(-90deg) translateX(-50%);
-      left: 40px;
-    }
-    
-    .sidebar-right .sidebar-text {
-      transform: rotate(90deg) translateX(50%);
-      right: 40px;
+    @media (max-width: 768px) {
+      .sidebar-left, .sidebar-right {
+        width: 20px;
+      }
     }
     
     .sidedots {
@@ -461,6 +457,7 @@
       border-radius: 50%;
       background-color: var(--gray-10);
       transition: background-color 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
     }
     
     .sidedot.active {
@@ -476,6 +473,8 @@
       align-items: center;
       z-index: 100;
       position: relative;
+      margin-left: 20px;
+      margin-right: 20px;
     }
     
     .main {
@@ -486,6 +485,8 @@
       justify-content: flex-start;
       align-items: center;
       z-index: 10;
+      overflow-x: hidden; /* Prevent horizontal scrolling */
+      padding-bottom: 100px; /* Ensure space at bottom of page */
     }
 
     /* ---------------------------------------
@@ -1049,14 +1050,14 @@
     
     .features {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 40px;
       position: relative;
       z-index: 4;
       width: 100%;
       max-width: 1400px;
       padding: 0 20px;
-      margin: 0 auto;
+      margin: 0 auto 100px; /* Added bottom margin */
     }
     
     @media (max-width: 768px) {
@@ -1078,6 +1079,9 @@
       transform: translateY(30px);
       transition: opacity 0.8s ease, transform 0.8s var(--transition-bezier), 
                   background-color 0.3s ease, border-color 0.3s ease;
+      min-height: 280px; /* Ensure consistent height */
+      display: flex;
+      flex-direction: column;
     }
     
     .feature-item.visible {
@@ -1115,6 +1119,9 @@
     .feature-item-inner {
       position: relative;
       z-index: 1;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
     
     .feature-header {
@@ -1205,66 +1212,280 @@
     }
 
     /* ---------------------------------------
-       IMAGE REVEAL EFFECT
+       FOOTER STYLES
     ---------------------------------------- */
-    .image-reveal {
-      position: absolute;
-      width: 350px;
-      height: 450px;
-      overflow: hidden;
-      opacity: 0;
-      z-index: 2;
-      pointer-events: none;
-      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-      transform: scale(0.95);
-      transition: transform var(--transition-medium) ease;
+    .footer {
+      width: 100%;
+      padding: 80px 0 40px;
+      background-color: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--gray-05);
+      position: relative;
+      z-index: 10;
+      margin-top: 50px;
     }
     
-    @media (max-width: 768px) {
-      .image-reveal {
-        width: 250px;
-        height: 320px;
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .footer-logo {
+      grid-column: 1 / 4;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .footer-logo-symbol {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .footer-logo-icon {
+      position: relative;
+      width: 30px;
+      height: 30px;
+      border: 2px solid var(--pure-white);
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 15px;
+    }
+    
+    .footer-logo-icon::before {
+      content: '';
+      position: absolute;
+      width: 15px;
+      height: 30px;
+      background-color: var(--pure-white);
+      right: 0;
+      top: 0;
+    }
+    
+    .footer-logo-text {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      letter-spacing: -0.03em;
+    }
+    
+    .footer-tagline {
+      color: var(--light-gray);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-top: 20px;
+      max-width: 260px;
+    }
+    
+    .footer-nav {
+      grid-column: 4 / 6;
+    }
+    
+    .footer-legal {
+      grid-column: 6 / 8;
+    }
+    
+    .footer-contact {
+      grid-column: 8 / 11;
+    }
+    
+    .footer-social {
+      grid-column: 11 / 13;
+    }
+    
+    .footer-heading {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      color: var(--pure-white);
+    }
+    
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-links a {
+      color: var(--light-gray);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+    
+    .footer-links a::before {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: var(--pure-white);
+      transition: width 0.3s var(--transition-bezier);
+    }
+    
+    .footer-links a:hover {
+      color: var(--pure-white);
+    }
+    
+    .footer-links a:hover::before {
+      width: 100%;
+    }
+    
+    .footer-contact-info {
+      color: var(--light-gray);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    
+    .footer-social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .social-icon {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--gray-30);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      border-color: var(--pure-white);
+      transform: translateY(-3px);
+    }
+    
+    .footer-bottom {
+      max-width: 1400px;
+      margin: 60px auto 0;
+      padding: 30px 20px 0;
+      border-top: 1px solid var(--gray-05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--light-gray);
+      font-size: 12px;
+    }
+    
+    .footer-copyright {
+      opacity: 0.7;
+    }
+    
+    .footer-signature {
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 10px;
+      opacity: 0.5;
+    }
+    
+    @media (max-width: 1024px) {
+      .footer-grid {
+        grid-template-columns: repeat(6, 1fr);
+      }
+      
+      .footer-logo {
+        grid-column: 1 / 4;
+      }
+      
+      .footer-nav {
+        grid-column: 4 / 7;
+      }
+      
+      .footer-legal {
+        grid-column: 1 / 3;
+        margin-top: 40px;
+      }
+      
+      .footer-contact {
+        grid-column: 3 / 5;
+        margin-top: 40px;
+      }
+      
+      .footer-social {
+        grid-column: 5 / 7;
+        margin-top: 40px;
       }
     }
     
-    .image-reveal-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transform: scale(1.2);
-      transition: transform 0.8s ease;
+    @media (max-width: 768px) {
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+      }
+      
+      .footer-logo,
+      .footer-nav,
+      .footer-legal,
+      .footer-contact,
+      .footer-social {
+        grid-column: auto;
+      }
+      
+      .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
     }
     
-    .image-reveal img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: grayscale(100%);
+    /* Light mode overrides for footer */
+    body.light-mode .footer {
+      background-color: rgba(245, 245, 245, 0.7);
+      border-top-color: rgba(0, 0, 0, 0.05);
     }
     
-    .image-reveal::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%);
+    body.light-mode .footer-links a {
+      color: var(--mid-gray);
     }
     
-    .image-reveal-caption {
-      position: absolute;
-      bottom: 20px;
-      left: 20px;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--pure-white);
-      z-index: 1;
-      transform: translateY(20px);
-      opacity: 0;
-      transition: transform 0.5s ease, opacity 0.5s ease;
+    body.light-mode .footer-links a:hover {
+      color: var(--pure-black);
+    }
+    
+    body.light-mode .footer-links a::before {
+      background-color: var(--pure-black);
+    }
+    
+    body.light-mode .footer-logo-icon {
+      border-color: var(--pure-black);
+    }
+    
+    body.light-mode .footer-logo-icon::before {
+      background-color: var(--pure-black);
+    }
+    
+    body.light-mode .footer-contact-info,
+    body.light-mode .footer-tagline,
+    body.light-mode .footer-copyright,
+    body.light-mode .footer-signature {
+      color: var(--mid-gray);
+    }
+    
+    body.light-mode .social-icon {
+      border-color: rgba(0, 0, 0, 0.2);
+    }
+    
+    body.light-mode .social-icon:hover {
+      border-color: var(--pure-black);
+    }
+    
+    body.light-mode .footer-bottom {
+      border-top-color: rgba(0, 0, 0, 0.05);
     }
 
     /* ---------------------------------------
@@ -1492,17 +1713,6 @@
             <li><div class="nav-link-wrap"><a href="https://flash.zone/AboutPage.html" data-cursor-text="04">ABOUT</a></div></li>
             <li><div class="nav-link-wrap"><a href="https://flash.zone/ContactPage.html" data-cursor-text="05">CONTACT</a></div></li>
           </ul>
-          
-          <div class="nav-info">
-            <p>Flash Ventures leverages Quantum Neural Networks to identify high-potential investments with unprecedented accuracy.</p>
-            <p>Based in San Francisco with global operations across New York, London, Tokyo, and Singapore.</p>
-            
-            <div class="nav-socials">
-              <a href="#" data-cursor-text="Twitter">Twitter</a>
-              <a href="#" data-cursor-text="LinkedIn">LinkedIn</a>
-              <a href="#" data-cursor-text="Instagram">Instagram</a>
-            </div>
-          </div>
         </div>
       </div>
       
@@ -1518,11 +1728,7 @@
   <div class="container">
     <!-- Left sidebar -->
     <div class="sidebar-left">
-      <div class="sidedots">
-        <div class="sidedot active" data-section="hero"></div>
-        <div class="sidedot" data-section="features"></div>
-        <div class="sidedot" data-section="about"></div>
-      </div>
+      <!-- Removed navigation dots -->
     </div>
 
     <!-- Header -->
@@ -1636,7 +1842,150 @@
           </div>
         </div>
       </section>
+      
+    /* Image Reveal Effect Styles (Hidden) */
+    .image-reveal {
+      position: absolute;
+      width: 350px;
+      height: 450px;
+      overflow: hidden;
+      opacity: 0;
+      z-index: 2;
+      pointer-events: none;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+      transform: scale(0.95);
+      transition: transform var(--transition-medium) ease;
+    }
+    
+    @media (max-width: 768px) {
+      .image-reveal {
+        width: 250px;
+        height: 320px;
+      }
+    }
+    
+    .image-reveal-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform: scale(1.2);
+      transition: transform 0.8s ease;
+    }
+    
+    .image-reveal img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%);
+    }
+    
+    .image-reveal::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%);
+    }
+    
+    .image-reveal-caption {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--pure-white);
+      z-index: 1;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+    }
 
+      <!-- Added full footer section -->
+      <footer class="footer">
+        <div class="footer-grid">
+          <!-- Company info -->
+          <div class="footer-logo">
+            <div class="footer-logo-symbol">
+              <div class="footer-logo-icon"></div>
+              <div class="footer-logo-text">FLASH</div>
+            </div>
+            <p class="footer-tagline">
+              Redefining the future of investments through AI-powered analytics and quantum neural networks.
+            </p>
+          </div>
+          
+          <!-- Navigation -->
+          <div class="footer-nav">
+            <h4 class="footer-heading">Navigation</h4>
+            <ul class="footer-links">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Platform</a></li>
+              <li><a href="#">Technology</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+          
+          <!-- Legal -->
+          <div class="footer-legal">
+            <h4 class="footer-heading">Legal</h4>
+            <ul class="footer-links">
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Cookie Policy</a></li>
+              <li><a href="#">Disclaimer</a></li>
+            </ul>
+          </div>
+          
+          <!-- Contact -->
+          <div class="footer-contact">
+            <h4 class="footer-heading">Contact</h4>
+            <div class="footer-contact-info">
+              <p>600 California Street<br>
+              San Francisco, CA 94108<br>
+              United States</p>
+              <p>contact@flashventures.com<br>
+              +1 (415) 555-0123</p>
+            </div>
+          </div>
+          
+          <!-- Social -->
+          <div class="footer-social">
+            <h4 class="footer-heading">Connect</h4>
+            <ul class="footer-links">
+              <li><a href="#">LinkedIn</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">Medium</a></li>
+            </ul>
+            <div class="footer-social-links">
+              <a href="#" class="social-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+              </a>
+              <a href="#" class="social-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+              </a>
+              <a href="#" class="social-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Footer bottom -->
+        <div class="footer-bottom">
+          <div class="footer-copyright">
+            © 2025 Flash Ventures. All rights reserved.
+          </div>
+          <div class="footer-signature">
+            Designed with precision in San Francisco
+          </div>
+        </div>
+      </footer>
+      
       <!-- Scroll indicator -->
       <div class="scroll-indicator" aria-hidden="true">
         <div class="scroll-line"></div>
@@ -1654,11 +2003,7 @@
 
     <!-- Right sidebar -->
     <div class="sidebar-right">
-      <div class="sidedots">
-        <div class="sidedot active" data-section="hero"></div>
-        <div class="sidedot" data-section="features"></div>
-        <div class="sidedot" data-section="about"></div>
-      </div>
+      <!-- Removed navigation dots -->
     </div>
   </div>
 
@@ -1754,8 +2099,9 @@
       
       // Animate elements when scrolled into view
       function checkScrollReveal() {
+        // Target all elements that need to be revealed on scroll
         const revealElements = document.querySelectorAll('.section-title-container:not(.visible), .feature-item:not(.visible)');
-        const triggerBottom = window.innerHeight * 0.85;
+        const triggerBottom = window.innerHeight * 0.8;
         
         revealElements.forEach(el => {
           const rect = el.getBoundingClientRect();
@@ -1763,7 +2109,21 @@
             el.classList.add('visible');
           }
         });
+        
+        // Forcibly make feature items visible if they're not already after a delay
+        // This ensures they appear even if scroll detection fails
+        setTimeout(() => {
+          document.querySelectorAll('.feature-item:not(.visible)').forEach(item => {
+            item.classList.add('visible');
+          });
+          document.querySelectorAll('.section-title-container:not(.visible)').forEach(item => {
+            item.classList.add('visible');
+          });
+        }, 2000);
       }
+      
+      // Initial check for elements in viewport
+      checkScrollReveal();
 
       /* ================================================
          3) SIMPLE CUSTOM CURSOR (NO MAGNETIC EFFECTS)
