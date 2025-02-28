@@ -3,19 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="FlashDNA Infinity - Advanced venture investment analysis platform using PDE meltdown, fractal dimension, chaos theory, quantum synergy, agent-based modeling, and reinforcement learning">
-  <title>FlashDNA Infinity - Platform</title>
+  <meta name="description" content="Flash Ventures - FlashDNA Infinity platform using advanced analytics to identify high-potential investments with unprecedented accuracy">
+  <title>Flash Ventures - FlashDNA Infinity Platform</title>
 
   <!-- Essential Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" defer></script>
 
-  <!-- Fonts -->
   <style>
-    /* ---------------------------------------
-       FONTS
-    ---------------------------------------- */
+    /* Fonts */
     @font-face {
       font-family: 'Monument Extended';
       src: url('https://cdnjs.cloudflare.com/ajax/libs/monospace/0.1.0/MonumentExtended-Regular.otf') format('opentype');
@@ -23,7 +20,6 @@
       font-style: normal;
       font-display: swap;
     }
-
     @font-face {
       font-family: 'Inter';
       src: url('https://cdnjs.cloudflare.com/ajax/libs/inter-ui/3.19.3/Inter.var.woff2') format('woff2');
@@ -31,18 +27,9 @@
       font-display: swap;
     }
 
-    @font-face {
-      font-family: 'Neue Montreal';
-      src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-brands-400.woff2') format('woff2');
-      font-weight: 300 700;
-      font-display: swap;
-    }
-
-    /* ---------------------------------------
-       CSS VARIABLES
-    ---------------------------------------- */
+    /* Variables */
     :root {
-      /* Color palette */
+      /* Colors */
       --pure-white: #FFFFFF;
       --off-white: #F5F5F5;
       --light-gray: #AAAAAA;
@@ -50,74 +37,138 @@
       --dark-gray: #222222;
       --pure-black: #000000;
       
-      /* Transparency values */
+      /* Transparencies */
       --gray-90: rgba(255, 255, 255, 0.9);
       --gray-70: rgba(255, 255, 255, 0.7);
       --gray-50: rgba(255, 255, 255, 0.5);
       --gray-30: rgba(255, 255, 255, 0.3);
       --gray-10: rgba(255, 255, 255, 0.1);
       --gray-05: rgba(255, 255, 255, 0.05);
-      
-      /* Typography */
+
+      /* Fonts */
       --font-heading: 'Monument Extended', sans-serif;
       --font-body: 'Inter', sans-serif;
-      
-      /* Animation */
-      --transition-bezier: cubic-bezier(0.165, 0.84, 0.44, 1);
+
+      /* Timing */
+      --transition-bezier: cubic-bezier(0.16, 1, 0.3, 1);
       --transition-fast: 0.3s;
       --transition-medium: 0.5s;
       --transition-slow: 0.8s;
     }
 
-    /* ---------------------------------------
-       GLOBAL RESETS
-    ---------------------------------------- */
+    /* Resets */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
+    
     body {
-      font-family: var(--font-body, 'Inter'), sans-serif;
+      font-family: var(--font-body);
       background-color: var(--pure-black);
       color: var(--pure-white);
       overflow-x: hidden;
-      cursor: none; /* Hide OS cursor for custom cursor */
-      height: 100vh;
-      width: 100vw;
-      transition: background-color var(--transition-medium) ease, color var(--transition-medium) ease;
+      cursor: auto; 
+      line-height: 1.6;
     }
 
-    /* Mobile devices keep default cursor */
-    @media (pointer: coarse) {
-      body {
-        cursor: auto;
-      }
-      .cursor-container {
-        display: none;
-      }
+    /* Accessibility */
+    .skip-link {
+      position: absolute;
+      top: -50px;
+      left: 10px;
+      padding: 10px;
+      background-color: var(--pure-white);
+      color: var(--pure-black);
+      z-index: 9999;
+      transition: top var(--transition-fast) ease;
+    }
+    
+    .skip-link:focus {
+      top: 10px;
     }
 
-    /* ---------------------------------------
-       NOISE OVERLAY
-    ---------------------------------------- */
-    .noise {
+    /* Loading Screen */
+    .loading-screen {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJub2lzZSIgeD0iMCIgeT0iMCIgd2lkdGg9IjMwMCUiIGhlaWdodD0iMzAwJSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuNzUiIG51bU9jdGF2ZXM9IjQiIHN0aXRjaFRpbGVzPSJzdGl0Y2giIHJlc3VsdD0ibm9pc2UiLz48ZmVDb2xvck1hdHJpeCB0eXBlPSJzYXR1cmF0ZSIgdmFsdWVzPSIwIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMDAiIGZpbHRlcj0idXJsKCNub2lzZSkiIG9wYWNpdHk9IjAuMDUiLz48L3N2Zz4=');
-      pointer-events: none;
-      opacity: 0.04;
-      z-index: 1;
-      mix-blend-mode: overlay;
+      background-color: var(--pure-black);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity var(--transition-slow) ease, visibility var(--transition-slow) ease;
+    }
+    
+    .loading-logo {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .loading-text {
+      font-family: var(--font-heading);
+      font-size: 64px;
+      letter-spacing: -0.03em;
+      color: var(--pure-white);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      animation: fade-in 0.8s var(--transition-bezier) forwards 0.3s;
+    }
+    
+    .loading-bar-container {
+      margin-top: 30px;
+      width: 200px;
+      height: 1px;
+      background-color: var(--gray-10);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .loading-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      background-color: var(--pure-white);
+      transition: width 1.5s var(--transition-bezier);
+    }
+    
+    .loading-percentage {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      margin-top: 15px;
+      color: var(--pure-white);
+      opacity: 0;
+      animation: fade-in 0.5s var(--transition-bezier) forwards 0.5s;
+    }
+    
+    .loading-screen.loaded {
+      opacity: 0;
+      visibility: hidden;
     }
 
-    /* ---------------------------------------
-       3D WIREFRAME CONTAINER
-    ---------------------------------------- */
+    /* Progress bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 1px;
+      background-color: var(--pure-white);
+      z-index: 999;
+      opacity: 0.7;
+      transform-origin: 0 0;
+      transform: scaleX(0);
+    }
+
+    /* 3D Background */
     #wireframe-container {
       position: fixed;
       top: 0;
@@ -125,132 +176,87 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      perspective: 1000px;
       z-index: 0;
+      opacity: 1;
+      will-change: transform;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
     }
-
-    /* ---------------------------------------
-       CUSTOM ADVANCED CURSOR
-    ---------------------------------------- */
-    .cursor-container {
+    
+    /* Noise overlay */
+    .noise {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 10000;
-    }
-    .cursor-dot {
-      position: fixed;
-      width: 8px;
-      height: 8px;
-      background-color: var(--pure-white);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      mix-blend-mode: difference;
-      transition: width var(--transition-fast), height var(--transition-fast);
-      z-index: 10001;
-    }
-    .cursor-circle {
-      position: fixed;
-      width: 40px;
-      height: 40px;
-      border: 1px solid var(--gray-30);
-      border-radius: 50%;
-      transform: translate(-50%, -50%) scale(1);
-      transition: all var(--transition-fast) ease-out;
-      z-index: 10000;
-    }
-    .cursor-trail {
-      position: fixed;
-      width: 2px;
-      height: 2px;
-      background-color: var(--gray-50);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: opacity 1s ease;
-      z-index: 9999;
+      opacity: 0.03;
+      z-index: 2;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     }
 
-    /* ---------------------------------------
-       MAIN CONTAINER + LAYOUT
-    ---------------------------------------- */
+    /* Layout */
     .container {
-      height: 100vh;
-      width: 100vw;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      grid-template-columns: 50px 1fr 50px;
-      grid-template-areas:
-        "sidebar-left header sidebar-right"
-        "sidebar-left main sidebar-right"
-        "sidebar-left footer sidebar-right";
-      transition: opacity var(--transition-fast) ease;
-    }
-
-    /* Media query for mobile devices */
-    @media (max-width: 768px) {
-      .container {
-        grid-template-columns: 20px 1fr 20px;
-      }
-      
-      .sidebar-text {
-        display: none;
-      }
-    }
-
-    .sidebar-left, .sidebar-right {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      min-height: 100vh;
+      width: 100%;
+      max-width: 100%;
       position: relative;
+      overflow-x: hidden;
+      padding-bottom: 50px;
     }
-    .sidebar-left {
-      grid-area: sidebar-left;
-    }
+    
+    .sidebar-left, 
     .sidebar-right {
-      grid-area: sidebar-right;
+      position: fixed;
+      height: 100vh;
+      width: 80px;
+      top: 0;
+      z-index: 50;
+    }
+    
+    .sidebar-left {
+      left: 0;
+      border-right: 1px solid var(--gray-05);
+    }
+    
+    .sidebar-right {
+      right: 0;
+      border-left: 1px solid var(--gray-05);
+    }
+    
+    @media (max-width: 768px) {
+      .sidebar-left, .sidebar-right {
+        width: 20px;
+      }
     }
 
-    .sidebar-text {
-      position: absolute;
-      white-space: nowrap;
-      font-size: 12px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      transform-origin: center;
-      color: var(--light-gray);
-      transition: color var(--transition-medium) ease;
-    }
-    .sidebar-left .sidebar-text {
-      transform: rotate(-90deg) translateX(-50%);
-      left: 25px;
-    }
-    .sidebar-right .sidebar-text {
-      transform: rotate(90deg) translateX(50%);
-      right: 25px;
-    }
-
+    /* Header */
     .header {
-      grid-area: header;
-      padding: 30px 0;
+      padding: 40px 80px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: relative;
       z-index: 100;
     }
-
+    
+    @media (max-width: 768px) {
+      .header {
+        padding: 30px 20px;
+      }
+    }
+    
     .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       font-family: var(--font-heading);
       font-size: 24px;
       letter-spacing: -0.03em;
-      position: relative;
-      color: white;
-      overflow: hidden;
       cursor: pointer;
     }
+
     .logo-text {
       position: relative;
       overflow: hidden;
@@ -272,55 +278,81 @@
       transform: translateX(-100%);
       animation: logo-reveal 1.5s var(--transition-bezier) forwards;
     }
-    @keyframes logo-reveal {
-      0% { transform: translateX(-100%); }
-      50% { transform: translateX(0); }
-      51% { transform: translateX(0); }
-      100% { transform: translateX(100%); }
+    
+    .logo-symbol {
+      position: relative;
+      width: 30px;
+      height: 30px;
+      border: 2px solid var(--pure-white);
+      border-radius: 50%;
+      overflow: hidden;
     }
-
+    
+    .logo-symbol::before {
+      content: '';
+      position: absolute;
+      width: 15px;
+      height: 30px;
+      background-color: var(--pure-white);
+      right: 0;
+      top: 0;
+    }
+    
     .nav-toggle {
       width: 30px;
       height: 30px;
       position: relative;
       cursor: pointer;
       z-index: 1000;
-      /* Add focus styles for accessibility */
       outline: none;
     }
+    
     .nav-toggle:focus-visible {
       box-shadow: 0 0 0 2px var(--pure-white);
     }
+    
     .nav-toggle span {
       width: 100%;
-      height: 2px;
+      height: 1px;
       background-color: var(--pure-white);
       position: absolute;
       left: 0;
       transition: all var(--transition-fast) ease;
     }
+    
     .nav-toggle span:nth-child(1) {
       top: 8px;
+      width: 70%;
     }
+    
     .nav-toggle span:nth-child(2) {
       top: 16px;
     }
+    
     .nav-toggle span:nth-child(3) {
       top: 24px;
+      width: 70%;
+      left: 30%;
     }
+    
     .nav-toggle.active span:nth-child(1) {
       transform: rotate(45deg);
       top: 14px;
+      width: 100%;
     }
+    
     .nav-toggle.active span:nth-child(2) {
       opacity: 0;
     }
+    
     .nav-toggle.active span:nth-child(3) {
       transform: rotate(-45deg);
       top: 14px;
+      width: 100%;
+      left: 0;
     }
 
-    /* Circle clipped navigation overlay */
+    /* Navigation menu */
     .navigation {
       position: fixed;
       top: 0;
@@ -329,322 +361,333 @@
       height: 100vh;
       background-color: var(--pure-black);
       display: flex;
+      z-index: 999;
+      clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+      transition: clip-path 1.2s var(--transition-bezier);
+    }
+    
+    .navigation.active {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+    
+    .nav-content {
+      width: 100%;
+      height: 100%;
+      display: flex;
       justify-content: center;
       align-items: center;
-      z-index: 999;
-      clip-path: circle(0% at calc(100% - 65px) 65px);
-      transition: clip-path 1s var(--transition-bezier);
     }
-    .navigation.active {
-      clip-path: circle(150% at calc(100% - 65px) 65px);
+    
+    .nav-links-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 0 50px;
     }
-
-    /* Mobile navigation adjustments */
-    @media (max-width: 768px) {
-      .navigation {
-        clip-path: circle(0% at calc(100% - 45px) 45px);
-      }
-      .navigation.active {
-        clip-path: circle(150% at calc(100% - 45px) 45px);
-      }
-    }
-
+    
     .nav-links {
       list-style: none;
       text-align: center;
+      width: 100%;
     }
+    
     .nav-links li {
       margin: 30px 0;
+      overflow: hidden;
+    }
+    
+    .nav-link-wrap {
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+      transform: translateY(100%);
       opacity: 0;
-      transform: translateY(30px);
-      transition: all var(--transition-medium) var(--transition-bezier);
+      transition: transform 0.8s var(--transition-bezier), opacity 0.8s ease;
     }
-    .navigation.active .nav-links li {
-      opacity: 1;
+    
+    .navigation.active .nav-link-wrap {
       transform: translateY(0);
-      transition-delay: calc(0.1s * var(--i));
+      opacity: 1;
     }
+    
+    .navigation.active .nav-links li:nth-child(1) .nav-link-wrap { transition-delay: 0.1s; }
+    .navigation.active .nav-links li:nth-child(2) .nav-link-wrap { transition-delay: 0.15s; }
+    .navigation.active .nav-links li:nth-child(3) .nav-link-wrap { transition-delay: 0.2s; }
+    .navigation.active .nav-links li:nth-child(4) .nav-link-wrap { transition-delay: 0.25s; }
+    .navigation.active .nav-links li:nth-child(5) .nav-link-wrap { transition-delay: 0.3s; }
+    
     .nav-links a {
       font-family: var(--font-heading);
-      font-size: 5vw;
+      font-size: 4vw;
       color: var(--pure-white);
       text-decoration: none;
       position: relative;
       display: inline-block;
       transition: all var(--transition-fast) ease;
-      overflow: hidden;
+      line-height: 1.1;
     }
     
-    /* Mobile navigation text size adjustment */
     @media (max-width: 768px) {
+      .nav-content {
+        padding: 20px 0;
+      }
       .nav-links a {
         font-size: 8vw;
       }
     }
     
     .nav-links a::before {
-      content: attr(data-text);
+      content: '';
       position: absolute;
-      top: 0;
+      bottom: 0;
       left: 0;
       width: 0;
-      color: var(--pure-black);
+      height: 1px;
       background-color: var(--pure-white);
-      overflow: hidden;
-      white-space: nowrap;
-      transition: width var(--transition-fast) ease;
+      transition: width var(--transition-medium) var(--transition-bezier);
     }
+    
     .nav-links a:hover::before,
     .nav-links a:focus::before {
       width: 100%;
     }
 
+    /* Main content */
     .main {
-      grid-area: main;
       position: relative;
-      overflow: auto;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      padding: 0;
-      max-height: calc(100vh - 120px);
-    }
-
-    /* ---------------------------------------
-       PLATFORM PAGE SPECIFIC STYLES
-    ---------------------------------------- */
-    .platform-content {
       width: 100%;
-      max-width: 1400px;
-      margin: 0 auto;
-      z-index: 3;
-      position: relative;
-      padding: 20px;
+      padding: 0 80px;
+      z-index: 10;
+    }
+    
+    @media (max-width: 768px) {
+      .main {
+        padding: 0 20px;
+      }
     }
 
-    /* Platform header */
+    /* Platform page header */
     .platform-header {
       position: relative;
-      overflow: hidden;
-      padding: 40px 0;
-      margin-bottom: 60px;
+      width: 100%;
+      max-width: 1400px;
+      margin: 50px auto 80px;
     }
-
+    
     .platform-title {
       font-family: var(--font-heading);
       font-size: calc(3vw + 1rem);
       line-height: 1.2;
-      margin-bottom: 20px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .platform-title span {
-      display: block;
+      margin-bottom: 30px;
       opacity: 0;
-      transform: translateY(100%);
-      animation: title-reveal 0.8s var(--transition-bezier) forwards;
-      animation-delay: 0.5s;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s var(--transition-bezier);
     }
-
-    @keyframes title-reveal {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    
+    .platform-title.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
-
-    .platform-subtitle {
-      font-family: var(--font-body);
+    
+    .platform-description {
       font-size: 1.2rem;
       color: var(--light-gray);
-      line-height: 1.6;
-      margin-bottom: 30px;
       max-width: 800px;
+      line-height: 1.6;
       opacity: 0;
-      transform: translateY(20px);
-      animation: fade-in 0.8s var(--transition-bezier) forwards;
-      animation-delay: 1s;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s var(--transition-bezier);
+      transition-delay: 0.2s;
     }
-
-    @keyframes fade-in {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    
+    .platform-description.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* Frameworks grid */
     .frameworks-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-      gap: 30px;
-      margin-bottom: 80px;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+      max-width: 1400px;
+      margin: 0 auto 100px;
     }
-
-    @media (max-width: 900px) {
+    
+    @media (max-width: 768px) {
       .frameworks-grid {
         grid-template-columns: 1fr;
       }
     }
-
-    /* Framework card */
+    
     .framework-card {
       position: relative;
-      background-color: rgba(255, 255, 255, 0.03);
+      background-color: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 30px;
-      border-radius: 2px;
+      padding: 40px;
       transition: all var(--transition-medium) var(--transition-bezier);
-      overflow: hidden;
-      min-height: 400px;
+      min-height: 380px;
       display: flex;
       flex-direction: column;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s var(--transition-bezier),
+                  background-color 0.3s ease, border-color 0.3s ease;
     }
-
-    .framework-card:hover {
-      transform: translateY(-10px);
-      background-color: rgba(255, 255, 255, 0.05);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    
+    .framework-card.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
-
+    
+    .framework-card:nth-child(1).visible { transition-delay: 0.1s; }
+    .framework-card:nth-child(2).visible { transition-delay: 0.15s; }
+    .framework-card:nth-child(3).visible { transition-delay: 0.2s; }
+    .framework-card:nth-child(4).visible { transition-delay: 0.25s; }
+    .framework-card:nth-child(5).visible { transition-delay: 0.3s; }
+    .framework-card:nth-child(6).visible { transition-delay: 0.35s; }
+    
     .framework-card::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--pure-white), transparent);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.8s var(--transition-bezier);
+      width: 3px;
+      height: 0;
+      background: var(--pure-white);
+      transition: height 0.4s var(--transition-bezier);
     }
-
+    
     .framework-card:hover::before {
-      transform: scaleX(1);
+      height: 100%;
     }
-
+    
+    .framework-card:hover {
+      background-color: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.08);
+      transform: translateY(-10px);
+    }
+    
     .framework-icon {
-      font-size: 28px;
+      font-size: 32px;
       margin-bottom: 20px;
-      color: var(--pure-white);
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.05);
+      opacity: 0.8;
+      transition: transform 0.3s ease;
     }
-
+    
+    .framework-card:hover .framework-icon {
+      transform: rotate(10deg) scale(1.2);
+    }
+    
     .framework-title {
       font-family: var(--font-heading);
       font-size: 1.5rem;
       margin-bottom: 15px;
-      position: relative;
-      display: inline-block;
     }
-
-    .framework-title::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 30px;
-      height: 1px;
-      background-color: var(--light-gray);
-      transition: width var(--transition-medium) var(--transition-bezier);
-    }
-
-    .framework-card:hover .framework-title::after {
-      width: 100%;
-    }
-
+    
     .framework-description {
       color: var(--light-gray);
       line-height: 1.6;
       margin-bottom: 30px;
       flex-grow: 1;
     }
-
+    
     .framework-visual {
       width: 100%;
       height: 180px;
-      margin-top: auto;
       overflow: hidden;
-      border-radius: 2px;
       background-color: rgba(0, 0, 0, 0.2);
-      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      margin-top: auto;
+      transition: all var(--transition-medium) ease;
     }
-
-    .framework-visual svg {
-      width: 100%;
-      height: 100%;
+    
+    .framework-card:hover .framework-visual {
+      border-color: rgba(255, 255, 255, 0.1);
+      transform: scale(1.02);
     }
 
     /* Architecture section */
     .architecture-section {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto 80px;
+      max-width: 1400px;
+      margin: 0 auto 100px;
+      padding: 0 40px;
     }
-
+    
     .architecture-title {
       font-family: var(--font-heading);
-      font-size: 2rem;
-      margin-bottom: 40px;
+      font-size: 2.5rem;
       text-align: center;
+      margin-bottom: 60px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s var(--transition-bezier);
     }
-
+    
+    .architecture-title.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
     .architecture-diagram {
       width: 100%;
-      height: 400px;
+      height: 500px;
       background-color: rgba(0, 0, 0, 0.2);
       border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 2px;
-      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       overflow: hidden;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s var(--transition-bezier);
+      transition-delay: 0.2s;
     }
-
-    .architecture-diagram svg {
-      width: 100%;
-      height: 100%;
+    
+    .architecture-diagram.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
-
+    
     @media (max-width: 768px) {
       .architecture-diagram {
         height: 300px;
       }
     }
 
-    /* Call to action */
+    /* CTA section */
     .cta-section {
-      width: 100%;
-      max-width: 800px;
-      margin: 0 auto 80px;
-      text-align: center;
-      background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
-      padding: 60px 20px;
-      border-radius: 2px;
+      max-width: 1000px;
+      margin: 0 auto 100px;
+      padding: 80px 40px;
+      background-color: rgba(255, 255, 255, 0.02);
       border: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s var(--transition-bezier);
     }
-
+    
+    .cta-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
     .cta-title {
       font-family: var(--font-heading);
       font-size: 2rem;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
-
-    .cta-text {
+    
+    .cta-description {
       color: var(--light-gray);
       line-height: 1.6;
-      margin-bottom: 40px;
+      max-width: 800px;
+      margin: 0 auto 40px;
     }
-
+    
     .cta-btn {
       display: inline-block;
       font-family: var(--font-heading);
@@ -652,154 +695,360 @@
       color: var(--pure-black);
       background-color: var(--pure-white);
       text-decoration: none;
-      padding: 15px 40px;
+      padding: 20px 50px;
       text-transform: uppercase;
       letter-spacing: 2px;
       position: relative;
       overflow: hidden;
-      transition: color var(--transition-fast) ease;
+      transition: all 0.3s ease;
       outline: none;
     }
-
-    .cta-btn:focus-visible {
-      box-shadow: 0 0 0 3px var(--light-gray);
-    }
-
+    
     .cta-btn::before {
       content: '';
       position: absolute;
       top: 0;
-      left: -5px;
-      width: 0;
+      left: 0;
+      width: 100%;
       height: 100%;
       background-color: var(--pure-black);
-      transform: skewX(-15deg);
-      transition: width 0.4s var(--transition-bezier);
-      z-index: -1;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.5s var(--transition-bezier);
+      z-index: 0;
     }
-
-    .cta-btn:hover,
-    .cta-btn:focus {
+    
+    .cta-btn:hover {
       color: var(--pure-white);
     }
-
-    .cta-btn:hover::before,
-    .cta-btn:focus::before {
-      width: 110%;
-    }
-
-    /* Dynamic grid background */
-    .grid-background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      overflow: hidden;
+    
+    .cta-btn:hover::before {
+      transform: scaleX(1);
+      transform-origin: left;
     }
     
-    .grid-line {
-      position: absolute;
-      background-color: rgba(255, 255, 255, 0.05);
-    }
-    
-    .grid-horizontal {
-      width: 100%;
-      height: 1px;
-      transform: scaleX(0);
-      transform-origin: 0 0;
-    }
-    
-    .grid-vertical {
-      height: 100%;
-      width: 1px;
-      transform: scaleY(0);
-      transform-origin: 0 0;
-    }
-
-    /* Dynamic noise canvas */
-    #noise-canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0.05;
-      pointer-events: none;
+    .cta-btn span {
+      position: relative;
       z-index: 1;
     }
 
-    /* Progress bar */
-    .progress-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 3px;
+    /* Footer */
+    .footer {
+      width: 100%;
+      padding: 80px 80px 40px;
+      background-color: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--gray-05);
+      position: relative;
+      z-index: 10;
+      margin-top: 50px;
+    }
+    
+    @media (max-width: 768px) {
+      .footer {
+        padding: 80px 20px 40px;
+      }
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .footer-logo {
+      grid-column: 1 / 4;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .footer-logo-symbol {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .footer-logo-icon {
+      position: relative;
+      width: 30px;
+      height: 30px;
+      border: 2px solid var(--pure-white);
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 15px;
+    }
+    
+    .footer-logo-icon::before {
+      content: '';
+      position: absolute;
+      width: 15px;
+      height: 30px;
       background-color: var(--pure-white);
-      z-index: 999;
+      right: 0;
+      top: 0;
+    }
+    
+    .footer-logo-text {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      letter-spacing: -0.03em;
+    }
+    
+    .footer-tagline {
+      color: var(--light-gray);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-top: 20px;
+      max-width: 260px;
+    }
+    
+    .footer-nav {
+      grid-column: 4 / 6;
+    }
+    
+    .footer-legal {
+      grid-column: 6 / 8;
+    }
+    
+    .footer-contact {
+      grid-column: 8 / 11;
+    }
+    
+    .footer-social {
+      grid-column: 11 / 13;
+    }
+    
+    .footer-heading {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      color: var(--pure-white);
+    }
+    
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-links a {
+      color: var(--light-gray);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+    
+    .footer-links a::before {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: var(--pure-white);
+      transition: width 0.3s var(--transition-bezier);
+    }
+    
+    .footer-links a:hover {
+      color: var(--pure-white);
+    }
+    
+    .footer-links a:hover::before {
+      width: 100%;
+    }
+    
+    .footer-contact-info {
+      color: var(--light-gray);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    
+    .footer-social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .social-icon {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--gray-30);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      border-color: var(--pure-white);
+      transform: translateY(-3px);
+    }
+    
+    .footer-bottom {
+      max-width: 1400px;
+      margin: 60px auto 0;
+      padding: 30px 0 0;
+      border-top: 1px solid var(--gray-05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--light-gray);
+      font-size: 12px;
+    }
+    
+    .footer-copyright {
       opacity: 0.7;
-      transform-origin: 0 0;
-      transform: scaleX(0);
+    }
+    
+    .footer-signature {
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 10px;
+      opacity: 0.5;
+    }
+    
+    @media (max-width: 1024px) {
+      .footer-grid {
+        grid-template-columns: repeat(6, 1fr);
+      }
+      
+      .footer-logo {
+        grid-column: 1 / 4;
+      }
+      
+      .footer-nav {
+        grid-column: 4 / 7;
+      }
+      
+      .footer-legal {
+        grid-column: 1 / 3;
+        margin-top: 40px;
+      }
+      
+      .footer-contact {
+        grid-column: 3 / 5;
+        margin-top: 40px;
+      }
+      
+      .footer-social {
+        grid-column: 5 / 7;
+        margin-top: 40px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+      }
+      
+      .footer-logo,
+      .footer-nav,
+      .footer-legal,
+      .footer-contact,
+      .footer-social {
+        grid-column: auto;
+      }
+      
+      .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
     }
 
-    /* DARK/LIGHT MODE SWITCH */
+    /* Animations */
+    @keyframes fade-in {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Mode Switch Styles */
     .mode-switch {
       position: fixed;
       bottom: 30px;
       right: 30px;
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
-      background-color: var(--pure-white);
+      background-color: var(--pure-black);
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       cursor: pointer;
       z-index: 100;
-      transition: all var(--transition-fast) ease;
-      outline: none;
-    }
-    
-    .mode-switch:focus-visible {
-      box-shadow: 0 0 0 3px var(--light-gray);
+      transition: all var(--transition-medium) ease;
+      overflow: hidden;
+      border: 2px solid var(--pure-white);
     }
     
     .mode-switch::before {
       content: '';
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background-color: var(--pure-black);
-      transition: all var(--transition-fast) ease;
-    }
-    
-    .mode-switch.light-mode {
-      background-color: var(--pure-black);
-    }
-    
-    .mode-switch.light-mode::before {
+      position: absolute;
+      width: 25px;
+      height: 50px;
       background-color: var(--pure-white);
+      right: 0;
+      top: 0;
+      transition: all var(--transition-medium) ease;
+    }
+    
+    body.light-mode .mode-switch {
+      background-color: var(--pure-white);
+      border-color: var(--pure-black);
+    }
+    
+    body.light-mode .mode-switch::before {
+      background-color: var(--pure-black);
+    }
+    
+    .mode-switch:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+    
+    body.light-mode .mode-switch:hover {
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    @media (max-width: 768px) {
+      .mode-switch {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+      }
+      
+      .mode-switch::before {
+        width: 20px;
+        height: 40px;
+      }
     }
 
-    /* LIGHT MODE OVERRIDES */
+    /* Light mode */
     body.light-mode {
       background-color: var(--pure-white);
       color: var(--pure-black);
     }
     
-    body.light-mode .cursor-dot,
-    body.light-mode .cursor-circle {
+    body.light-mode .nav-toggle span {
       background-color: var(--pure-black);
-      border-color: var(--pure-black);
     }
     
     body.light-mode .navigation {
       background-color: var(--pure-white);
-    }
-    
-    body.light-mode .nav-toggle span {
-      background-color: var(--pure-black);
     }
     
     body.light-mode .nav-links a {
@@ -807,42 +1056,32 @@
     }
     
     body.light-mode .nav-links a::before {
-      color: var(--pure-white);
       background-color: var(--pure-black);
     }
     
-    body.light-mode .grid-line {
-      background-color: rgba(0, 0, 0, 0.05);
-    }
-    
-    body.light-mode .sidebar-text {
-      color: var(--mid-gray);
+    body.light-mode .sidebar-left,
+    body.light-mode .sidebar-right {
+      border-color: rgba(0, 0, 0, 0.05);
     }
     
     body.light-mode .framework-card {
-      background-color: rgba(0, 0, 0, 0.03);
-      border: 1px solid rgba(0, 0, 0, 0.05);
+      background-color: rgba(0, 0, 0, 0.02);
+      border: 1px solid rgba(0, 0, 0, 0.03);
     }
     
     body.light-mode .framework-card:hover {
-      background-color: rgba(0, 0, 0, 0.05);
+      background-color: rgba(0, 0, 0, 0.04);
+      border-color: rgba(0, 0, 0, 0.08);
     }
     
-    body.light-mode .framework-icon {
-      border-color: rgba(0, 0, 0, 0.1);
-      background-color: rgba(0, 0, 0, 0.05);
+    body.light-mode .framework-card::before {
+      background: var(--pure-black);
     }
     
+    body.light-mode .platform-description,
     body.light-mode .framework-description,
-    body.light-mode .cta-text,
-    body.light-mode .platform-subtitle {
+    body.light-mode .cta-description {
       color: var(--mid-gray);
-    }
-    
-    body.light-mode .architecture-diagram,
-    body.light-mode .framework-visual {
-      background-color: rgba(0, 0, 0, 0.05);
-      border-color: rgba(0, 0, 0, 0.1);
     }
     
     body.light-mode .cta-btn {
@@ -853,112 +1092,124 @@
     body.light-mode .cta-btn::before {
       background-color: var(--mid-gray);
     }
-
-    /* Loading screen */
-    .loading-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+    
+    body.light-mode .logo-symbol {
+      border-color: var(--pure-black);
+    }
+    
+    body.light-mode .logo-symbol::before {
       background-color: var(--pure-black);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      transition: opacity var(--transition-slow) ease, visibility var(--transition-slow) ease;
     }
     
-    .loading-logo {
-      font-family: var(--font-heading);
-      font-size: 48px;
-      letter-spacing: -0.03em;
-      color: var(--pure-white);
-      position: relative;
+    body.light-mode .framework-visual,
+    body.light-mode .architecture-diagram {
+      background-color: rgba(0, 0, 0, 0.05);
+      border-color: rgba(0, 0, 0, 0.05);
     }
     
-    .loading-bar {
-      position: absolute;
-      bottom: -20px;
-      left: 0;
-      width: 0%;
-      height: 2px;
-      background-color: var(--pure-white);
-      transition: width 1.5s var(--transition-bezier);
+    body.light-mode .footer {
+      background-color: rgba(245, 245, 245, 0.7);
+      border-top-color: rgba(0, 0, 0, 0.05);
     }
     
-    .loading-screen.loaded {
-      opacity: 0;
-      visibility: hidden;
+    body.light-mode .footer-links a {
+      color: var(--mid-gray);
     }
-
-    /* Skip to content link for accessibility */
-    .skip-link {
-      position: absolute;
-      top: -50px;
-      left: 10px;
-      padding: 10px;
-      background-color: var(--pure-white);
+    
+    body.light-mode .footer-links a:hover {
       color: var(--pure-black);
-      z-index: 9999;
-      transition: top 0.3s ease;
     }
     
-    .skip-link:focus {
-      top: 10px;
+    body.light-mode .footer-links a::before {
+      background-color: var(--pure-black);
+    }
+    
+    body.light-mode .footer-logo-icon {
+      border-color: var(--pure-black);
+    }
+    
+    body.light-mode .footer-logo-icon::before {
+      background-color: var(--pure-black);
+    }
+    
+    body.light-mode .footer-contact-info,
+    body.light-mode .footer-tagline,
+    body.light-mode .footer-copyright,
+    body.light-mode .footer-signature {
+      color: var(--mid-gray);
+    }
+    
+    body.light-mode .social-icon {
+      border-color: rgba(0, 0, 0, 0.2);
+    }
+    
+    body.light-mode .social-icon:hover {
+      border-color: var(--pure-black);
+    }
+    
+    body.light-mode .footer-bottom {
+      border-top-color: rgba(0, 0, 0, 0.05);
+    }
+    
+    body.light-mode .cta-section {
+      background-color: rgba(0, 0, 0, 0.02);
+      border: 1px solid rgba(0, 0, 0, 0.05);
     }
   </style>
 </head>
 <body>
-  <!-- Accessibility skip link -->
+  <!-- Skip link for accessibility -->
   <a href="#main-content" class="skip-link">Skip to content</a>
 
   <!-- Loading screen -->
   <div class="loading-screen">
     <div class="loading-logo">
-      FLASH
-      <div class="loading-bar"></div>
+      <div class="loading-text">FLASH</div>
+      <div class="loading-bar-container">
+        <div class="loading-bar"></div>
+      </div>
+      <div class="loading-percentage">0%</div>
     </div>
   </div>
 
   <!-- Progress bar -->
   <div class="progress-bar"></div>
 
-  <!-- Noise Overlay -->
+  <!-- Noise overlay -->
   <div class="noise"></div>
 
-  <!-- 3D Wireframe -->
+  <!-- 3D Wireframe container -->
   <div id="wireframe-container"></div>
 
-  <!-- Advanced custom cursor -->
-  <div class="cursor-container">
-    <div class="cursor-dot" aria-hidden="true"></div>
-    <div class="cursor-circle" aria-hidden="true"></div>
-  </div>
-
-  <!-- Circle-clipped NAV -->
+  <!-- Navigation -->
   <div class="navigation" aria-hidden="true">
-    <ul class="nav-links">
-      <li style="--i:1;"><a href="https://flash.zone/index.html" data-text="HOME">HOME</a></li>
-      <li style="--i:2;"><a href="https://flash.zone/PlatformPage.html" data-text="PLATFORM">PLATFORM</a></li>
-      <li style="--i:3;"><a href="https://flash.zone/TechnologyPage.html" data-text="TECHNOLOGY">TECHNOLOGY</a></li>
-      <li style="--i:4;"><a href="https://flash.zone/AboutPage.html" data-text="ABOUT">ABOUT</a></li>
-      <li style="--i:5;"><a href="https://flash.zone/ContactPage.html" data-text="CONTACT">CONTACT</a></li>
-    </ul>
+    <div class="nav-content">
+      <div class="nav-links-container">
+        <ul class="nav-links">
+          <li><div class="nav-link-wrap"><a href="https://flash.zone/index.html">HOME</a></div></li>
+          <li><div class="nav-link-wrap"><a href="https://flash.zone/PlatformPage.html">PLATFORM</a></div></li>
+          <li><div class="nav-link-wrap"><a href="https://flash.zone/TechnologyPage.html">TECHNOLOGY</a></div></li>
+          <li><div class="nav-link-wrap"><a href="https://flash.zone/AboutPage.html">ABOUT</a></div></li>
+          <li><div class="nav-link-wrap"><a href="https://flash.zone/ContactPage.html">CONTACT</a></div></li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <!-- Main container -->
   <div class="container">
-    <div class="sidebar-left">
-      <div class="sidebar-text">FLASH VENTURES — EST. 2025</div>
-    </div>
+    <!-- Left sidebar -->
+    <div class="sidebar-left"></div>
 
+    <!-- Header -->
     <header class="header">
       <div class="logo" tabindex="0" aria-label="Flash logo">
+        <div class="logo-symbol"></div>
         <a class="logo-link" href="https://flash.zone/index.html">
             <div class="logo-text">FLASH</div>
         </a>
       </div>
+      
       <div class="nav-toggle" tabindex="0" role="button" aria-label="Toggle navigation menu" aria-expanded="false">
         <span></span>
         <span></span>
@@ -966,668 +1217,644 @@
       </div>
     </header>
 
+    <!-- Main content -->
     <main class="main" id="main-content">
-      <!-- Dynamic noise canvas -->
-      <canvas id="noise-canvas"></canvas>
+      <!-- Platform Header -->
+      <section class="platform-header">
+        <h1 class="platform-title">FlashDNA Infinity Platform</h1>
+        <p class="platform-description">
+          Our advanced venture capital decision engine uses PDE meltdown, fractal dimension, chaos theory, quantum synergy, agent-based modeling, and reinforcement learning to identify high-potential investments with unprecedented accuracy.
+        </p>
+      </section>
 
-      <!-- Dynamic grid background -->
-      <div class="grid-background"></div>
-
-      <!-- Platform content -->
-      <div class="platform-content">
-        <!-- Platform Header -->
-        <div class="platform-header">
-          <h1 class="platform-title">
-            <span>FlashDNA Infinity Platform</span>
-          </h1>
-          <p class="platform-subtitle">
-            Our advanced venture capital decision engine uses PDE meltdown, fractal dimension, chaos theory, quantum synergy, agent-based modeling, and reinforcement learning to identify high-potential investments with unprecedented accuracy.
+      <!-- Frameworks Grid -->
+      <section class="frameworks-grid">
+        <!-- PDE Meltdown -->
+        <div class="framework-card">
+          <div class="framework-icon">∂²</div>
+          <h3 class="framework-title">PDE Meltdown</h3>
+          <p class="framework-description">
+            Finite-difference Black-Scholes-style approach to model startup meltdown vs. success boundary, with mathematical precision in calculating potential value trajectories.
           </p>
-        </div>
-        
-        <!-- Frameworks Grid -->
-        <div class="frameworks-grid">
-          <!-- PDE Meltdown Framework -->
-          <div class="framework-card">
-            <div class="framework-icon">∂²</div>
-            <h3 class="framework-title">PDE Meltdown</h3>
-            <p class="framework-description">
-              Finite-difference Black-Scholes-style approach to model startup meltdown vs. success boundary, with mathematical precision in calculating potential value trajectories.
-            </p>
-            <div class="framework-visual">
-              <svg viewBox="0 0 300 180">
-                <!-- Grid lines -->
-                <g stroke="rgba(255,255,255,0.1)" stroke-width="1">
-                  <line x1="0" y1="45" x2="300" y2="45" />
-                  <line x1="0" y1="90" x2="300" y2="90" />
-                  <line x1="0" y1="135" x2="300" y2="135" />
-                  <line x1="75" y1="0" x2="75" y2="180" />
-                  <line x1="150" y1="0" x2="150" y2="180" />
-                  <line x1="225" y1="0" x2="225" y2="180" />
-                </g>
-                
-                <!-- Meltdown threshold -->
-                <line x1="0" y1="130" x2="300" y2="130" stroke="#ff3366" stroke-width="2" stroke-dasharray="5,5" />
-                
-                <!-- PDE curve -->
-                <path d="M0,150 C50,130 100,110 150,80 S250,30 300,20" 
-                      fill="none" stroke="#ffffff" stroke-width="3" />
-                
-                <!-- Labels -->
-                <text x="10" y="20" fill="#ffffff" font-size="12">Success</text>
-                <text x="10" y="170" fill="#ffffff" font-size="12">Meltdown</text>
-                <text x="250" y="170" fill="#ffffff" font-size="12">Time →</text>
-              </svg>
-            </div>
-          </div>
-          
-          <!-- Fractal Dimension Framework -->
-          <div class="framework-card">
-            <div class="framework-icon">◈</div>
-            <h3 class="framework-title">Fractal Dimension</h3>
-            <p class="framework-description">
-              Box-counting approach to calculate the fractal dimension of startup metrics, revealing complex patterns in growth, revenue, and burn rate metrics.
-            </p>
-            <div class="framework-visual">
-              <svg viewBox="0 0 300 180">
-                <!-- Fractal grid pattern -->
-                <defs>
-                  <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
-                    <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.5" />
-                  </pattern>
-                  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                    <rect width="40" height="40" fill="url(#smallGrid)" />
-                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1" />
-                  </pattern>
-                </defs>
-                
-                <rect width="300" height="180" fill="url(#grid)" />
-                
-                <!-- Fractal squares -->
-                <rect x="40" y="40" width="40" height="40" fill="rgba(255,255,255,0.7)" />
-                <rect x="80" y="40" width="20" height="20" fill="rgba(255,255,255,0.7)" />
-                <rect x="100" y="60" width="10" height="10" fill="rgba(255,255,255,0.7)" />
-                <rect x="40" y="80" width="20" height="20" fill="rgba(255,255,255,0.7)" />
-                <rect x="60" y="100" width="10" height="10" fill="rgba(255,255,255,0.7)" />
-                
-                <rect x="120" y="80" width="40" height="40" fill="rgba(255,255,255,0.7)" />
-                <rect x="160" y="80" width="20" height="20" fill="rgba(255,255,255,0.7)" />
-                <rect x="180" y="100" width="10" height="10" fill="rgba(255,255,255,0.7)" />
-                
-                <rect x="200" y="40" width="40" height="40" fill="rgba(255,255,255,0.7)" />
-                <rect x="240" y="40" width="20" height="20" fill="rgba(255,255,255,0.7)" />
-                
-                <!-- Dimension label -->
-                <text x="10" y="20" fill="#ffffff" font-size="12">Fractal Dim: 1.78</text>
-              </svg>
-            </div>
-          </div>
-          
-          <!-- Chaos Analysis Framework -->
-          <div class="framework-card">
-            <div class="framework-icon">λ</div>
-            <h3 class="framework-title">Chaos Analysis</h3>
-            <p class="framework-description">
-              Logistic map implementation to compute Lyapunov exponents from startup growth patterns, identifying chaotic vs. stable growth trajectories.
-            </p>
-            <div class="framework-visual">
-              <svg viewBox="0 0 300 180">
-                <!-- Background -->
-                <rect width="300" height="180" fill="rgba(0,0,0,0)" />
-                
-                <!-- Bifurcation diagram points -->
-                <g fill="rgba(255,255,255,0.5)">
-                  <circle cx="100" cy="90" r="0.7" />
-                  <circle cx="100" cy="100" r="0.7" />
-                  <circle cx="110" cy="70" r="0.7" />
-                  <circle cx="110" cy="110" r="0.7" />
-                  <circle cx="120" cy="60" r="0.7" />
-                  <circle cx="120" cy="120" r="0.7" />
-                  <circle cx="130" cy="40" r="0.7" />
-                  <circle cx="130" cy="80" r="0.7" />
-                  <circle cx="130" cy="100" r="0.7" />
-                  <circle cx="130" cy="140" r="0.7" />
-                  <circle cx="140" cy="30" r="0.7" />
-                  <circle cx="140" cy="60" r="0.7" />
-                  <circle cx="140" cy="90" r="0.7" />
-                  <circle cx="140" cy="120" r="0.7" />
-                  <circle cx="140" cy="150" r="0.7" />
-                  <circle cx="150" cy="20" r="0.7" />
-                  <circle cx="150" cy="40" r="0.7" />
-                  <circle cx="150" cy="60" r="0.7" />
-                  <circle cx="150" cy="80" r="0.7" />
-                  <circle cx="150" cy="100" r="0.7" />
-                  <circle cx="150" cy="120" r="0.7" />
-                  <circle cx="150" cy="140" r="0.7" />
-                  <circle cx="150" cy="160" r="0.7" />
-                  
-                  <!-- Repeat similar patterns with higher density on right side -->
-                  <circle cx="160" cy="20" r="0.7" />
-                  <circle cx="160" cy="40" r="0.7" />
-                  <circle cx="160" cy="60" r="0.7" />
-                  <circle cx="160" cy="80" r="0.7" />
-                  <circle cx="160" cy="100" r="0.7" />
-                  <circle cx="160" cy="120" r="0.7" />
-                  <circle cx="160" cy="140" r="0.7" />
-                  <circle cx="160" cy="160" r="0.7" />
-                  
-                  <circle cx="170" cy="25" r="0.7" />
-                  <circle cx="170" cy="45" r="0.7" />
-                  <circle cx="170" cy="65" r="0.7" />
-                  <circle cx="170" cy="85" r="0.7" />
-                  <circle cx="170" cy="105" r="0.7" />
-                  <circle cx="170" cy="125" r="0.7" />
-                  <circle cx="170" cy="145" r="0.7" />
-                  <circle cx="170" cy="165" r="0.7" />
-                  
-                  <!-- More dense on right side -->
-                  <g fill-opacity="0.3">
-                    <circle cx="190" cy="10" r="0.7" />
-                    <circle cx="190" cy="15" r="0.7" />
-                    <circle cx="190" cy="20" r="0.7" />
-                    <circle cx="190" cy="25" r="0.7" />
-                    <circle cx="190" cy="30" r="0.7" />
-                    <circle cx="190" cy="35" r="0.7" />
-                    <circle cx="190" cy="40" r="0.7" />
-                    <circle cx="190" cy="45" r="0.7" />
-                    <circle cx="190" cy="50" r="0.7" />
-                    <circle cx="190" cy="55" r="0.7" />
-                    <circle cx="190" cy="60" r="0.7" />
-                    <circle cx="190" cy="65" r="0.7" />
-                    <circle cx="190" cy="70" r="0.7" />
-                    <circle cx="190" cy="75" r="0.7" />
-                    <circle cx="190" cy="80" r="0.7" />
-                    <circle cx="190" cy="85" r="0.7" />
-                    <circle cx="190" cy="90" r="0.7" />
-                    <circle cx="190" cy="95" r="0.7" />
-                    <circle cx="190" cy="100" r="0.7" />
-                    <circle cx="190" cy="105" r="0.7" />
-                    <circle cx="190" cy="110" r="0.7" />
-                    <circle cx="190" cy="115" r="0.7" />
-                    <circle cx="190" cy="120" r="0.7" />
-                    <circle cx="190" cy="125" r="0.7" />
-                    <circle cx="190" cy="130" r="0.7" />
-                    <circle cx="190" cy="135" r="0.7" />
-                    <circle cx="190" cy="140" r="0.7" />
-                    <circle cx="190" cy="145" r="0.7" />
-                    <circle cx="190" cy="150" r="0.7" />
-                    <circle cx="190" cy="155" r="0.7" />
-                    <circle cx="190" cy="160" r="0.7" />
-                    <circle cx="190" cy="165" r="0.7" />
-                    <circle cx="190" cy="170" r="0.7" />
-                    <circle cx="190" cy="175" r="0.7" />
-                    
-                    <circle cx="200" cy="10" r="0.7" />
-                    <circle cx="200" cy="20" r="0.7" />
-                    <circle cx="200" cy="30" r="0.7" />
-                    <circle cx="200" cy="40" r="0.7" />
-                    <circle cx="200" cy="50" r="0.7" />
-                    <circle cx="200" cy="60" r="0.7" />
-                    <circle cx="200" cy="70" r="0.7" />
-                    <circle cx="200" cy="80" r="0.7" />
-                    <circle cx="200" cy="90" r="0.7" />
-                    <circle cx="200" cy="100" r="0.7" />
-                    <circle cx="200" cy="110" r="0.7" />
-                    <circle cx="200" cy="120" r="0.7" />
-                    <circle cx="200" cy="130" r="0.7" />
-                    <circle cx="200" cy="140" r="0.7" />
-                    <circle cx="200" cy="150" r="0.7" />
-                    <circle cx="200" cy="160" r="0.7" />
-                    <circle cx="200" cy="170" r="0.7" />
-                  </g>
-                </g>
-                
-                <!-- Lyapunov exponent curve -->
-                <path d="M50,90 C100,100 150,120 180,50 S250,30 290,70" 
-                      fill="none" stroke="#00AAFF" stroke-width="2" />
-                
-                <!-- Labels -->
-                <text x="10" y="20" fill="#ffffff" font-size="12">Logistic Map Bifurcation</text>
-                <text x="10" y="40" fill="#00AAFF" font-size="12">Lyapunov Exponent</text>
-                <text x="270" y="170" fill="#ffffff" font-size="12">r →</text>
-              </svg>
-            </div>
-          </div>
-          
-          <!-- Quantum Synergy Framework -->
-          <div class="framework-card">
-            <div class="framework-icon">Ψ</div>
-            <h3 class="framework-title">Quantum Synergy</h3>
-            <p class="framework-description">
-              Wavefunction amplitude approach to calculate synergy between intangible factors and financial metrics, producing quantum-inspired synergy probabilities.
-            </p>
-            <div class="framework-visual">
-              <svg viewBox="0 0 300 180">
-                <!-- Axis -->
-                <line x1="0" y1="90" x2="300" y2="90" stroke="rgba(255,255,255,0.3)" stroke-width="1" />
-                
-                <!-- Wavefunction amplitude -->
-                <path d="M0,90 C25,50 50,30 75,50 S100,120 125,130 S150,70 175,50 S200,110 225,130 S250,70 275,90 S300,90 300,90" 
-                      fill="none" stroke="#ffffff" stroke-width="2" />
-                
-                <!-- Secondary wavefunction -->
-                <path d="M0,90 C25,120 50,150 75,120 S100,60 125,50 S150,110 175,130 S200,70 225,50 S250,110 275,90 S300,90 300,90" 
-                      fill="none" stroke="#9900FF" stroke-width="2" />
-                
-                <!-- Probability density -->
-                <path d="M0,180 C25,150 50,130 75,140 S100,160 125,170 S150,150 175,160 S200,150 225,140 S250,145 275,160 S300,180 300,180" 
-                      fill="rgba(153,0,255,0.2)" stroke="none" />
-                
-                <!-- Labels -->
-                <text x="10" y="20" fill="#ffffff" font-size="12">Wavefunction Amplitude</text>
-                <text x="10" y="170" fill="#9900FF" font-size="12">Synergy Probability</text>
-              </svg>
-            </div>
-          </div>
-          
-          <!-- Agent-Based Modeling Framework -->
-          <div class="framework-card">
-            <div class="framework-icon">⚙</div>
-            <h3 class="framework-title">Agent-Based Modeling</h3>
-            <p class="framework-description">
-              Multi-step simulation environment modeling startup dynamics with agents who invest or cut costs, revealing emergent patterns in complex systems.
-            </p>
-            <div class="framework-visual">
-              <svg viewBox="0 0 300 180">
-                <!-- Grid -->
-                <g stroke="rgba(255,255,255,0.1)" stroke-width="1">
-                  <line x1="0" y1="30" x2="300" y2="30" />
-                  <line x1="0" y1="60" x2="300" y2="60" />
-                  <line x1="0" y1="90" x2="300" y2="90" />
-                  <line x1="0" y1="120" x2="300" y2="120" />
-                  <line x1="0" y1="150" x2="300" y2="150" />
-                  <line x1="60" y1="0" x2="60" y2="180" />
-                  <line x1="120" y1="0" x2="120" y2="180" />
-                  <line x1="180" y1="0" x2="180" y2="180" />
-                  <line x1="240" y1="0" x2="240" y2="180" />
-                </g>
-                
-                <!-- Invest agents (green) -->
-                <circle cx="90" cy="60" r="8" fill="#00CC66" />
-                <circle cx="150" cy="90" r="8" fill="#00CC66" />
-                <circle cx="210" cy="60" r="8" fill="#00CC66" />
-                <circle cx="270" cy="120" r="8" fill="#00CC66" />
-                <circle cx="30" cy="150" r="8" fill="#00CC66" />
-                
-                <!-- Cut cost agents (red) -->
-                <circle cx="60" cy="120" r="8" fill="#FF3366" />
-                <circle cx="120" cy="30" r="8" fill="#FF3366" />
-                <circle cx="180" cy="120" r="8" fill="#FF3366" />
-                <circle cx="240" cy="90" r="8" fill="#FF3366" />
-                <circle cx="30" cy="60" r="8" fill="#FF3366" />
-                
-                <!-- Agent connections -->
-                <g stroke="rgba(255,255,255,0.2)" stroke-width="1">
-                  <line x1="90" y1="60" x2="150" y2="90" />
-                  <line x1="150" y1="90" x2="210" y2="60" />
-                  <line x1="30" y1="60" x2="90" y2="60" />
-                  <line x1="30" y1="60" x2="60" y2="120" />
-                  <line x1="60" y1="120" x2="30" y2="150" />
-                  <line x1="180" y1="120" x2="240" y2="90" />
-                  <line x1="240" y1="90" x2="270" y2="120" />
-                  <line x1="120" y1="30" x2="180" y2="120" />
-                </g>
-                
-                <!-- Legend -->
-                <rect x="10" y="10" width="10" height="10" fill="#00CC66" />
-                <text x="25" y="20" fill="#ffffff" font-size="12">Invest</text>
-                
-                <rect x="70" y="10" width="10" height="10" fill="#FF3366" />
-                <text x="85" y="20" fill="#ffffff" font-size="12">Cut Costs</text>
-              </svg>
-            </div>
-          </div>
-          
-          <!-- Reinforcement Learning Framework -->
-          <div class="framework-card">
-            <div class="framework-icon">Q</div>
-            <h3 class="framework-title">Reinforcement Learning</h3>
-            <p class="framework-description">
-              Q-learning implementation to discover optimal strategies for startup success, training on historical data to maximize reward functions in variable environments.
-            </p>
-            <div class="framework-visual">
-              <svg viewBox="0 0 300 180">
-                <!-- Q-matrix visualization as heatmap -->
-                <g>
-                  <!-- Row 1 -->
-                  <rect x="60" y="30" width="30" height="30" fill="rgb(0,100,255)" />
-                  <rect x="90" y="30" width="30" height="30" fill="rgb(10,120,245)" />
-                  <rect x="120" y="30" width="30" height="30" fill="rgb(20,140,235)" />
-                  <rect x="150" y="30" width="30" height="30" fill="rgb(40,160,215)" />
-                  <rect x="180" y="30" width="30" height="30" fill="rgb(60,180,195)" />
-                  <rect x="210" y="30" width="30" height="30" fill="rgb(80,200,175)" />
-                  
-                  <!-- Row 2 -->
-                  <rect x="60" y="60" width="30" height="30" fill="rgb(10,120,245)" />
-                  <rect x="90" y="60" width="30" height="30" fill="rgb(30,150,225)" />
-                  <rect x="120" y="60" width="30" height="30" fill="rgb(50,170,205)" />
-                  <rect x="150" y="60" width="30" height="30" fill="rgb(70,190,185)" />
-                  <rect x="180" y="60" width="30" height="30" fill="rgb(90,210,165)" />
-                  <rect x="210" y="60" width="30" height="30" fill="rgb(100,230,145)" />
-                  
-                  <!-- Row 3 -->
-                  <rect x="60" y="90" width="30" height="30" fill="rgb(20,140,235)" />
-                  <rect x="90" y="90" width="30" height="30" fill="rgb(40,160,215)" />
-                  <rect x="120" y="90" width="30" height="30" fill="rgb(60,180,195)" />
-                  <rect x="150" y="90" width="30" height="30" fill="rgb(80,200,175)" />
-                  <rect x="180" y="90" width="30" height="30" fill="rgb(100,220,155)" />
-                  <rect x="210" y="90" width="30" height="30" fill="rgb(100,255,0)" />
-                  
-                  <!-- Row 4 -->
-                  <rect x="60" y="120" width="30" height="30" fill="rgb(15,130,240)" />
-                  <rect x="90" y="120" width="30" height="30" fill="rgb(35,155,220)" />
-                  <rect x="120" y="120" width="30" height="30" fill="rgb(55,175,200)" />
-                  <rect x="150" y="120" width="30" height="30" fill="rgb(75,195,180)" />
-                  <rect x="180" y="120" width="30" height="30" fill="rgb(95,215,160)" />
-                  <rect x="210" y="120" width="30" height="30" fill="rgb(95,235,140)" />
-                </g>
-                
-                <!-- Grid lines -->
-                <g stroke="rgba(255,255,255,0.3)" stroke-width="1">
-                  <line x1="60" y1="30" x2="60" y2="150" />
-                  <line x1="90" y1="30" x2="90" y2="150" />
-                  <line x1="120" y1="30" x2="120" y2="150" />
-                  <line x1="150" y1="30" x2="150" y2="150" />
-                  <line x1="180" y1="30" x2="180" y2="150" />
-                  <line x1="210" y1="30" x2="210" y2="150" />
-                  <line x1="240" y1="30" x2="240" y2="150" />
-                  
-                  <line x1="60" y1="30" x2="240" y2="30" />
-                  <line x1="60" y1="60" x2="240" y2="60" />
-                  <line x1="60" y1="90" x2="240" y2="90" />
-                  <line x1="60" y1="120" x2="240" y2="120" />
-                  <line x1="60" y1="150" x2="240" y2="150" />
-                </g>
-                
-                <!-- Optimal path -->
-                <polyline points="75,45 105,75 135,75 165,75 195,75 225,105" 
-                          fill="none" stroke="#ffffff" stroke-width="2" />
-                
-                <!-- Legend -->
-                <text x="10" y="20" fill="#ffffff" font-size="12">Q-Learning Matrix</text>
-                
-                <!-- Value scale -->
-                <linearGradient id="qGradient" x1="0%" y1="0%" x2="100%" y1="0%">
-                  <stop offset="0%" stop-color="rgb(0,100,255)" />
-                  <stop offset="100%" stop-color="rgb(100,255,0)" />
-                </linearGradient>
-                <rect x="60" y="160" width="180" height="10" fill="url(#qGradient)" />
-                <text x="140" y="175" fill="#ffffff" font-size="10" text-anchor="middle">Q-values</text>
-              </svg>
-            </div>
-          </div>
-        </div>
-        
-        <!-- System Architecture Diagram -->
-        <div class="architecture-section">
-          <h2 class="architecture-title">System Architecture</h2>
-          <div class="architecture-diagram">
-            <svg viewBox="0 0 900 400">
-              <!-- Nodes -->
-              <g>
-                <!-- Data node -->
-                <circle cx="100" cy="200" r="50" fill="none" stroke="#ffffff" stroke-width="2" />
-                <text x="100" y="200" fill="#ffffff" font-size="14" text-anchor="middle">Startup Data</text>
-                
-                <!-- Framework nodes -->
-                <circle cx="300" cy="100" r="40" fill="none" stroke="#ffffff" stroke-width="2" />
-                <text x="300" y="100" fill="#ffffff" font-size="12" text-anchor="middle">PDE Meltdown</text>
-                
-                <circle cx="300" cy="200" r="40" fill="none" stroke="#ffffff" stroke-width="2" />
-                <text x="300" y="200" fill="#ffffff" font-size="12" text-anchor="middle">Fractal Dimension</text>
-                
-                <circle cx="300" cy="300" r="40" fill="none" stroke="#ffffff" stroke-width="2" />
-                <text x="300" y="300" fill="#ffffff" font-size="12" text-anchor="middle">Chaos Analysis</text>
-                
-                <!-- HPC node -->
-                <circle cx="500" cy="200" r="50" fill="none" stroke="#ffffff" stroke-width="2" />
-                <text x="500" y="200" fill="#ffffff" font-size="14" text-anchor="middle">HPC Orchestrator</text>
-                
-                <!-- Advanced frameworks -->
-                <circle cx="700" cy="100" r="40" fill="none" stroke="#ffffff" stroke-width="2" />
-                <text x="700" y="100" fill="#ffffff" font-size="12" text-anchor="middle">Quantum Synergy</text>
-                
-                <circle cx="700" cy="200" r="40" fill="none" stroke="#ffffff" stroke-width="2" />
-                <text x="700" y="200" fill="#ffffff" font-size="12" text-anchor="middle">Agent-Based</text>
-                
-                <circle cx="700" cy="300" r="40" fill="none" stroke="#ffffff" stroke-width="2" />
-                <text x="700" y="300" fill="#ffffff" font-size="12" text-anchor="middle">Reinforcement Learning</text>
-                
-                <!-- Intangible LLM node -->
-                <circle cx="500" cy="80" r="40" fill="none" stroke="#ffffff" stroke-width="2" />
-                <text x="500" y="80" fill="#ffffff" font-size="12" text-anchor="middle">Intangible LLM</text>
-                
-                <!-- XGBoost model node -->
-                <circle cx="850" cy="200" r="60" fill="none" stroke="#ffffff" stroke-width="2" />
-                <text x="850" y="200" fill="#ffffff" font-size="14" text-anchor="middle">XGBoost Model</text>
+          <div class="framework-visual">
+            <svg viewBox="0 0 300 180">
+              <!-- Grid lines -->
+              <g stroke="rgba(255,255,255,0.1)" stroke-width="1">
+                <line x1="0" y1="45" x2="300" y2="45" />
+                <line x1="0" y1="90" x2="300" y2="90" />
+                <line x1="0" y1="135" x2="300" y2="135" />
+                <line x1="75" y1="0" x2="75" y2="180" />
+                <line x1="150" y1="0" x2="150" y2="180" />
+                <line x1="225" y1="0" x2="225" y2="180" />
               </g>
               
-              <!-- Connections -->
-              <g stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.5">
-                <!-- From data to frameworks -->
-                <line x1="150" y1="200" x2="260" y2="100" />
-                <line x1="150" y1="200" x2="260" y2="200" />
-                <line x1="150" y1="200" x2="260" y2="300" />
-                <line x1="150" y1="200" x2="460" y2="80" />
-                
-                <!-- From frameworks to HPC -->
-                <line x1="340" y1="100" x2="450" y2="200" />
-                <line x1="340" y1="200" x2="450" y2="200" />
-                <line x1="340" y1="300" x2="450" y2="200" />
-                
-                <!-- From HPC to advanced frameworks -->
-                <line x1="550" y1="200" x2="660" y2="100" />
-                <line x1="550" y1="200" x2="660" y2="200" />
-                <line x1="550" y1="200" x2="660" y2="300" />
-                
-                <!-- From Intangible LLM -->
-                <line x1="540" y1="80" x2="660" y2="100" />
-                
-                <!-- From advanced frameworks to XGBoost -->
-                <line x1="740" y1="100" x2="790" y2="200" />
-                <line x1="740" y1="200" x2="790" y2="200" />
-                <line x1="740" y1="300" x2="790" y2="200" />
-                <line x1="540" y1="80" x2="790" y2="200" />
-              </g>
+              <!-- Meltdown threshold -->
+              <line x1="0" y1="130" x2="300" y2="130" stroke="#ff3366" stroke-width="2" stroke-dasharray="5,5" />
+              
+              <!-- PDE curve -->
+              <path d="M0,150 C50,130 100,110 150,80 S250,30 300,20" 
+                    fill="none" stroke="#ffffff" stroke-width="3" />
+              
+              <!-- Labels -->
+              <text x="10" y="20" fill="#ffffff" font-size="12">Success</text>
+              <text x="10" y="170" fill="#ffffff" font-size="12">Meltdown</text>
+              <text x="250" y="170" fill="#ffffff" font-size="12">Time →</text>
             </svg>
           </div>
         </div>
-        
-        <!-- Call to Action -->
-        <div class="cta-section">
-          <h2 class="cta-title">Experience the Future of VC Analytics</h2>
-          <p class="cta-text">
-            Our proprietary FlashDNA Infinity platform combines advanced mathematics, high-performance computing, and artificial intelligence to revolutionize venture capital decision-making.
+
+        <!-- Fractal Dimension -->
+        <div class="framework-card">
+          <div class="framework-icon">◈</div>
+          <h3 class="framework-title">Fractal Dimension</h3>
+          <p class="framework-description">
+            Box-counting approach to calculate the fractal dimension of startup metrics, revealing complex patterns in growth, revenue, and burn rate metrics.
           </p>
-          <a href="#" class="cta-btn">Request Demo</a>
+          <div class="framework-visual">
+            <svg viewBox="0 0 300 180">
+              <!-- Fractal grid pattern -->
+              <defs>
+                <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+                  <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.5" />
+                </pattern>
+                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <rect width="40" height="40" fill="url(#smallGrid)" />
+                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1" />
+                </pattern>
+              </defs>
+              
+              <rect width="300" height="180" fill="url(#grid)" />
+              
+              <!-- Fractal squares -->
+              <rect x="40" y="40" width="40" height="40" fill="rgba(255,255,255,0.7)" />
+              <rect x="80" y="40" width="20" height="20" fill="rgba(255,255,255,0.7)" />
+              <rect x="100" y="60" width="10" height="10" fill="rgba(255,255,255,0.7)" />
+              <rect x="40" y="80" width="20" height="20" fill="rgba(255,255,255,0.7)" />
+              <rect x="60" y="100" width="10" height="10" fill="rgba(255,255,255,0.7)" />
+              
+              <rect x="120" y="80" width="40" height="40" fill="rgba(255,255,255,0.7)" />
+              <rect x="160" y="80" width="20" height="20" fill="rgba(255,255,255,0.7)" />
+              <rect x="180" y="100" width="10" height="10" fill="rgba(255,255,255,0.7)" />
+              
+              <rect x="200" y="40" width="40" height="40" fill="rgba(255,255,255,0.7)" />
+              <rect x="240" y="40" width="20" height="20" fill="rgba(255,255,255,0.7)" />
+              
+              <!-- Dimension label -->
+              <text x="10" y="20" fill="#ffffff" font-size="12">Fractal Dim: 1.78</text>
+            </svg>
+          </div>
         </div>
-      </div>
+
+        <!-- Chaos Analysis -->
+        <div class="framework-card">
+          <div class="framework-icon">λ</div>
+          <h3 class="framework-title">Chaos Analysis</h3>
+          <p class="framework-description">
+            Logistic map implementation to compute Lyapunov exponents from startup growth patterns, identifying chaotic vs. stable growth trajectories.
+          </p>
+          <div class="framework-visual">
+            <svg viewBox="0 0 300 180">
+              <!-- Background -->
+              <rect width="300" height="180" fill="rgba(0,0,0,0)" />
+              
+              <!-- Bifurcation diagram points -->
+              <g fill="rgba(255,255,255,0.5)">
+                <circle cx="100" cy="90" r="0.7" />
+                <circle cx="100" cy="100" r="0.7" />
+                <circle cx="110" cy="70" r="0.7" />
+                <circle cx="110" cy="110" r="0.7" />
+                <circle cx="120" cy="60" r="0.7" />
+                <circle cx="120" cy="120" r="0.7" />
+                <circle cx="130" cy="40" r="0.7" />
+                <circle cx="130" cy="80" r="0.7" />
+                <circle cx="130" cy="100" r="0.7" />
+                <circle cx="130" cy="140" r="0.7" />
+                <circle cx="140" cy="30" r="0.7" />
+                <circle cx="140" cy="60" r="0.7" />
+                <circle cx="140" cy="90" r="0.7" />
+                <circle cx="140" cy="120" r="0.7" />
+                <circle cx="140" cy="150" r="0.7" />
+                <circle cx="150" cy="20" r="0.7" />
+                <circle cx="150" cy="40" r="0.7" />
+                <circle cx="150" cy="60" r="0.7" />
+                <circle cx="150" cy="80" r="0.7" />
+                <circle cx="150" cy="100" r="0.7" />
+                <circle cx="150" cy="120" r="0.7" />
+                <circle cx="150" cy="140" r="0.7" />
+                <circle cx="150" cy="160" r="0.7" />
+                
+                <!-- Repeat similar patterns with higher density on right side -->
+                <circle cx="160" cy="20" r="0.7" />
+                <circle cx="160" cy="40" r="0.7" />
+                <circle cx="160" cy="60" r="0.7" />
+                <circle cx="160" cy="80" r="0.7" />
+                <circle cx="160" cy="100" r="0.7" />
+                <circle cx="160" cy="120" r="0.7" />
+                <circle cx="160" cy="140" r="0.7" />
+                <circle cx="160" cy="160" r="0.7" />
+                
+                <circle cx="170" cy="25" r="0.7" />
+                <circle cx="170" cy="45" r="0.7" />
+                <circle cx="170" cy="65" r="0.7" />
+                <circle cx="170" cy="85" r="0.7" />
+                <circle cx="170" cy="105" r="0.7" />
+                <circle cx="170" cy="125" r="0.7" />
+                <circle cx="170" cy="145" r="0.7" />
+                <circle cx="170" cy="165" r="0.7" />
+                
+                <!-- More dense on right side -->
+                <g fill-opacity="0.3">
+                  <circle cx="190" cy="10" r="0.7" />
+                  <circle cx="190" cy="15" r="0.7" />
+                  <circle cx="190" cy="20" r="0.7" />
+                  <circle cx="190" cy="25" r="0.7" />
+                  <circle cx="190" cy="30" r="0.7" />
+                  <circle cx="190" cy="35" r="0.7" />
+                  <circle cx="190" cy="40" r="0.7" />
+                  <circle cx="190" cy="45" r="0.7" />
+                  <circle cx="190" cy="50" r="0.7" />
+                  <circle cx="190" cy="55" r="0.7" />
+                  <circle cx="190" cy="60" r="0.7" />
+                  <circle cx="190" cy="65" r="0.7" />
+                  <circle cx="190" cy="70" r="0.7" />
+                  <circle cx="190" cy="75" r="0.7" />
+                  <circle cx="190" cy="80" r="0.7" />
+                  <circle cx="190" cy="85" r="0.7" />
+                  <circle cx="190" cy="90" r="0.7" />
+                  <circle cx="190" cy="95" r="0.7" />
+                  <circle cx="190" cy="100" r="0.7" />
+                  <circle cx="190" cy="105" r="0.7" />
+                  <circle cx="190" cy="110" r="0.7" />
+                  <circle cx="190" cy="115" r="0.7" />
+                  <circle cx="190" cy="120" r="0.7" />
+                  <circle cx="190" cy="125" r="0.7" />
+                  <circle cx="190" cy="130" r="0.7" />
+                  <circle cx="190" cy="135" r="0.7" />
+                  <circle cx="190" cy="140" r="0.7" />
+                  <circle cx="190" cy="145" r="0.7" />
+                  <circle cx="190" cy="150" r="0.7" />
+                  <circle cx="190" cy="155" r="0.7" />
+                  <circle cx="190" cy="160" r="0.7" />
+                  <circle cx="190" cy="165" r="0.7" />
+                  <circle cx="190" cy="170" r="0.7" />
+                  <circle cx="190" cy="175" r="0.7" />
+                  
+                  <circle cx="200" cy="10" r="0.7" />
+                  <circle cx="200" cy="20" r="0.7" />
+                  <circle cx="200" cy="30" r="0.7" />
+                  <circle cx="200" cy="40" r="0.7" />
+                  <circle cx="200" cy="50" r="0.7" />
+                  <circle cx="200" cy="60" r="0.7" />
+                  <circle cx="200" cy="70" r="0.7" />
+                  <circle cx="200" cy="80" r="0.7" />
+                  <circle cx="200" cy="90" r="0.7" />
+                  <circle cx="200" cy="100" r="0.7" />
+                  <circle cx="200" cy="110" r="0.7" />
+                  <circle cx="200" cy="120" r="0.7" />
+                  <circle cx="200" cy="130" r="0.7" />
+                  <circle cx="200" cy="140" r="0.7" />
+                  <circle cx="200" cy="150" r="0.7" />
+                  <circle cx="200" cy="160" r="0.7" />
+                  <circle cx="200" cy="170" r="0.7" />
+                </g>
+              </g>
+              
+              <!-- Lyapunov exponent curve -->
+              <path d="M50,90 C100,100 150,120 180,50 S250,30 290,70" 
+                    fill="none" stroke="#00AAFF" stroke-width="2" />
+              
+              <!-- Labels -->
+              <text x="10" y="20" fill="#ffffff" font-size="12">Logistic Map Bifurcation</text>
+              <text x="10" y="40" fill="#00AAFF" font-size="12">Lyapunov Exponent</text>
+              <text x="270" y="170" fill="#ffffff" font-size="12">r →</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Quantum Synergy -->
+        <div class="framework-card">
+          <div class="framework-icon">Ψ</div>
+          <h3 class="framework-title">Quantum Synergy</h3>
+          <p class="framework-description">
+            Wavefunction amplitude approach to calculate synergy between intangible factors and financial metrics, producing quantum-inspired synergy probabilities.
+          </p>
+          <div class="framework-visual">
+            <svg viewBox="0 0 300 180">
+              <!-- Axis -->
+              <line x1="0" y1="90" x2="300" y2="90" stroke="rgba(255,255,255,0.3)" stroke-width="1" />
+              
+              <!-- Wavefunction amplitude -->
+              <path d="M0,90 C25,50 50,30 75,50 S100,120 125,130 S150,70 175,50 S200,110 225,130 S250,70 275,90 S300,90 300,90" 
+                    fill="none" stroke="#ffffff" stroke-width="2" />
+              
+              <!-- Secondary wavefunction -->
+              <path d="M0,90 C25,120 50,150 75,120 S100,60 125,50 S150,110 175,130 S200,70 225,50 S250,110 275,90 S300,90 300,90" 
+                    fill="none" stroke="#9900FF" stroke-width="2" />
+              
+              <!-- Probability density -->
+              <path d="M0,180 C25,150 50,130 75,140 S100,160 125,170 S150,150 175,160 S200,150 225,140 S250,145 275,160 S300,180 300,180" 
+                    fill="rgba(153,0,255,0.2)" stroke="none" />
+              
+              <!-- Labels -->
+              <text x="10" y="20" fill="#ffffff" font-size="12">Wavefunction Amplitude</text>
+              <text x="10" y="170" fill="#9900FF" font-size="12">Synergy Probability</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Agent-Based Modeling -->
+        <div class="framework-card">
+          <div class="framework-icon">⚙</div>
+          <h3 class="framework-title">Agent-Based Modeling</h3>
+          <p class="framework-description">
+            Multi-step simulation environment modeling startup dynamics with agents who invest or cut costs, revealing emergent patterns in complex systems.
+          </p>
+          <div class="framework-visual">
+            <svg viewBox="0 0 300 180">
+              <!-- Grid -->
+              <g stroke="rgba(255,255,255,0.1)" stroke-width="1">
+                <line x1="0" y1="30" x2="300" y2="30" />
+                <line x1="0" y1="60" x2="300" y2="60" />
+                <line x1="0" y1="90" x2="300" y2="90" />
+                <line x1="0" y1="120" x2="300" y2="120" />
+                <line x1="0" y1="150" x2="300" y2="150" />
+                <line x1="60" y1="0" x2="60" y2="180" />
+                <line x1="120" y1="0" x2="120" y2="180" />
+                <line x1="180" y1="0" x2="180" y2="180" />
+                <line x1="240" y1="0" x2="240" y2="180" />
+              </g>
+              
+              <!-- Invest agents (green) -->
+              <circle cx="90" cy="60" r="8" fill="#00CC66" />
+              <circle cx="150" cy="90" r="8" fill="#00CC66" />
+              <circle cx="210" cy="60" r="8" fill="#00CC66" />
+              <circle cx="270" cy="120" r="8" fill="#00CC66" />
+              <circle cx="30" cy="150" r="8" fill="#00CC66" />
+              
+              <!-- Cut cost agents (red) -->
+              <circle cx="60" cy="120" r="8" fill="#FF3366" />
+              <circle cx="120" cy="30" r="8" fill="#FF3366" />
+              <circle cx="180" cy="120" r="8" fill="#FF3366" />
+              <circle cx="240" cy="90" r="8" fill="#FF3366" />
+              <circle cx="30" cy="60" r="8" fill="#FF3366" />
+              
+              <!-- Agent connections -->
+              <g stroke="rgba(255,255,255,0.2)" stroke-width="1">
+                <line x1="90" y1="60" x2="150" y2="90" />
+                <line x1="150" y1="90" x2="210" y2="60" />
+                <line x1="30" y1="60" x2="90" y2="60" />
+                <line x1="30" y1="60" x2="60" y2="120" />
+                <line x1="60" y1="120" x2="30" y2="150" />
+                <line x1="180" y1="120" x2="240" y2="90" />
+                <line x1="240" y1="90" x2="270" y2="120" />
+                <line x1="120" y1="30" x2="180" y2="120" />
+              </g>
+              
+              <!-- Legend -->
+              <rect x="10" y="10" width="10" height="10" fill="#00CC66" />
+              <text x="25" y="20" fill="#ffffff" font-size="12">Invest</text>
+              
+              <rect x="70" y="10" width="10" height="10" fill="#FF3366" />
+              <text x="85" y="20" fill="#ffffff" font-size="12">Cut Costs</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Reinforcement Learning -->
+        <div class="framework-card">
+          <div class="framework-icon">Q</div>
+          <h3 class="framework-title">Reinforcement Learning</h3>
+          <p class="framework-description">
+            Q-learning implementation to discover optimal strategies for startup success, training on historical data to maximize reward functions in variable environments.
+          </p>
+          <div class="framework-visual">
+            <svg viewBox="0 0 300 180">
+              <!-- Q-matrix visualization as heatmap -->
+              <g>
+                <!-- Row 1 -->
+                <rect x="60" y="30" width="30" height="30" fill="rgb(0,100,255)" />
+                <rect x="90" y="30" width="30" height="30" fill="rgb(10,120,245)" />
+                <rect x="120" y="30" width="30" height="30" fill="rgb(20,140,235)" />
+                <rect x="150" y="30" width="30" height="30" fill="rgb(40,160,215)" />
+                <rect x="180" y="30" width="30" height="30" fill="rgb(60,180,195)" />
+                <rect x="210" y="30" width="30" height="30" fill="rgb(80,200,175)" />
+                
+                <!-- Row 2 -->
+                <rect x="60" y="60" width="30" height="30" fill="rgb(10,120,245)" />
+                <rect x="90" y="60" width="30" height="30" fill="rgb(30,150,225)" />
+                <rect x="120" y="60" width="30" height="30" fill="rgb(50,170,205)" />
+                <rect x="150" y="60" width="30" height="30" fill="rgb(70,190,185)" />
+                <rect x="180" y="60" width="30" height="30" fill="rgb(90,210,165)" />
+                <rect x="210" y="60" width="30" height="30" fill="rgb(100,230,145)" />
+                
+                <!-- Row 3 -->
+                <rect x="60" y="90" width="30" height="30" fill="rgb(20,140,235)" />
+                <rect x="90" y="90" width="30" height="30" fill="rgb(40,160,215)" />
+                <rect x="120" y="90" width="30" height="30" fill="rgb(60,180,195)" />
+                <rect x="150" y="90" width="30" height="30" fill="rgb(80,200,175)" />
+                <rect x="180" y="90" width="30" height="30" fill="rgb(100,220,155)" />
+                <rect x="210" y="90" width="30" height="30" fill="rgb(100,255,0)" />
+                
+                <!-- Row 4 -->
+                <rect x="60" y="120" width="30" height="30" fill="rgb(15,130,240)" />
+                <rect x="90" y="120" width="30" height="30" fill="rgb(35,155,220)" />
+                <rect x="120" y="120" width="30" height="30" fill="rgb(55,175,200)" />
+                <rect x="150" y="120" width="30" height="30" fill="rgb(75,195,180)" />
+                <rect x="180" y="120" width="30" height="30" fill="rgb(95,215,160)" />
+                <rect x="210" y="120" width="30" height="30" fill="rgb(95,235,140)" />
+              </g>
+              
+              <!-- Grid lines -->
+              <g stroke="rgba(255,255,255,0.3)" stroke-width="1">
+                <line x1="60" y1="30" x2="60" y2="150" />
+                <line x1="90" y1="30" x2="90" y2="150" />
+                <line x1="120" y1="30" x2="120" y2="150" />
+                <line x1="150" y1="30" x2="150" y2="150" />
+                <line x1="180" y1="30" x2="180" y2="150" />
+                <line x1="210" y1="30" x2="210" y2="150" />
+                <line x1="240" y1="30" x2="240" y2="150" />
+                
+                <line x1="60" y1="30" x2="240" y2="30" />
+                <line x1="60" y1="60" x2="240" y2="60" />
+                <line x1="60" y1="90" x2="240" y2="90" />
+                <line x1="60" y1="120" x2="240" y2="120" />
+                <line x1="60" y1="150" x2="240" y2="150" />
+              </g>
+              
+              <!-- Optimal path -->
+              <polyline points="75,45 105,75 135,75 165,75 195,75 225,105" 
+                        fill="none" stroke="#ffffff" stroke-width="2" />
+              
+              <!-- Legend -->
+              <text x="10" y="20" fill="#ffffff" font-size="12">Q-Learning Matrix</text>
+              
+              <!-- Value scale -->
+              <linearGradient id="qGradient" x1="0%" y1="0%" x2="100%" y1="0%">
+                <stop offset="0%" stop-color="rgb(0,100,255)" />
+                <stop offset="100%" stop-color="rgb(100,255,0)" />
+              </linearGradient>
+              <rect x="60" y="160" width="180" height="10" fill="url(#qGradient)" />
+              <text x="140" y="175" fill="#ffffff" font-size="10" text-anchor="middle">Q-values</text>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- System Architecture Section -->
+      <section class="architecture-section">
+        <h2 class="architecture-title">System Architecture</h2>
+        <div class="architecture-diagram">
+          <svg viewBox="0 0 900 400">
+            <!-- Nodes -->
+            <g>
+              <!-- Data node -->
+              <circle cx="100" cy="200" r="50" fill="none" stroke="#ffffff" stroke-width="2" />
+              <text x="100" y="200" fill="#ffffff" font-size="14" text-anchor="middle">Startup Data</text>
+              
+              <!-- Framework nodes -->
+              <circle cx="300" cy="100" r="40" fill="none" stroke="#ffffff" stroke-width="2" />
+              <text x="300" y="100" fill="#ffffff" font-size="12" text-anchor="middle">PDE Meltdown</text>
+              
+              <circle cx="300" cy="200" r="40" fill="none" stroke="#ffffff" stroke-width="2" />
+              <text x="300" y="200" fill="#ffffff" font-size="12" text-anchor="middle">Fractal Dimension</text>
+              
+              <circle cx="300" cy="300" r="40" fill="none" stroke="#ffffff" stroke-width="2" />
+              <text x="300" y="300" fill="#ffffff" font-size="12" text-anchor="middle">Chaos Analysis</text>
+              
+              <!-- HPC node -->
+              <circle cx="500" cy="200" r="50" fill="none" stroke="#ffffff" stroke-width="2" />
+              <text x="500" y="200" fill="#ffffff" font-size="14" text-anchor="middle">HPC Orchestrator</text>
+              
+              <!-- Advanced frameworks -->
+              <circle cx="700" cy="100" r="40" fill="none" stroke="#ffffff" stroke-width="2" />
+              <text x="700" y="100" fill="#ffffff" font-size="12" text-anchor="middle">Quantum Synergy</text>
+              
+              <circle cx="700" cy="200" r="40" fill="none" stroke="#ffffff" stroke-width="2" />
+              <text x="700" y="200" fill="#ffffff" font-size="12" text-anchor="middle">Agent-Based</text>
+              
+              <circle cx="700" cy="300" r="40" fill="none" stroke="#ffffff" stroke-width="2" />
+              <text x="700" y="300" fill="#ffffff" font-size="12" text-anchor="middle">Reinforcement Learning</text>
+              
+              <!-- Intangible LLM node -->
+              <circle cx="500" cy="80" r="40" fill="none" stroke="#ffffff" stroke-width="2" />
+              <text x="500" y="80" fill="#ffffff" font-size="12" text-anchor="middle">Intangible LLM</text>
+              
+              <!-- XGBoost model node -->
+              <circle cx="850" cy="200" r="60" fill="none" stroke="#ffffff" stroke-width="2" />
+              <text x="850" y="200" fill="#ffffff" font-size="14" text-anchor="middle">XGBoost Model</text>
+            </g>
+            
+            <!-- Connections -->
+            <g stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.5">
+              <!-- From data to frameworks -->
+              <line x1="150" y1="200" x2="260" y2="100" />
+              <line x1="150" y1="200" x2="260" y2="200" />
+              <line x1="150" y1="200" x2="260" y2="300" />
+              <line x1="150" y1="200" x2="460" y2="80" />
+              
+              <!-- From frameworks to HPC -->
+              <line x1="340" y1="100" x2="450" y2="200" />
+              <line x1="340" y1="200" x2="450" y2="200" />
+              <line x1="340" y1="300" x2="450" y2="200" />
+              
+              <!-- From HPC to advanced frameworks -->
+              <line x1="550" y1="200" x2="660" y2="100" />
+              <line x1="550" y1="200" x2="660" y2="200" />
+              <line x1="550" y1="200" x2="660" y2="300" />
+              
+              <!-- From Intangible LLM -->
+              <line x1="540" y1="80" x2="660" y2="100" />
+              
+              <!-- From advanced frameworks to XGBoost -->
+              <line x1="740" y1="100" x2="790" y2="200" />
+              <line x1="740" y1="200" x2="790" y2="200" />
+              <line x1="740" y1="300" x2="790" y2="200" />
+              <line x1="540" y1="80" x2="790" y2="200" />
+            </g>
+          </svg>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="cta-section">
+        <h2 class="cta-title">Experience the Future of VC Analytics</h2>
+        <p class="cta-description">
+          Our proprietary FlashDNA Infinity platform combines advanced mathematics, high-performance computing, and artificial intelligence to revolutionize venture capital decision-making.
+        </p>
+        <a href="#" class="cta-btn"><span>Request Demo</span></a>
+      </section>
+      
+      <!-- FOOTER -->
+      <footer class="footer">
+        <div class="footer-grid">
+          <!-- Company info -->
+          <div class="footer-logo">
+            <div class="footer-logo-symbol">
+              <div class="footer-logo-icon"></div>
+              <div class="footer-logo-text">FLASH</div>
+            </div>
+            <p class="footer-tagline">
+              Redefining the future of investments through AI-powered analytics and quantum neural networks.
+            </p>
+          </div>
+          
+          <!-- Navigation -->
+          <div class="footer-nav">
+            <h4 class="footer-heading">Navigation</h4>
+            <ul class="footer-links">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Platform</a></li>
+              <li><a href="#">Technology</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+          
+          <!-- Legal -->
+          <div class="footer-legal">
+            <h4 class="footer-heading">Legal</h4>
+            <ul class="footer-links">
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Cookie Policy</a></li>
+              <li><a href="#">Disclaimer</a></li>
+            </ul>
+          </div>
+          
+          <!-- Contact -->
+          <div class="footer-contact">
+            <h4 class="footer-heading">Contact</h4>
+            <div class="footer-contact-info">
+              <p>600 California Street<br>
+              San Francisco, CA 94108<br>
+              United States</p>
+              <p>contact@flash.zone<br>
+              +1 (415) 555-0123</p>
+            </div>
+          </div>
+          
+          <!-- Social -->
+          <div class="footer-social">
+            <h4 class="footer-heading">Connect</h4>
+            <ul class="footer-links">
+              <li><a href="#">LinkedIn</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">Medium</a></li>
+            </ul>
+            <div class="footer-social-links">
+              <a href="#" class="social-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+              </a>
+              <a href="#" class="social-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+              </a>
+              <a href="#" class="social-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Footer bottom -->
+        <div class="footer-bottom">
+          <div class="footer-copyright">
+            © 2025 Flash Ventures. All rights reserved.
+          </div>
+          <div class="footer-signature">
+            Designed with precision in San Francisco
+          </div>
+        </div>
+      </footer>
     </main>
 
-    <div class="sidebar-right">
-      <div class="sidebar-text">DIMENSIONAL QUANTUM ANALYTICS</div>
-    </div>
+    <!-- Right sidebar -->
+    <div class="sidebar-right"></div>
   </div>
 
   <!-- Dark/Light mode switch -->
-  <div class="mode-switch" tabindex="0" role="button" aria-label="Toggle dark and light mode"></div>
+  <div class="mode-switch" tabindex="0" role="button" aria-label="Toggle dark/light mode"></div>
 
   <!-- JavaScript -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Check if user prefers dark or light mode
-      const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const body = document.body;
-      const modeSwitch = document.querySelector('.mode-switch');
-      
-      // Apply user's system preference
-      if (!prefersDarkMode) {
-        body.classList.add('light-mode');
-        modeSwitch.classList.add('light-mode');
-      }
-      
-      /* ------------------------------------------------
-         LOADING SCREEN
-      ------------------------------------------------*/
+      // Loading screen animation
       const loadingScreen = document.querySelector('.loading-screen');
       const loadingBar = document.querySelector('.loading-bar');
-      
-      // Simulate loading progress
+      const loadingPercentage = document.querySelector('.loading-percentage');
       let progress = 0;
+      
       const loadingInterval = setInterval(() => {
-        progress += Math.random() * 10;
+        progress += Math.random() * 8; 
         if (progress >= 100) {
           progress = 100;
-          clearTimeout(loadingInterval);
+          clearInterval(loadingInterval);
           
-          // Hide loading screen after a short delay
           setTimeout(() => {
             loadingScreen.classList.add('loaded');
+            document.body.classList.add('loaded');
+            
+            // Animate content elements after loading
+            document.querySelector('.platform-title').classList.add('visible');
+            document.querySelector('.platform-description').classList.add('visible');
+            
+            // Make all framework cards visible with staggered delay
+            const frameworkCards = document.querySelectorAll('.framework-card');
+            frameworkCards.forEach(card => {
+              card.classList.add('visible');
+            });
+            
+            // Make architecture section visible
+            document.querySelector('.architecture-title').classList.add('visible');
+            document.querySelector('.architecture-diagram').classList.add('visible');
+            
+            // Make CTA section visible
+            document.querySelector('.cta-section').classList.add('visible');
           }, 500);
         }
+        
         loadingBar.style.width = `${progress}%`;
-      }, 150);
+        loadingPercentage.textContent = `${Math.floor(progress)}%`;
+      }, 100);
 
-      /* ------------------------------------------------
-         SCROLL PROGRESS INDICATOR
-      ------------------------------------------------*/
+      // Progress bar
       const progressBar = document.querySelector('.progress-bar');
-      
-      window.addEventListener('scroll', () => {
+      function updateProgressBar() {
         const scrollTop = window.scrollY;
         const docHeight = document.documentElement.scrollHeight;
         const winHeight = window.innerHeight;
         const scrollPercent = scrollTop / (docHeight - winHeight);
         
-        progressBar.style.width = `${window.innerWidth * scrollPercent}px`;
-      });
-
-      /* ------------------------------------------------
-         ADVANCED CURSOR
-      ------------------------------------------------*/
-      const cursorDot = document.querySelector('.cursor-dot');
-      const cursorCircle = document.querySelector('.cursor-circle');
-      const cursorContainer = document.querySelector('.cursor-container');
-
-      // Only apply custom cursor on non-touch devices
-      if (!('ontouchstart' in window)) {
-        let mouseX = 0;
-        let mouseY = 0;
-        let dotX = 0;
-        let dotY = 0;
-        let circleX = 0;
-        let circleY = 0;
-        
-        // Use requestAnimationFrame for smoother cursor movement
-        function updateCursor() {
-          // Smooth follow with lerp (linear interpolation)
-          dotX += (mouseX - dotX) * 0.2;
-          dotY += (mouseY - dotY) * 0.2;
-          circleX += (mouseX - circleX) * 0.1;
-          circleY += (mouseY - circleY) * 0.1;
-          
-          cursorDot.style.transform = `translate(${dotX}px, ${dotY}px)`;
-          cursorCircle.style.transform = `translate(${circleX}px, ${circleY}px)`;
-          
-          requestAnimationFrame(updateCursor);
-        }
-        
-        document.addEventListener('mousemove', (e) => {
-          mouseX = e.clientX;
-          mouseY = e.clientY;
-          
-          // Create trail with throttling for performance
-          if (Math.random() > 0.7) {
-            const trail = document.createElement('div');
-            trail.className = 'cursor-trail';
-            cursorContainer.appendChild(trail);
-            
-            trail.style.left = `${mouseX}px`;
-            trail.style.top = `${mouseY}px`;
-            
-            setTimeout(() => {
-              trail.style.opacity = '0';
-              trail.style.transform = 'translate(-50%, -50%) scale(2)';
-              
-              // Remove from DOM after animation
-              setTimeout(() => {
-                trail.remove();
-              }, 1000);
-            }, 10);
-          }
-        });
-        
-        // Start the animation loop
-        updateCursor();
-
-        // Interactive elements cursor effect
-        const interactiveEls = document.querySelectorAll('a, .nav-toggle, .framework-card, .mode-switch, [tabindex="0"]');
-        interactiveEls.forEach(el => {
-          el.addEventListener('mouseenter', () => {
-            cursorDot.style.width = '12px';
-            cursorDot.style.height = '12px';
-            gsap.to(cursorCircle, {
-              scale: 1.5,
-              opacity: 0.7,
-              duration: 0.3,
-              ease: "power2.out"
-            });
-          });
-          
-          el.addEventListener('mouseleave', () => {
-            cursorDot.style.width = '8px';
-            cursorDot.style.height = '8px';
-            gsap.to(cursorCircle, {
-              scale: 1,
-              opacity: 1,
-              duration: 0.3,
-              ease: "power2.out"
-            });
-          });
-        });
+        progressBar.style.width = `${scrollPercent * 100}%`;
+        progressBar.style.transform = `scaleX(${scrollPercent})`;
       }
+      
+      window.addEventListener('scroll', updateProgressBar);
+      updateProgressBar();
 
-      /* ------------------------------------------------
-         NAVIGATION TOGGLE
-      ------------------------------------------------*/
+      // Navigation toggle
       const navToggle = document.querySelector('.nav-toggle');
       const navigation = document.querySelector('.navigation');
-      
-      navToggle.addEventListener('click', toggleNav);
-      navToggle.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          toggleNav();
-        }
-      });
       
       function toggleNav() {
         navToggle.classList.toggle('active');
         navigation.classList.toggle('active');
         
-        // Update ARIA attributes
         const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
         navToggle.setAttribute('aria-expanded', !isExpanded);
         navigation.setAttribute('aria-hidden', isExpanded);
-        
-        // Focus trap for keyboard navigation
-        if (!isExpanded) {
-          setTimeout(() => {
-            document.querySelector('.nav-links a').focus();
-          }, 100);
-        }
       }
       
-      // Close navigation when clicking outside
+      navToggle.addEventListener('click', toggleNav);
+      
+      // Close nav on outside click or ESC
       document.addEventListener('click', (e) => {
-        if (navigation.classList.contains('active') && 
-            !navigation.contains(e.target) && 
+        if (navigation.classList.contains('active') &&
+            !navigation.contains(e.target) &&
             !navToggle.contains(e.target)) {
           toggleNav();
         }
       });
       
-      // Close navigation on escape key
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && navigation.classList.contains('active')) {
           toggleNav();
@@ -1635,178 +1862,200 @@
         }
       });
 
-      /* ------------------------------------------------
-         DYNAMIC GRID BACKGROUND
-      ------------------------------------------------*/
-      const gridBackground = document.querySelector('.grid-background');
-      const gridCount = {
-        horizontal: 10,
-        vertical: 10
-      };
-      
-      // Create grid with performance optimization
-      function createGrid() {
-        // Clear existing grid lines
-        gridBackground.innerHTML = '';
-        
-        // Create a document fragment for better performance
-        const fragment = document.createDocumentFragment();
-        
-        // Horizontal lines
-        for (let i = 1; i <= gridCount.horizontal; i++) {
-          const gridLine = document.createElement('div');
-          gridLine.classList.add('grid-line', 'grid-horizontal');
-          gridLine.style.top = `${(i * 100) / (gridCount.horizontal + 1)}%`;
-          fragment.appendChild(gridLine);
+      // 3D Wireframe
+      function initWireframe() {
+        if (typeof THREE === 'undefined') {
+          console.warn('Three.js not loaded');
+          return;
         }
         
-        // Vertical lines
-        for (let i = 1; i <= gridCount.vertical; i++) {
-          const gridLine = document.createElement('div');
-          gridLine.classList.add('grid-line', 'grid-vertical');
-          gridLine.style.left = `${(i * 100) / (gridCount.vertical + 1)}%`;
-          fragment.appendChild(gridLine);
-        }
-        
-        // Add all lines at once
-        gridBackground.appendChild(fragment);
-        
-        // Animate grid lines
-        const horizontalLines = document.querySelectorAll('.grid-horizontal');
-        const verticalLines = document.querySelectorAll('.grid-vertical');
-        
-        horizontalLines.forEach((line, index) => {
-          gsap.to(line, {
-            scaleX: 1,
-            duration: 1.5,
-            delay: 0.05 * index,
-            ease: "power3.inOut"
-          });
-        });
-        
-        verticalLines.forEach((line, index) => {
-          gsap.to(line, {
-            scaleY: 1,
-            duration: 1.5,
-            delay: 0.05 * index,
-            ease: "power3.inOut"
-          });
-        });
-      }
-      
-      // Create grid initially
-      createGrid();
-      
-      // Recreate grid on resize (with debounce)
-      let resizeTimeout;
-      window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(createGrid, 200);
-      });
-
-      /* ------------------------------------------------
-         DARK/LIGHT MODE TOGGLE
-      ------------------------------------------------*/
-      modeSwitch.addEventListener('click', toggleMode);
-      modeSwitch.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          toggleMode();
-        }
-      });
-      
-      function toggleMode() {
-        body.classList.toggle('light-mode');
-        modeSwitch.classList.toggle('light-mode');
-        
-        const isLightMode = body.classList.contains('light-mode');
-        localStorage.setItem('lightMode', isLightMode);
-        
-        // Update ARIA label
-        modeSwitch.setAttribute('aria-label', 
-          isLightMode ? 'Switch to dark mode' : 'Switch to light mode'
-        );
-        
-        // Smooth transition effect
-        gsap.to('.container', {
-          opacity: 0.8,
-          duration: 0.2,
-          onComplete: () => {
-            gsap.to('.container', {
-              opacity: 1,
-              duration: 0.2
-            });
-          }
-        });
-      }
-      
-      // Set initial ARIA label
-      modeSwitch.setAttribute('aria-label', 
-        body.classList.contains('light-mode') ? 'Switch to dark mode' : 'Switch to light mode'
-      );
-
-      /* ------------------------------------------------
-         3D WIREFRAME IN BACKGROUND
-      ------------------------------------------------*/
-      if (typeof THREE !== 'undefined') {
-        // Create scene
         const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(
+          60, 
+          window.innerWidth / window.innerHeight, 
+          0.1, 
+          1000
+        );
+        camera.position.z = 8;
         
-        // Create camera
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 5;
-        
-        // Create renderer
         const renderer = new THREE.WebGLRenderer({ 
           alpha: true, 
           antialias: true,
-          powerPreference: 'high-performance'
+          preserveDrawingBuffer: true
         });
         
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         
-        document.getElementById('wireframe-container').appendChild(renderer.domElement);
+        const container = document.getElementById('wireframe-container');
+        container.innerHTML = '';
+        container.appendChild(renderer.domElement);
         
-        // Complex geometry representing interconnected nodes
-        const geometry = new THREE.IcosahedronGeometry(2, 1);
-        const edges = new THREE.EdgesGeometry(geometry);
+        const group = new THREE.Group();
         
-        // Material
-        const wireframeMaterial = new THREE.LineBasicMaterial({
-          color: 0xffffff,
-          transparent: true,
-          opacity: body.classList.contains('light-mode') ? 0.05 : 0.1
-        });
+        // Get the current mode for coloring
+        const isLightMode = document.body.classList.contains('light-mode');
+        const wireColor = isLightMode ? 0x000000 : 0xffffff;
         
-        const wireframe = new THREE.LineSegments(edges, wireframeMaterial);
-        scene.add(wireframe);
+        // Main icosahedron
+        const icoGeometry = new THREE.IcosahedronGeometry(2.2, 1);
+        const icoEdges = new THREE.EdgesGeometry(icoGeometry);
+        const icoLines = new THREE.LineSegments(
+          icoEdges,
+          new THREE.LineBasicMaterial({ 
+            color: wireColor,
+            transparent: true,
+            opacity: 0.2
+          })
+        );
+        group.add(icoLines);
         
-        // Animation loop
-        function animate() {
-          requestAnimationFrame(animate);
-          
-          wireframe.rotation.x += 0.001;
-          wireframe.rotation.y += 0.002;
-          
-          // Responsive to scroll
-          const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-          wireframe.rotation.z = scrollPercent * Math.PI * 2;
-          wireframe.scale.setScalar(1 + scrollPercent * 0.5);
-          
-          renderer.render(scene, camera);
+        // Outer sphere
+        const sphereGeometry = new THREE.SphereGeometry(3, 24, 24);
+        const sphereEdges = new THREE.EdgesGeometry(sphereGeometry);
+        const sphereLines = new THREE.LineSegments(
+          sphereEdges,
+          new THREE.LineBasicMaterial({ 
+            color: wireColor,
+            transparent: true,
+            opacity: 0.15
+          })
+        );
+        group.add(sphereLines);
+        
+        // Inner shape
+        const dodecGeometry = new THREE.DodecahedronGeometry(1.5, 0);
+        const dodecEdges = new THREE.EdgesGeometry(dodecGeometry);
+        const dodecLines = new THREE.LineSegments(
+          dodecEdges,
+          new THREE.LineBasicMaterial({ 
+            color: wireColor,
+            transparent: true,
+            opacity: 0.25
+          })
+        );
+        group.add(dodecLines);
+        
+        // Add points
+        const pointsGeometry = new THREE.BufferGeometry();
+        const pointsCount = 150;
+        const pointsPositions = new Float32Array(pointsCount * 3);
+        
+        for (let i = 0; i < pointsCount; i++) {
+          const i3 = i * 3;
+          pointsPositions[i3] = (Math.random() - 0.5) * 10;
+          pointsPositions[i3 + 1] = (Math.random() - 0.5) * 10;
+          pointsPositions[i3 + 2] = (Math.random() - 0.5) * 10;
         }
         
-        // Start animation
+        pointsGeometry.setAttribute('position', new THREE.BufferAttribute(pointsPositions, 3));
+        
+        const pointsMaterial = new THREE.PointsMaterial({
+          color: wireColor,
+          size: 0.05,
+          transparent: true,
+          opacity: 0.8
+        });
+        
+        const points = new THREE.Points(pointsGeometry, pointsMaterial);
+        group.add(points);
+        
+        scene.add(group);
+        
+        // Animation
+        let rotationSpeed = { x: 0.0005, y: 0.001 };
+        let lastScrollY = window.scrollY;
+        let animFrame;
+        
+        // Position adjustment
+        group.position.x = 2;
+        
+        function animate() {
+          group.rotation.x += rotationSpeed.x;
+          group.rotation.y += rotationSpeed.y;
+          
+          const time = Date.now() * 0.001;
+          const pulse = Math.sin(time) * 0.05 + 1;
+          group.scale.set(pulse, pulse, pulse);
+          
+          // Respond to scroll but keep the wireframe fixed
+          const scrollY = window.scrollY;
+          if (scrollY !== lastScrollY) {
+            // Instead of transforming based on scroll, just update lastScrollY
+            lastScrollY = scrollY;
+          }
+          
+          renderer.render(scene, camera);
+          animFrame = requestAnimationFrame(animate);
+        }
+        
         animate();
         
-        // Handle resize
+        // Resize handler
         window.addEventListener('resize', () => {
           camera.aspect = window.innerWidth / window.innerHeight;
           camera.updateProjectionMatrix();
           renderer.setSize(window.innerWidth, window.innerHeight);
         });
+        
+        // Handle visibility change
+        document.addEventListener('visibilitychange', () => {
+          if (document.hidden) {
+            cancelAnimationFrame(animFrame);
+          } else {
+            animate();
+          }
+        });
+        
+        // Respond to mouse
+        document.addEventListener('mousemove', (e) => {
+          const mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+          const mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+          
+          rotationSpeed.x = 0.0005 + mouseY * 0.0003;
+          rotationSpeed.y = 0.001 + mouseX * 0.0003;
+        });
+        
+        // Store scene and renderer in global variables for potential updates
+        window.threeScene = scene;
+        window.threeRenderer = renderer;
       }
+      
+      // Initialize wireframe
+      setTimeout(initWireframe, 500);
+
+      // Color mode toggle functionality
+      const modeSwitch = document.querySelector('.mode-switch');
+      
+      // Check for saved preference in localStorage
+      if (localStorage.getItem('colorMode') === 'light') {
+        document.body.classList.add('light-mode');
+      }
+      
+      // Toggle between dark and light mode
+      function toggleColorMode() {
+        document.body.classList.toggle('light-mode');
+        
+        // Save preference to localStorage
+        if (document.body.classList.contains('light-mode')) {
+          localStorage.setItem('colorMode', 'light');
+        } else {
+          localStorage.setItem('colorMode', 'dark');
+        }
+        
+        // Reinitialize wireframe to ensure it's visible in both modes
+        setTimeout(initWireframe, 100);
+      }
+      
+      modeSwitch.addEventListener('click', toggleColorMode);
+      
+      // Allow toggling with keyboard
+      modeSwitch.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleColorMode();
+        }
+      });
     });
   </script>
 </body>
