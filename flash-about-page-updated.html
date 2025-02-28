@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Flash Ventures - The team of mathematicians, data scientists, and investment professionals pioneering new approaches to venture capital">
+  <title>Flash Ventures - About</title>
+
+  <!-- Essential Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" defer></script>
+
+  <style>
+    /* Fonts */
+    @font-face {
+      font-family: 'Monument Extended';
+      src: url('https://cdnjs.cloudflare.com/ajax/libs/monospace/0.1.0/MonumentExtended-Regular.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Inter';
+      src: url('https://cdnjs.cloudflare.com/ajax/libs/inter-ui/3.19.3/Inter.var.woff2') format('woff2');
+      font-weight: 100 900;
+      font-display: swap;
+    }
+
+    /* Variables */
+    :root {
+      /* Colors */
+      --pure-white: #FFFFFF;
+      --off-white: #F5F5F5;
+      --light-gray: #AAAAAA;
+      --mid-gray: #555555;
+      --dark-gray: #222222;
+      --pure-black: #000000;
+      
+      /* Transparencies */
+      --gray-90: rgba(255, 255, 255, 0.9);
+      --gray-70: rgba(255, 255, 255, 0.7);
+      --gray-50: rgba(255, 255, 255, 0.5);
+      --gray-30: rgba(255, 255, 255, 0.3);
+      --gray-10: rgba(255, 255, 255, 0.1);
+      --gray-05: rgba(255, 255, 255, 0.05);
+
+      /* Fonts */
+      --font-heading: 'Monument Extended', sans-serif;
+      --font-body: 'Inter', sans-serif;
+
+      /* Timing */
+      --transition-bezier: cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-fast: 0.3s;
+      --transition-medium: 0.5s;
+      --transition-slow: 0.8s;
+    }
+
+    /* Resets */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: var(--font-body);
+      background-color: var(--pure-black);
+      color: var(--pure-white);
+      overflow-x: hidden;
+      cursor: auto; 
+      line-height: 1.6;
+    }
+
+    /* Accessibility */
+    .skip-link {
+      position: absolute;
+      top: -50px;
+      left: 10px;
+      padding: 10px;
+      background-color: var(--pure-white);
+      color: var(--pure-black);
+      z-index: 9999;
+      transition: top var(--transition-fast) ease;
+    }
+    
+    .skip-link:focus {
+      top: 10px;
+    }
+
+    /* Loading Screen */
+    .loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--pure-black);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity var(--transition-slow) ease, visibility var(--transition-slow) ease;
+    }
+    
+    .loading-logo {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .loading-text {
+      font-family: var(--font-heading);
+      font-size: 64px;
+      letter-spacing: -0.03em;
+      color: var(--pure-white);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      animation: fade-in 0.8s var(--transition-bezier) forwards 0.3s;
+    }
+    
+    .loading-bar-container {
+      margin-top: 30px;
+      width: 200px;
+      height: 1px;
+      background-color: var(--gray-10);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .loading-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      background-color: var(--pure-white);
+      transition: width 1.5s var(--transition-bezier);
+    }
+    
+    .loading-percentage {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      margin-top: 15px;
+      color: var(--pure-white);
+      opacity: 0;
+      animation: fade-in 0.5s var(--transition-bezier) forwards 0.5s;
+    }
+    
+    .loading-screen.loaded {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    /* Progress bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 1px;
+      background-color: var(--pure-white);
+      z-index: 999;
+      opacity: 0.7;
+      transform-origin: 0 0;
+      transform: scaleX(0);
+    }
+
+    /* 3D Background */
+    #wireframe-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 1;
+      will-change: transform;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    
+    /* Noise overlay */
+    .noise {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.03;
+      z-index: 2;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    /* Layout */
+    .container {
+      min-height: 100vh;
+      width: 100%;
+      max-width: 100%;
+      position: relative;
+      overflow-x: hidden;
+      padding-bottom: 50px;
+    }
+    
+    .sidebar-left, 
+    .sidebar-right {
+      position: fixed;
+      height: 100vh;
+      width: 80px;
+      top: 0;
+      z-index: 50;
+    }
+    
+    .sidebar-left {
+      left: 0;
+      border-right: 1px solid var(--gray-05);
+    }
+    
+    .sidebar-right {
+      right: 0;
+      border-left: 1px solid var(--gray-05);
+    }
+    
+    @media (max-width: 768px) {
+      .sidebar-left, .sidebar-right {
+        width: 20px;
+      }
+    }
+
+    /* Header */
+    .header {
+      padding: 40px 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 100;
+    }
+    
+    @media (max-width: 768px) {
+      .header {
+        padding: 30px 20px;
+      }
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-heading);
+      font-size: 24px;
+      letter-spacing: -0.03em;
+      cursor: pointer;
+    }
+    
+    .logo-symbol {
+      position: relative;
+      width: 30px;
+      height: 30px;
+      border: 2px solid var(--pure-white);
+      border-radius: 50%;
+      overflow: hidden;
+    }
+    
+    .logo-symbol::before {
+      content: '';
+      position: absolute;
+      width: 15px;
+      height: 30px;
+      background-color: var(--pure-white);
+      right: 0;
+      top: 0;
+    }
+    
+    .nav-toggle {
+      width: 30px;
+      height: 30px;
+      position: relative;
+      cursor: pointer;
+      z-index: 1000;
+      outline: none;
+    }
+    
+    .nav-toggle:focus-visible {
+      box-shadow: 0 0 0 2px var(--pure-white);
+    }
+    
+    .nav-toggle span {
+      width: 100%;
+      height: 1px;
+      background-color: var(--pure-white);
+      position: absolute;
+      left: 0;
+      transition: all var(--transition-fast) ease;
+    }
+    
+    .nav-toggle span:nth-child(1) {
+      top: 8px;
+      width: 70%;
+    }
+    
+    .nav-toggle span:nth-child(2) {
+      top: 16px;
+    }
+    
+    .nav-toggle span:nth-child(3) {
+      top: 24px;
+      width: 70%;
+      left: 30%;
+    }
+    
+    .nav-toggle.active span:nth-child(1) {
+      transform: rotate(45deg);
+      top: 14px;
+      width: 100%;
+    }
+    
+    .nav-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .nav-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg);
+      top: 14px;
+      width: 100%;
+      left: 0;
+    }
+
+    /* Navigation menu */
+    .navigation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: var(--pure-black);
+      display: flex;
+      z-index: 999;
+      clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+      transition: clip-path 1.2s var(--transition-bezier);
+    }
+    
+    .navigation.active {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+    
+    .nav-content {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .nav-links-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 0 50px;
+    }
+    
+    .nav-links {
+      list-style: none;
+      text-align: center;
+      width: 100%;
+    }
+    
+    .nav-links li {
+      margin: 30px 0;
+      overflow: hidden;
+    }
+    
+    .nav-link-wrap {
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+      transform: translateY(100%);
+      opacity: 0;
+      transition: transform 0.8s var(--transition-bezier), opacity 0.8s ease;
+    }
+    
+    .navigation.active .nav-link-wrap {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    .navigation.active .nav-links li:nth-child(1) .nav-link-wrap { transition-delay: 0.1s; }
+    .navigation.active .nav-links li:nth-child(2) .nav-link-wrap { transition-delay: 0.15s; }
+    .navigation.active .nav-links li:nth-child(3) .nav-link-wrap { transition-delay: 0.2s; }
+    .navigation.active .nav-links li:nth-child(4) .nav-link-wrap { transition-delay: 0.25s; }
+    .navigation.active .nav-links li:nth-child(5) .nav-link-wrap { transition-delay: 0.3s; }
+    
+    .nav-links a {
+      font-family: var(--font-heading);
+      font-size: 4vw;
+      color: var(--pure-white);
+      text-decoration: none;
+      position: relative;
+      display: inline-block;
+      transition: all var(--transition-fast) ease;
+      line-height: 1.1;
+    }
+    
+    @media (max-width: 768px) {
+      .nav-content {
+        padding: 20px 0;
+      }
+      .nav-links a {
+        font-size: 8vw;
+      }
+    }
+    
+    .nav-links a::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: var(--pure-white);
+      transition: width var(--transition-medium) var(--transition-bezier);
+    }
+    
+    .nav-links a:hover::before,
+    .nav-links a:focus::before {
+      width: 100%;
+    }
+
+    /* Main content */
+    .main {
+      position: relative;
+      width: 100%;
+      padding: 0 80px;
+      z-index: 10;
+    }
+    
+    @media (max-width: 768px) {
+      .main {
+        padding: 0 20px;
+      }
+    }
+
+    /* About page header */
+    .about-header {
+      position: relative;
+      width: 100%;
+      max-width: 1400px;
+      margin: 50px auto 80px;
+    }
+    
+    .about-title {
+      font-family: var(--font-heading);
+      font-size: calc(3vw + 1rem);
+      line-height: 1.2;
+      margin-bottom: 30px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s var(--transition-bezier);
+    }
+    
+    .about-title.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .about-description {
+      font-size: 1.2rem;
+      color: var(--light-gray);
+      max-width: 800px;
+      line-height: 1.6;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s var(--transition-bezier);
+      transition-delay: 0.2s;
+    }
+    
+    .about-description.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Story section */
+    .story-section {
+      max-width: 1400px;
+      margin: 0 auto 100px;
+    }
+    
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s var(--transition-bezier);
+    }
+    
+    .section-title.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .story-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s var(--transition-bezier);
+      transition-delay: 0.1s;
+    }
+    
+    .story-content.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    @media (max-width: 900px) {
+      .story-content {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .story-text {
+      color: var(--light-gray);
+      line-height: 1.8;
+    }
+    
+    .story-text p {
+      margin-bottom: 20px;
+    }
+    
+    .story-timeline {
+      width: 100%;
+      height: 300px;
+      background-color: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Mission & Values section */
+    .mission-section {
+      max-width: 1400px;
+      margin: 0 auto 100px;
+    }
+    
+    .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s var(--transition-bezier);
+      transition-delay: 0.1s;
+    }
+    
+    .mission-grid.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .mission-card {
+      background-color: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      transition: all var(--transition-medium) var(--transition-bezier);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .mission-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 0;
+      background: var(--pure-white);
+      transition: height 0.4s var(--transition-bezier);
+    }
+    
+    .mission-card:hover::before {
+      height: 100%;
+    }
+    
+    .mission-card:hover {
+      transform: translateY(-10px);
+      background-color: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+    
+    .mission-title {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+    
+    .mission-text {
+      color: var(--light-gray);
+      line-height: 1.6;
+    }
+
+    /* Team section */
+    .team-section {
+      max-width: 1400px;
+      margin: 0 auto 100px;
+    }
+    
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 30px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s var(--transition-bezier);
+      transition-delay: 0.1s;
+    }
+    
+    .team-grid.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .team-member {
+      background-color: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      transition: all var(--transition-medium) var(--transition-bezier);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .team-member::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 0;
+      background: var(--pure-white);
+      transition: height 0.4s var(--transition-bezier);
+    }
+    
+    .team-member:hover::before {
+      height: 100%;
+    }
+    
+    .team-member:hover {
+      transform: translateY(-10px);
+      background-color: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+    
+    .member-avatar {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    
+    .avatar-svg {
+      width: 100%;
+      height: 100%;
+    }
+    
+    .member-name {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+    
+    .member-title {
+      color: var(--light-gray);
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    
+    .member-bio {
+      color: var(--light-gray);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    
+    .member-expertise {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+    }
+    
+    .expertise-tag {
+      font-size: 0.7rem;
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 5px 10px;
+      color: var(--pure-white);
+    }
+
+    /* Footer */
+    .footer {
+      width: 100%;
+      padding: 80px 80px 40px;
+      background-color: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--gray-05);
+      position: relative;
+      z-index: 10;
+      margin-top: 50px;
+    }
+    
+    @media (max-width: 768px) {
+      .footer {
+        padding: 80px 20px 40px;
+      }
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .footer-logo {
+      grid-column: 1 / 4;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .footer-logo-symbol {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .footer-logo-icon {
+      position: relative;
+      width: 30px;
+      height: 30px;
+      border: 2px solid var(--pure-white);
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 15px;
+    }
+    
+    .footer-logo-icon::before {
+      content: '';
+      position: absolute;
+      width: 15px;
+      height: 30px;
+      background-color: var(--pure-white);
+      right: 0;
+      top: 0;
+    }
+    
+    .footer-logo-text {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      letter-spacing: -0.03em;
+    }
+    
+    .footer-tagline {
+      color: var(--light-gray);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-top: 20px;
+      max-width: 260px;
+    }
+    
+    .footer-nav {
+      grid-column: 4 / 6;
+    }
+    
+    .footer-legal {
+      grid-column: 6 / 8;
+    }
+    
+    .footer-contact {
+      grid-column: 8 / 11;
+    }
+    
+    .footer-social {
+      grid-column: 11 / 13;
+    }
+    
+    .footer-heading {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      color: var(--pure-white);
+    }
+    
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-links a {
+      color: var(--light-gray);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+    
+    .footer-links a::before {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: var(--pure-white);
+      transition: width 0.3s var(--transition-bezier);
+    }
+    
+    .footer-links a:hover {
+      color: var(--pure-white);
+    }
+    
+    .footer-links a:hover::before {
+      width: 100%;
+    }
+    
+    .footer-contact-info {
+      color: var(--light-gray);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    
+    .footer-social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .social-icon {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--gray-30);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      border-color: var(--pure-white);
+      transform: translateY(-3px);
+    }
+    
+    .footer-bottom {
+      max-width: 1400px;
+      margin: 60px auto 0;
+      padding: 30px 0 0;
+      border-top: 1px solid var(--gray-05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--light-gray);
+      font-size: 12px;
+    }
+    
+    .footer-copyright {
+      opacity: 0.7;
+    }
+    
+    .footer-signature {
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 10px;
+      opacity: 0.5;
+    }
+    
+    @media (max-width: 1024px) {
+      .footer-grid {
+        grid-template-columns: repeat(6, 1fr);
+      }
+      
+      .footer-logo {
+        grid-column: 1 / 4;
+      }
+      
+      .footer-nav {
+        grid-column: 4 / 7;
+      }
+      
+      .footer-legal {
+        grid-column: 1 / 3;
+        margin-top: 40px;
+      }
+      
+      .footer-contact {
+        grid-column: 3 / 5;
+        margin-top: 40px;
+      }
+      
+      .footer-social {
+        grid-column: 5 / 7;
+        margin-top: 40px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+      }
+      
+      .footer-logo,
+      .footer-nav,
+      .footer-legal,
+      .footer-contact,
+      .footer-social {
+        grid-column: auto;
+      }
+      
+      .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+    }
+
+    /* Animations */
+    @keyframes fade-in {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Mode Switch Styles */
+    .mode-switch {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: var(--pure-black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 100;
+      transition: all var(--transition-medium) ease;
+      overflow: hidden;
+      border: 2px solid var(--pure-white);
+    }
+    
+    .mode-switch::before {
+      content: '';
+      position: absolute;
+      width: 25px;
+      height: 50px;
+      background-color: var(--pure-white);
+      right: 0;
+      top: 0;
+      transition: all var(--transition-medium) ease;
+    }
+    
+    body.light-mode .mode-switch {
+      background-color: var(--pure-white);
+      border-color: var(--pure-black);
+    }
+    
+    body.light-mode .mode-switch::before {
+      background-color: var(--pure-black);
+    }
+    
+    .mode-switch:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+    
+    body.light-mode .mode-switch:hover {
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    @media (max-width: 768px) {
+      .mode-switch {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+      }
+      
+      .mode-switch::before {
+        width: 20px;
+        height: 40px;
+      }
+    }
+
+    /* Light mode */
+    body.light-mode {
+      background-color: var(--pure-white);
+      color: var(--pure-black);
+    }
+    
+    body.light-mode .nav-toggle span {
+      background-color: var(--pure-black);
+    }
+    
+    body.light-mode .navigation {
+      background-color: var(--pure-white);
+    }
+    
+    body.light-mode .nav-links a {
+      color: var(--pure-black);
+    }
+    
+    body.light-mode .nav-links a::before {
+      background-color: var(--pure-black);
+    }
+    
+    body.light-mode .sidebar-left,
+    body.light-mode .sidebar-right {
+      border-color: rgba(0, 0, 0, 0.05);
+    }
+    
+    body.light-mode .about-description,
+    body.light-mode .story-text,
+    body.light-mode .mission-text,
+    body.light-mode .member-bio,
+    body.light-mode .member-title {
+      color: var(--mid-gray);
+    }
+    
+    body.light-mode .mission-card,
+    body.light-mode .team-member {
+      background-color: rgba(0, 0, 0, 0.02);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+    
+    body.light-mode .mission-card:hover,
+    body.light-mode .team-member:hover {
+      background-color: rgba(0, 0, 0, 0.04);
+      border-color: rgba(0, 0, 0, 0.08);
+    }
+    
+    body.light-mode .mission-card::before,
+    body.light-mode .team-member::before {
+      background: var(--pure-black);
+    }
+    
+    body.light-mode .story-timeline {
+      background-color: rgba(0, 0, 0, 0.05);
+      border-color: rgba(0, 0, 0, 0.05);
+    }
+    
+    body.light-mode .expertise-tag {
+      background-color: rgba(0, 0, 0, 0.05);
+      color: var(--pure-black);
+    }
+    
+    body.light-mode .logo-symbol {
+      border-color: var(--pure-black);
+    }
+    
+    body.light-mode .logo-symbol::before {
+      background-color: var(--pure-black);
+    }
+    
+    body.light-mode .footer {
+      background-color: rgba(245, 245, 245, 0.7);
+      border-top-color: rgba(0, 0, 0, 0.05);
+    }
+    
+    body.light-mode .footer-links a {
+      color: var(--mid-gray);
+    }
+    
+    body.light-mode .footer-links a:hover {
+      color: var(--pure-black);
+    }
+    
+    body.light-mode .footer-links a::before {
+      background-color: var(--pure-black);
+    }
+    
+    body.light-mode .footer-logo-icon {
+      border-color: var(--pure-black);
+    }
+    
+    body.light-mode .footer-logo-icon::before {
+      background-color: var(--pure-black);
+    }
+    
+    body.light-mode .footer-contact-info,
+    body.light-mode .footer-tagline,
+    body.light-mode .footer-copyright,
+    body.light-mode .footer-signature {
+      color: var(--mid-gray);
+    }
+    
+    body.light-mode .social-icon {
+      border-color: rgba(0, 0, 0, 0.2);
+    }
+    
+    body.light-mode .social-icon:hover {
+      border-color: var(--pure-black);
+    }
+    
+    body.light-mode .footer-bottom {
+      border-top-color: rgba(0, 0, 0, 0.05);
+    }
+  </style>
+</head>
+<body>
+  <!-- Skip link for accessibility -->
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <!-- Loading screen -->
+  <div class="loading-screen">
+    <div class="loading-logo">
+      <div class="loading-text">FLASH</div>
+      <div class="loading-bar-container">
+        <div class="loading-bar"></div>
+      </div>
+      <div class="loading-percentage">0%</div>
+    </div>
+  </div>
+
+  <!-- Progress bar -->
+  <div class="progress-bar"></div>
+
+  <!-- Noise overlay -->
+  <div class="noise"></div>
+
+  <!-- 3D Wireframe container -->
+  <div id="wireframe-container"></div>
+
+  <!-- Navigation -->
+  <div class="navigation" aria-hidden="true">
+    <div class="nav-content">
+      <div class="nav-links-container">
+        <ul class="nav-links">
+          <li><div class="nav-link-wrap"><a href="#">HOME</a></div></li>
+          <li><div class="nav-link-wrap"><a href="#">PLATFORM</a></div></li>
+          <li><div class="nav-link-wrap"><a href="#">TECHNOLOGY</a></div></li>
+          <li><div class="nav-link-wrap"><a href="#">ABOUT</a></div></li>
+          <li><div class="nav-link-wrap"><a href="#">CONTACT</a></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main container -->
+  <div class="container">
+    <!-- Left sidebar -->
+    <div class="sidebar-left"></div>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="logo" tabindex="0" aria-label="Flash logo">
+        <div class="logo-symbol"></div>
+        <div>FLASH</div>
+      </div>
+      
+      <div class="nav-toggle" tabindex="0" role="button" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="main" id="main-content">
+      <!-- About Header -->
+      <section class="about-header">
+        <h1 class="about-title">About Flash</h1>
+        <p class="about-description">
+          We're a team of mathematicians, data scientists, and investment professionals pioneering new approaches to venture capital through advanced mathematics, high-performance computing, and artificial intelligence.
+        </p>
+      </section>
+
+      <!-- Company Story Section -->
+      <section class="story-section">
+        <h2 class="section-title">Our Story</h2>
+        <div class="story-content">
+          <div class="story-text">
+            <p>
+              FlashDNA began with a simple question: why do traditional venture capital firms rely on intuition and personal networks when evaluating startups, instead of applying rigorous mathematical models?
+            </p>
+            <p>
+              Founded in 2023 by a team of mathematicians and former VCs, FlashDNA emerged from research into the application of partial differential equations and chaos theory to startup growth dynamics. Our insight was that startups can be modeled as complex systems where a rigorous mathematical approach provides predictive power that traditional methods cannot match.
+            </p>
+            <p>
+              Our first model, using a Black-Scholes-style PDE approach to calculate startup meltdown probabilities, demonstrated 76% higher accuracy than traditional methods. This breakthrough led to rapid expansion of our research, incorporating fractal dimensions, chaos theory, agent-based modeling, and quantum-inspired probability calculations.
+            </p>
+            <p>
+              Today, our FlashDNA Infinity platform processes over 10,000 startup data points per evaluation, distilling complex mathematical insights into clear investment recommendations with unparalleled accuracy.
+            </p>
+          </div>
+          <div class="story-timeline">
+            <svg viewBox="0 0 400 300" width="100%" height="100%">
+              <!-- Timeline line -->
+              <line x1="30" y1="20" x2="30" y2="280" stroke="#FFFFFF" stroke-width="2" />
+              
+              <!-- Timeline nodes -->
+              <circle cx="30" cy="60" r="8" fill="#FFFFFF" />
+              <circle cx="30" cy="120" r="8" fill="#FFFFFF" />
+              <circle cx="30" cy="180" r="8" fill="#FFFFFF" />
+              <circle cx="30" cy="240" r="8" fill="#FFFFFF" />
+              
+              <!-- Timeline content -->
+              <text x="50" y="50" fill="#FFFFFF" font-family="var(--font-heading)" font-size="14">2023: Foundation</text>
+              <text x="50" y="70" fill="#AAAAAA" font-size="12">Initial PDE meltdown research begins</text>
+              
+              <text x="50" y="110" fill="#FFFFFF" font-family="var(--font-heading)" font-size="14">2023: First Breakthrough</text>
+              <text x="50" y="130" fill="#AAAAAA" font-size="12">76% higher accuracy with first model</text>
+              
+              <text x="50" y="170" fill="#FFFFFF" font-family="var(--font-heading)" font-size="14">2024: Platform Release</text>
+              <text x="50" y="190" fill="#AAAAAA" font-size="12">FlashDNA Infinity launched</text>
+              
+              <text x="50" y="230" fill="#FFFFFF" font-family="var(--font-heading)" font-size="14">2025: Quantum Integration</text>
+              <text x="50" y="250" fill="#AAAAAA" font-size="12">Quantum-inspired probability models</text>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mission & Values Section -->
+      <section class="mission-section">
+        <h2 class="section-title">Mission & Values</h2>
+        <div class="mission-grid">
+          <div class="mission-card">
+            <h3 class="mission-title">Our Mission</h3>
+            <p class="mission-text">
+              To transform venture capital through mathematical rigor, removing bias and increasing success rates for worthy innovations that might otherwise be overlooked.
+            </p>
+          </div>
+          
+          <div class="mission-card">
+            <h3 class="mission-title">Mathematical Truth</h3>
+            <p class="mission-text">
+              We believe that complex systems can be understood through mathematical models, and that data-driven insights lead to better investment decisions than intuition alone.
+            </p>
+          </div>
+          
+          <div class="mission-card">
+            <h3 class="mission-title">Radical Transparency</h3>
+            <p class="mission-text">
+              Our models and methodologies are transparent to our clients, allowing them to understand not just what we recommend, but why we recommend it.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Team Section -->
+      <section class="team-section">
+        <h2 class="section-title">Our Team</h2>
+        <div class="team-grid">
+          <!-- Team Member 1 -->
+          <div class="team-member">
+            <div class="member-avatar">
+              <svg class="avatar-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="45" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                <path d="M35,35 Q50,20 65,35 Q80,50 65,65 Q50,80 35,65 Q20,50 35,35" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                <circle cx="50" cy="50" r="15" fill="none" stroke="#FFFFFF" stroke-width="2" />
+              </svg>
+            </div>
+            <h3 class="member-name">Dr. Jason Park</h3>
+            <div class="member-title">CEO & Founder</div>
+            <p class="member-bio">
+              Quantum physicist turned venture capitalist with a passion for applying mathematical models to investment decisions. Ph.D. from Stanford in Applied Mathematics.
+            </p>
+            <div class="member-expertise">
+              <span class="expertise-tag">Quantum Computing</span>
+              <span class="expertise-tag">Mathematical Modeling</span>
+              <span class="expertise-tag">Venture Strategy</span>
+            </div>
+          </div>
+          
+          <!-- Team Member 2 -->
+          <div class="team-member">
+            <div class="member-avatar">
+              <svg class="avatar-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="15" y="15" width="70" height="70" rx="15" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                <circle cx="50" cy="40" r="10" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                <path d="M30,65 Q50,85 70,65" fill="none" stroke="#FFFFFF" stroke-width="2" />
+              </svg>
+            </div>
+            <h3 class="member-name">Dr. Maria Gonzalez</h3>
+            <div class="member-title">Chief Scientific Officer</div>
+            <p class="member-bio">
+              Former research lead at CERN with expertise in complex systems and chaos theory. Revolutionized our approach to pattern detection in startup trajectories.
+            </p>
+            <div class="member-expertise">
+              <span class="expertise-tag">Chaos Theory</span>
+              <span class="expertise-tag">Complex Systems</span>
+              <span class="expertise-tag">Statistical Physics</span>
+            </div>
+          </div>
+          
+          <!-- Team Member 3 -->
+          <div class="team-member">
+            <div class="member-avatar">
+              <svg class="avatar-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="50,15 85,50 50,85 15,50" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                <circle cx="50" cy="50" r="25" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                <circle cx="50" cy="50" r="5" fill="#FFFFFF" />
+                <line x1="50" y1="25" x2="50" y2="15" stroke="#FFFFFF" stroke-width="2" />
+                <line x1="50" y1="75" x2="50" y2="85" stroke="#FFFFFF" stroke-width="2" />
+                <line x1="25" y1="50" x2="15" y2="50" stroke="#FFFFFF" stroke-width="2" />
+                <line x1="75" y1="50" x2="85" y2="50" stroke="#FFFFFF" stroke-width="2" />
+              </svg>
+            </div>
+            <h3 class="member-name">Kevin Patel</h3>
+            <div class="member-title">CTO</div>
+            <p class="member-bio">
+              Distributed systems architect who built our high-performance computing platform. Previously led engineering at two AI unicorns and Google's quantum computing team.
+            </p>
+            <div class="member-expertise">
+              <span class="expertise-tag">HPC Architecture</span>
+              <span class="expertise-tag">Distributed Systems</span>
+              <span class="expertise-tag">Quantum Algorithms</span>
+            </div>
+          </div>
+          
+          <!-- Team Member 4 -->
+          <div class="team-member">
+            <div class="member-avatar">
+              <svg class="avatar-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                <path d="M30,40 Q50,20 70,40" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                <path d="M30,60 Q50,80 70,60" fill="none" stroke="#FFFFFF" stroke-width="2" />
+              </svg>
+            </div>
+            <h3 class="member-name">Amara Washington</h3>
+            <div class="member-title">Head of Investment Strategy</div>
+            <p class="member-bio">
+              Ex-partner at Sequoia with an economics background from Harvard. Bridges the gap between our algorithmic insights and practical investment strategies.
+            </p>
+            <div class="member-expertise">
+              <span class="expertise-tag">Investment Strategy</span>
+              <span class="expertise-tag">Portfolio Optimization</span>
+              <span class="expertise-tag">Risk Assessment</span>
+            </div>
+          </div>
+          
+          <!-- Team Member 5 -->
+          <div class="team-member">
+            <div class="member-avatar">
+              <svg class="avatar-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M25,50 C25,25 75,25 75,50 C75,75 25,75 25,50 Z" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                <circle cx="40" cy="40" r="5" fill="#FFFFFF" />
+                <circle cx="60" cy="40" r="5" fill="#FFFFFF" />
+                <path d="M40,65 Q50,75 60,65" fill="none" stroke="#FFFFFF" stroke-width="2" />
+              </svg>
+            </div>
+            <h3 class="member-name">Dr. Li Wei</h3>
+            <div class="member-title">Lead Data Scientist</div>
+            <p class="member-bio">
+              Machine learning expert who developed our proprietary algorithms for detecting founder capability from intangible data. Ph.D. in AI from Berkeley.
+            </p>
+            <div class="member-expertise">
+              <span class="expertise-tag">Neural Networks</span>
+              <span class="expertise-tag">NLP</span>
+              <span class="expertise-tag">Predictive Modeling</span>
+            </div>
+          </div>
+          
+          <!-- Team Member 6 -->
+          <div class="team-member">
+            <div class="member-avatar">
+              <svg class="avatar-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="20" width="60" height="60" rx="5" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                <line x1="20" y1="40" x2="80" y2="40" stroke="#FFFFFF" stroke-width="2" />
+                <line x1="20" y1="60" x2="80" y2="60" stroke="#FFFFFF" stroke-width="2" />
+                <line x1="40" y1="20" x2="40" y2="80" stroke="#FFFFFF" stroke-width="2" />
+                <line x1="60" y1="20" x2="60" y2="80" stroke="#FFFFFF" stroke-width="2" />
+              </svg>
+            </div>
+            <h3 class="member-name">Sarah Nakamura</h3>
+            <div class="member-title">Head of Operations</div>
+            <p class="member-bio">
+              Operational excellence expert with experience scaling three startups. MBA from Wharton with a focus on organizational design for high-innovation companies.
+            </p>
+            <div class="member-expertise">
+              <span class="expertise-tag">Scaling Operations</span>
+              <span class="expertise-tag">Process Optimization</span>
+              <span class="expertise-tag">Strategic Planning</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- FOOTER -->
+      <footer class="footer">
+        <div class="footer-grid">
+          <!-- Company info -->
+          <div class="footer-logo">
+            <div class="footer-logo-symbol">
+              <div class="footer-logo-icon"></div>
+              <div class="footer-logo-text">FLASH</div>
+            </div>
+            <p class="footer-tagline">
+              Redefining the future of investments through AI-powered analytics and quantum neural networks.
+            </p>
+          </div>
+          
+          <!-- Navigation -->
+          <div class="footer-nav">
+            <h4 class="footer-heading">Navigation</h4>
+            <ul class="footer-links">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Platform</a></li>
+              <li><a href="#">Technology</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+          
+          <!-- Legal -->
+          <div class="footer-legal">
+            <h4 class="footer-heading">Legal</h4>
+            <ul class="footer-links">
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Cookie Policy</a></li>
+              <li><a href="#">Disclaimer</a></li>
+            </ul>
+          </div>
+          
+          <!-- Contact -->
+          <div class="footer-contact">
+            <h4 class="footer-heading">Contact</h4>
+            <div class="footer-contact-info">
+              <p>600 California Street<br>
+              San Francisco, CA 94108<br>
+              United States</p>
+              <p>contact@flashventures.com<br>
+              +1 (415) 555-0123</p>
+            </div>
+          </div>
+          
+          <!-- Social -->
+          <div class="footer-social">
+            <h4 class="footer-heading">Connect</h4>
+            <ul class="footer-links">
+              <li><a href="#">LinkedIn</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">Medium</a></li>
+            </ul>
+            <div class="footer-social-links">
+              <a href="#" class="social-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+              </a>
+              <a href="#" class="social-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+              </a>
+              <a href="#" class="social-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Footer bottom -->
+        <div class="footer-bottom">
+          <div class="footer-copyright">
+            © 2025 Flash Ventures. All rights reserved.
+          </div>
+          <div class="footer-signature">
+            Designed with precision in San Francisco
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <!-- Right sidebar -->
+    <div class="sidebar-right"></div>
+  </div>
+
+  <!-- Dark/Light mode switch -->
+  <div class="mode-switch" tabindex="0" role="button" aria-label="Toggle dark/light mode"></div>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Loading screen animation
+      const loadingScreen = document.querySelector('.loading-screen');
+      const loadingBar = document.querySelector('.loading-bar');
+      const loadingPercentage = document.querySelector('.loading-percentage');
+      let progress = 0;
+      
+      const loadingInterval = setInterval(() => {
+        progress += Math.random() * 8; 
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(loadingInterval);
+          
+          setTimeout(() => {
+            loadingScreen.classList.add('loaded');
+            document.body.classList.add('loaded');
+            
+            // Make all elements visible with staggered animations
+            document.querySelector('.about-title').classList.add('visible');
+            document.querySelector('.about-description').classList.add('visible');
+            
+            // Section titles
+            const sectionTitles = document.querySelectorAll('.section-title');
+            sectionTitles.forEach((title, index) => {
+              setTimeout(() => {
+                title.classList.add('visible');
+              }, 100 * index);
+            });
+            
+            // Story content
+            setTimeout(() => {
+              document.querySelector('.story-content').classList.add('visible');
+            }, 200);
+            
+            // Mission cards
+            setTimeout(() => {
+              document.querySelector('.mission-grid').classList.add('visible');
+            }, 300);
+            
+            // Team members
+            setTimeout(() => {
+              document.querySelector('.team-grid').classList.add('visible');
+            }, 400);
+          }, 500);
+        }
+        
+        loadingBar.style.width = `${progress}%`;
+        loadingPercentage.textContent = `${Math.floor(progress)}%`;
+      }, 100);
+
+      // Progress bar
+      const progressBar = document.querySelector('.progress-bar');
+      function updateProgressBar() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight;
+        const winHeight = window.innerHeight;
+        const scrollPercent = scrollTop / (docHeight - winHeight);
+        
+        progressBar.style.width = `${scrollPercent * 100}%`;
+        progressBar.style.transform = `scaleX(${scrollPercent})`;
+      }
+      
+      window.addEventListener('scroll', updateProgressBar);
+      updateProgressBar();
+
+      // Navigation toggle
+      const navToggle = document.querySelector('.nav-toggle');
+      const navigation = document.querySelector('.navigation');
+      
+      function toggleNav() {
+        navToggle.classList.toggle('active');
+        navigation.classList.toggle('active');
+        
+        const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', !isExpanded);
+        navigation.setAttribute('aria-hidden', isExpanded);
+      }
+      
+      navToggle.addEventListener('click', toggleNav);
+      
+      // Close nav on outside click or ESC
+      document.addEventListener('click', (e) => {
+        if (navigation.classList.contains('active') &&
+            !navigation.contains(e.target) &&
+            !navToggle.contains(e.target)) {
+          toggleNav();
+        }
+      });
+      
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navigation.classList.contains('active')) {
+          toggleNav();
+          navToggle.focus();
+        }
+      });
+
+      // 3D Wireframe
+      function initWireframe() {
+        if (typeof THREE === 'undefined') {
+          console.warn('Three.js not loaded');
+          return;
+        }
+        
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(
+          60, 
+          window.innerWidth / window.innerHeight, 
+          0.1, 
+          1000
+        );
+        camera.position.z = 8;
+        
+        const renderer = new THREE.WebGLRenderer({ 
+          alpha: true, 
+          antialias: true,
+          preserveDrawingBuffer: true
+        });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        
+        const container = document.getElementById('wireframe-container');
+        container.innerHTML = '';
+        container.appendChild(renderer.domElement);
+        
+        const group = new THREE.Group();
+        
+        // Get the current mode for coloring
+        const isLightMode = document.body.classList.contains('light-mode');
+        const wireColor = isLightMode ? 0x000000 : 0xffffff;
+        
+        // Main icosahedron
+        const icoGeometry = new THREE.IcosahedronGeometry(2.2, 1);
+        const icoEdges = new THREE.EdgesGeometry(icoGeometry);
+        const icoLines = new THREE.LineSegments(
+          icoEdges,
+          new THREE.LineBasicMaterial({ 
+            color: wireColor,
+            transparent: true,
+            opacity: 0.2
+          })
+        );
+        group.add(icoLines);
+        
+        // Outer sphere
+        const sphereGeometry = new THREE.SphereGeometry(3, 24, 24);
+        const sphereEdges = new THREE.EdgesGeometry(sphereGeometry);
+        const sphereLines = new THREE.LineSegments(
+          sphereEdges,
+          new THREE.LineBasicMaterial({ 
+            color: wireColor,
+            transparent: true,
+            opacity: 0.15
+          })
+        );
+        group.add(sphereLines);
+        
+        // Inner shape
+        const dodecGeometry = new THREE.DodecahedronGeometry(1.5, 0);
+        const dodecEdges = new THREE.EdgesGeometry(dodecGeometry);
+        const dodecLines = new THREE.LineSegments(
+          dodecEdges,
+          new THREE.LineBasicMaterial({ 
+            color: wireColor,
+            transparent: true,
+            opacity: 0.25
+          })
+        );
+        group.add(dodecLines);
+        
+        // Add points
+        const pointsGeometry = new THREE.BufferGeometry();
+        const pointsCount = 150;
+        const pointsPositions = new Float32Array(pointsCount * 3);
+        
+        for (let i = 0; i < pointsCount; i++) {
+          const i3 = i * 3;
+          pointsPositions[i3] = (Math.random() - 0.5) * 10;
+          pointsPositions[i3 + 1] = (Math.random() - 0.5) * 10;
+          pointsPositions[i3 + 2] = (Math.random() - 0.5) * 10;
+        }
+        
+        pointsGeometry.setAttribute('position', new THREE.BufferAttribute(pointsPositions, 3));
+        
+        const pointsMaterial = new THREE.PointsMaterial({
+          color: wireColor,
+          size: 0.05,
+          transparent: true,
+          opacity: 0.8
+        });
+        
+        const points = new THREE.Points(pointsGeometry, pointsMaterial);
+        group.add(points);
+        
+        scene.add(group);
+        
+        // Animation
+        let rotationSpeed = { x: 0.0005, y: 0.001 };
+        let lastScrollY = window.scrollY;
+        let animFrame;
+        
+        // Position adjustment
+        group.position.x = 2;
+        
+        function animate() {
+          group.rotation.x += rotationSpeed.x;
+          group.rotation.y += rotationSpeed.y;
+          
+          const time = Date.now() * 0.001;
+          const pulse = Math.sin(time) * 0.05 + 1;
+          group.scale.set(pulse, pulse, pulse);
+          
+          // Respond to scroll but keep the wireframe fixed
+          const scrollY = window.scrollY;
+          if (scrollY !== lastScrollY) {
+            // Just update lastScrollY to avoid transforming the wireframe
+            lastScrollY = scrollY;
+          }
+          
+          renderer.render(scene, camera);
+          animFrame = requestAnimationFrame(animate);
+        }
+        
+        animate();
+        
+        // Resize handler
+        window.addEventListener('resize', () => {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // Handle visibility change
+        document.addEventListener('visibilitychange', () => {
+          if (document.hidden) {
+            cancelAnimationFrame(animFrame);
+          } else {
+            animate();
+          }
+        });
+        
+        // Respond to mouse
+        document.addEventListener('mousemove', (e) => {
+          const mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+          const mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+          
+          rotationSpeed.x = 0.0005 + mouseY * 0.0003;
+          rotationSpeed.y = 0.001 + mouseX * 0.0003;
+        });
+      }
+      
+      // Initialize wireframe
+      setTimeout(initWireframe, 500);
+
+      // Color mode toggle functionality
+      const modeSwitch = document.querySelector('.mode-switch');
+      
+      // Check for saved preference in localStorage
+      if (localStorage.getItem('colorMode') === 'light') {
+        document.body.classList.add('light-mode');
+      }
+      
+      // Toggle between dark and light mode
+      function toggleColorMode() {
+        document.body.classList.toggle('light-mode');
+        
+        // Save preference to localStorage
+        if (document.body.classList.contains('light-mode')) {
+          localStorage.setItem('colorMode', 'light');
+        } else {
+          localStorage.setItem('colorMode', 'dark');
+        }
+        
+        // Reinitialize wireframe to ensure it's visible in both modes
+        setTimeout(initWireframe, 100);
+      }
+      
+      modeSwitch.addEventListener('click', toggleColorMode);
+      
+      // Allow toggling with keyboard
+      modeSwitch.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleColorMode();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
