@@ -256,6 +256,28 @@
       letter-spacing: -0.03em;
       cursor: pointer;
     }
+
+    .logo-text {
+      position: relative;
+      overflow: hidden;
+      color: white;
+      display: inline-block;
+      padding: 10px 0;
+    }
+    .logo-link{
+      text-decoration: none;
+    }
+    .logo-text::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--pure-white);
+      transform: translateX(-100%);
+      animation: logo-reveal 1.5s var(--transition-bezier) forwards;
+    }
     
     .logo-symbol {
       position: relative;
@@ -1158,11 +1180,11 @@
     <div class="nav-content">
       <div class="nav-links-container">
         <ul class="nav-links">
-          <li><div class="nav-link-wrap"><a href="#">HOME</a></div></li>
-          <li><div class="nav-link-wrap"><a href="#">PLATFORM</a></div></li>
-          <li><div class="nav-link-wrap"><a href="#">TECHNOLOGY</a></div></li>
-          <li><div class="nav-link-wrap"><a href="#">ABOUT</a></div></li>
-          <li><div class="nav-link-wrap"><a href="#">CONTACT</a></div></li>
+          <li><div class="nav-link-wrap"><a href="https://flash.zone/index.html">HOME</a></div></li>
+          <li><div class="nav-link-wrap"><a href="https://flash.zone/PlatformPage.html">PLATFORM</a></div></li>
+          <li><div class="nav-link-wrap"><a href="https://flash.zone/TechnologyPage.html">TECHNOLOGY</a></div></li>
+          <li><div class="nav-link-wrap"><a href="https://flash.zone/AboutPage.html">ABOUT</a></div></li>
+          <li><div class="nav-link-wrap"><a href="https://flash.zone/ContactPage.html">CONTACT</a></div></li>
         </ul>
       </div>
     </div>
@@ -1177,7 +1199,9 @@
     <header class="header">
       <div class="logo" tabindex="0" aria-label="Flash logo">
         <div class="logo-symbol"></div>
-        <div>FLASH</div>
+        <a class="logo-link" href="https://flash.zone/index.html">
+            <div class="logo-text">FLASH</div>
+        </a>
       </div>
       
       <div class="nav-toggle" tabindex="0" role="button" aria-label="Toggle navigation menu" aria-expanded="false">
@@ -1283,8 +1307,8 @@
                 <circle cx="50" cy="50" r="15" fill="none" stroke="#FFFFFF" stroke-width="2" />
               </svg>
             </div>
-            <h3 class="member-name">Dr. Jason Park</h3>
-            <div class="member-title">CEO & Founder</div>
+            <h3 class="member-name">Syed Faraaz</h3>
+            <div class="member-title">CEO</div>
             <p class="member-bio">
               Quantum physicist turned venture capitalist with a passion for applying mathematical models to investment decisions. Ph.D. from Stanford in Applied Mathematics.
             </p>
@@ -1304,8 +1328,8 @@
                 <path d="M30,65 Q50,85 70,65" fill="none" stroke="#FFFFFF" stroke-width="2" />
               </svg>
             </div>
-            <h3 class="member-name">Dr. Maria Gonzalez</h3>
-            <div class="member-title">Chief Scientific Officer</div>
+            <h3 class="member-name">Palchen</h3>
+            <div class="member-title">COO</div>
             <p class="member-bio">
               Former research lead at CERN with expertise in complex systems and chaos theory. Revolutionized our approach to pattern detection in startup trajectories.
             </p>
@@ -1329,7 +1353,7 @@
                 <line x1="75" y1="50" x2="85" y2="50" stroke="#FFFFFF" stroke-width="2" />
               </svg>
             </div>
-            <h3 class="member-name">Kevin Patel</h3>
+            <h3 class="member-name">Nagendra</h3>
             <div class="member-title">CTO</div>
             <p class="member-bio">
               Distributed systems architect who built our high-performance computing platform. Previously led engineering at two AI unicorns and Google's quantum computing team.
@@ -1350,8 +1374,8 @@
                 <path d="M30,60 Q50,80 70,60" fill="none" stroke="#FFFFFF" stroke-width="2" />
               </svg>
             </div>
-            <h3 class="member-name">Amara Washington</h3>
-            <div class="member-title">Head of Investment Strategy</div>
+            <h3 class="member-name">Kshiti</h3>
+            <div class="member-title">CFO</div>
             <p class="member-bio">
               Ex-partner at Sequoia with an economics background from Harvard. Bridges the gap between our algorithmic insights and practical investment strategies.
             </p>
@@ -1372,8 +1396,8 @@
                 <path d="M40,65 Q50,75 60,65" fill="none" stroke="#FFFFFF" stroke-width="2" />
               </svg>
             </div>
-            <h3 class="member-name">Dr. Li Wei</h3>
-            <div class="member-title">Lead Data Scientist</div>
+            <h3 class="member-name">Catherine</h3>
+            <div class="member-title">Head of Legal & Compliance</div>
             <p class="member-bio">
               Machine learning expert who developed our proprietary algorithms for detecting founder capability from intangible data. Ph.D. in AI from Berkeley.
             </p>
@@ -1395,8 +1419,8 @@
                 <line x1="60" y1="20" x2="60" y2="80" stroke="#FFFFFF" stroke-width="2" />
               </svg>
             </div>
-            <h3 class="member-name">Sarah Nakamura</h3>
-            <div class="member-title">Head of Operations</div>
+            <h3 class="member-name">Amer</h3>
+            <div class="member-title">Head of Marketing</div>
             <p class="member-bio">
               Operational excellence expert with experience scaling three startups. MBA from Wharton with a focus on organizational design for high-innovation companies.
             </p>
@@ -1453,7 +1477,7 @@
               <p>600 California Street<br>
               San Francisco, CA 94108<br>
               United States</p>
-              <p>contact@flashventures.com<br>
+              <p>contact@flash.zone<br>
               +1 (415) 555-0123</p>
             </div>
           </div>
