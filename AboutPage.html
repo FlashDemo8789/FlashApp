@@ -3,19 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="About FlashDNA Infinity - Pioneering venture investment analysis using advanced mathematics and AI">
-  <title>FlashDNA Infinity - About</title>
+  <meta name="description" content="Flash Ventures - The team of mathematicians, data scientists, and investment professionals pioneering new approaches to venture capital">
+  <title>Flash Ventures - About</title>
 
   <!-- Essential Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" defer></script>
 
-  <!-- Fonts -->
   <style>
-    /* ---------------------------------------
-       FONTS
-    ---------------------------------------- */
+    /* Fonts */
     @font-face {
       font-family: 'Monument Extended';
       src: url('https://cdnjs.cloudflare.com/ajax/libs/monospace/0.1.0/MonumentExtended-Regular.otf') format('opentype');
@@ -23,7 +20,6 @@
       font-style: normal;
       font-display: swap;
     }
-
     @font-face {
       font-family: 'Inter';
       src: url('https://cdnjs.cloudflare.com/ajax/libs/inter-ui/3.19.3/Inter.var.woff2') format('woff2');
@@ -31,18 +27,9 @@
       font-display: swap;
     }
 
-    @font-face {
-      font-family: 'Neue Montreal';
-      src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-brands-400.woff2') format('woff2');
-      font-weight: 300 700;
-      font-display: swap;
-    }
-
-    /* ---------------------------------------
-       CSS VARIABLES
-    ---------------------------------------- */
+    /* Variables */
     :root {
-      /* Color palette */
+      /* Colors */
       --pure-white: #FFFFFF;
       --off-white: #F5F5F5;
       --light-gray: #AAAAAA;
@@ -50,74 +37,138 @@
       --dark-gray: #222222;
       --pure-black: #000000;
       
-      /* Transparency values */
+      /* Transparencies */
       --gray-90: rgba(255, 255, 255, 0.9);
       --gray-70: rgba(255, 255, 255, 0.7);
       --gray-50: rgba(255, 255, 255, 0.5);
       --gray-30: rgba(255, 255, 255, 0.3);
       --gray-10: rgba(255, 255, 255, 0.1);
       --gray-05: rgba(255, 255, 255, 0.05);
-      
-      /* Typography */
+
+      /* Fonts */
       --font-heading: 'Monument Extended', sans-serif;
       --font-body: 'Inter', sans-serif;
-      
-      /* Animation */
-      --transition-bezier: cubic-bezier(0.165, 0.84, 0.44, 1);
+
+      /* Timing */
+      --transition-bezier: cubic-bezier(0.16, 1, 0.3, 1);
       --transition-fast: 0.3s;
       --transition-medium: 0.5s;
       --transition-slow: 0.8s;
     }
 
-    /* ---------------------------------------
-       GLOBAL RESETS
-    ---------------------------------------- */
+    /* Resets */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
+    
     body {
-      font-family: var(--font-body, 'Inter'), sans-serif;
+      font-family: var(--font-body);
       background-color: var(--pure-black);
       color: var(--pure-white);
       overflow-x: hidden;
-      cursor: none; /* Hide OS cursor for custom cursor */
-      height: 100vh;
-      width: 100vw;
-      transition: background-color var(--transition-medium) ease, color var(--transition-medium) ease;
+      cursor: auto; 
+      line-height: 1.6;
     }
 
-    /* Mobile devices keep default cursor */
-    @media (pointer: coarse) {
-      body {
-        cursor: auto;
-      }
-      .cursor-container {
-        display: none;
-      }
+    /* Accessibility */
+    .skip-link {
+      position: absolute;
+      top: -50px;
+      left: 10px;
+      padding: 10px;
+      background-color: var(--pure-white);
+      color: var(--pure-black);
+      z-index: 9999;
+      transition: top var(--transition-fast) ease;
+    }
+    
+    .skip-link:focus {
+      top: 10px;
     }
 
-    /* ---------------------------------------
-       NOISE OVERLAY
-    ---------------------------------------- */
-    .noise {
+    /* Loading Screen */
+    .loading-screen {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJub2lzZSIgeD0iMCIgeT0iMCIgd2lkdGg9IjMwMCUiIGhlaWdodD0iMzAwJSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuNzUiIG51bU9jdGF2ZXM9IjQiIHN0aXRjaFRpbGVzPSJzdGl0Y2giIHJlc3VsdD0ibm9pc2UiLz48ZmVDb2xvck1hdHJpeCB0eXBlPSJzYXR1cmF0ZSIgdmFsdWVzPSIwIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMDAiIGZpbHRlcj0idXJsKCNub2lzZSkiIG9wYWNpdHk9IjAuMDUiLz48L3N2Zz4=');
-      pointer-events: none;
-      opacity: 0.04;
-      z-index: 1;
-      mix-blend-mode: overlay;
+      background-color: var(--pure-black);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity var(--transition-slow) ease, visibility var(--transition-slow) ease;
+    }
+    
+    .loading-logo {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .loading-text {
+      font-family: var(--font-heading);
+      font-size: 64px;
+      letter-spacing: -0.03em;
+      color: var(--pure-white);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      animation: fade-in 0.8s var(--transition-bezier) forwards 0.3s;
+    }
+    
+    .loading-bar-container {
+      margin-top: 30px;
+      width: 200px;
+      height: 1px;
+      background-color: var(--gray-10);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .loading-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      background-color: var(--pure-white);
+      transition: width 1.5s var(--transition-bezier);
+    }
+    
+    .loading-percentage {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      margin-top: 15px;
+      color: var(--pure-white);
+      opacity: 0;
+      animation: fade-in 0.5s var(--transition-bezier) forwards 0.5s;
+    }
+    
+    .loading-screen.loaded {
+      opacity: 0;
+      visibility: hidden;
     }
 
-    /* ---------------------------------------
-       3D WIREFRAME CONTAINER
-    ---------------------------------------- */
+    /* Progress bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 1px;
+      background-color: var(--pure-white);
+      z-index: 999;
+      opacity: 0.7;
+      transform-origin: 0 0;
+      transform: scaleX(0);
+    }
+
+    /* 3D Background */
     #wireframe-container {
       position: fixed;
       top: 0;
@@ -125,131 +176,87 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      perspective: 1000px;
       z-index: 0;
+      opacity: 1;
+      will-change: transform;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
     }
-
-    /* ---------------------------------------
-       CUSTOM ADVANCED CURSOR
-    ---------------------------------------- */
-    .cursor-container {
+    
+    /* Noise overlay */
+    .noise {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 10000;
-    }
-    .cursor-dot {
-      position: fixed;
-      width: 8px;
-      height: 8px;
-      background-color: var(--pure-white);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      mix-blend-mode: difference;
-      transition: width var(--transition-fast), height var(--transition-fast);
-      z-index: 10001;
-    }
-    .cursor-circle {
-      position: fixed;
-      width: 40px;
-      height: 40px;
-      border: 1px solid var(--gray-30);
-      border-radius: 50%;
-      transform: translate(-50%, -50%) scale(1);
-      transition: all var(--transition-fast) ease-out;
-      z-index: 10000;
-    }
-    .cursor-trail {
-      position: fixed;
-      width: 2px;
-      height: 2px;
-      background-color: var(--gray-50);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: opacity 1s ease;
-      z-index: 9999;
+      opacity: 0.03;
+      z-index: 2;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     }
 
-    /* ---------------------------------------
-       MAIN CONTAINER + LAYOUT
-    ---------------------------------------- */
+    /* Layout */
     .container {
-      height: 100vh;
-      width: 100vw;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      grid-template-columns: 50px 1fr 50px;
-      grid-template-areas:
-        "sidebar-left header sidebar-right"
-        "sidebar-left main sidebar-right"
-        "sidebar-left footer sidebar-right";
-      transition: opacity var(--transition-fast) ease;
-    }
-
-    /* Media query for mobile devices */
-    @media (max-width: 768px) {
-      .container {
-        grid-template-columns: 20px 1fr 20px;
-      }
-      
-      .sidebar-text {
-        display: none;
-      }
-    }
-
-    .sidebar-left, .sidebar-right {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      min-height: 100vh;
+      width: 100%;
+      max-width: 100%;
       position: relative;
+      overflow-x: hidden;
+      padding-bottom: 50px;
     }
-    .sidebar-left {
-      grid-area: sidebar-left;
-    }
+    
+    .sidebar-left, 
     .sidebar-right {
-      grid-area: sidebar-right;
+      position: fixed;
+      height: 100vh;
+      width: 80px;
+      top: 0;
+      z-index: 50;
+    }
+    
+    .sidebar-left {
+      left: 0;
+      border-right: 1px solid var(--gray-05);
+    }
+    
+    .sidebar-right {
+      right: 0;
+      border-left: 1px solid var(--gray-05);
+    }
+    
+    @media (max-width: 768px) {
+      .sidebar-left, .sidebar-right {
+        width: 20px;
+      }
     }
 
-    .sidebar-text {
-      position: absolute;
-      white-space: nowrap;
-      font-size: 12px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      transform-origin: center;
-      color: var(--light-gray);
-      transition: color var(--transition-medium) ease;
-    }
-    .sidebar-left .sidebar-text {
-      transform: rotate(-90deg) translateX(-50%);
-      left: 25px;
-    }
-    .sidebar-right .sidebar-text {
-      transform: rotate(90deg) translateX(50%);
-      right: 25px;
-    }
-
+    /* Header */
     .header {
-      grid-area: header;
-      padding: 30px 0;
+      padding: 40px 80px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: relative;
       z-index: 100;
     }
-
+    
+    @media (max-width: 768px) {
+      .header {
+        padding: 30px 20px;
+      }
+    }
+    
     .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       font-family: var(--font-heading);
       font-size: 24px;
       letter-spacing: -0.03em;
-      position: relative;
-      overflow: hidden;
       cursor: pointer;
     }
+
     .logo-text {
       position: relative;
       overflow: hidden;
@@ -271,55 +278,81 @@
       transform: translateX(-100%);
       animation: logo-reveal 1.5s var(--transition-bezier) forwards;
     }
-    @keyframes logo-reveal {
-      0% { transform: translateX(-100%); }
-      50% { transform: translateX(0); }
-      51% { transform: translateX(0); }
-      100% { transform: translateX(100%); }
+    
+    .logo-symbol {
+      position: relative;
+      width: 30px;
+      height: 30px;
+      border: 2px solid var(--pure-white);
+      border-radius: 50%;
+      overflow: hidden;
     }
-
+    
+    .logo-symbol::before {
+      content: '';
+      position: absolute;
+      width: 15px;
+      height: 30px;
+      background-color: var(--pure-white);
+      right: 0;
+      top: 0;
+    }
+    
     .nav-toggle {
       width: 30px;
       height: 30px;
       position: relative;
       cursor: pointer;
       z-index: 1000;
-      /* Add focus styles for accessibility */
       outline: none;
     }
+    
     .nav-toggle:focus-visible {
       box-shadow: 0 0 0 2px var(--pure-white);
     }
+    
     .nav-toggle span {
       width: 100%;
-      height: 2px;
+      height: 1px;
       background-color: var(--pure-white);
       position: absolute;
       left: 0;
       transition: all var(--transition-fast) ease;
     }
+    
     .nav-toggle span:nth-child(1) {
       top: 8px;
+      width: 70%;
     }
+    
     .nav-toggle span:nth-child(2) {
       top: 16px;
     }
+    
     .nav-toggle span:nth-child(3) {
       top: 24px;
+      width: 70%;
+      left: 30%;
     }
+    
     .nav-toggle.active span:nth-child(1) {
       transform: rotate(45deg);
       top: 14px;
+      width: 100%;
     }
+    
     .nav-toggle.active span:nth-child(2) {
       opacity: 0;
     }
+    
     .nav-toggle.active span:nth-child(3) {
       transform: rotate(-45deg);
       top: 14px;
+      width: 100%;
+      left: 0;
     }
 
-    /* Circle clipped navigation overlay */
+    /* Navigation menu */
     .navigation {
       position: fixed;
       top: 0;
@@ -328,253 +361,270 @@
       height: 100vh;
       background-color: var(--pure-black);
       display: flex;
+      z-index: 999;
+      clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+      transition: clip-path 1.2s var(--transition-bezier);
+    }
+    
+    .navigation.active {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+    
+    .nav-content {
+      width: 100%;
+      height: 100%;
+      display: flex;
       justify-content: center;
       align-items: center;
-      z-index: 999;
-      clip-path: circle(0% at calc(100% - 65px) 65px);
-      transition: clip-path 1s var(--transition-bezier);
     }
-    .navigation.active {
-      clip-path: circle(150% at calc(100% - 65px) 65px);
+    
+    .nav-links-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 0 50px;
     }
-
-    /* Mobile navigation adjustments */
-    @media (max-width: 768px) {
-      .navigation {
-        clip-path: circle(0% at calc(100% - 45px) 45px);
-      }
-      .navigation.active {
-        clip-path: circle(150% at calc(100% - 45px) 45px);
-      }
-    }
-
+    
     .nav-links {
       list-style: none;
       text-align: center;
+      width: 100%;
     }
+    
     .nav-links li {
       margin: 30px 0;
+      overflow: hidden;
+    }
+    
+    .nav-link-wrap {
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+      transform: translateY(100%);
       opacity: 0;
-      transform: translateY(30px);
-      transition: all var(--transition-medium) var(--transition-bezier);
+      transition: transform 0.8s var(--transition-bezier), opacity 0.8s ease;
     }
-    .navigation.active .nav-links li {
-      opacity: 1;
+    
+    .navigation.active .nav-link-wrap {
       transform: translateY(0);
-      transition-delay: calc(0.1s * var(--i));
+      opacity: 1;
     }
+    
+    .navigation.active .nav-links li:nth-child(1) .nav-link-wrap { transition-delay: 0.1s; }
+    .navigation.active .nav-links li:nth-child(2) .nav-link-wrap { transition-delay: 0.15s; }
+    .navigation.active .nav-links li:nth-child(3) .nav-link-wrap { transition-delay: 0.2s; }
+    .navigation.active .nav-links li:nth-child(4) .nav-link-wrap { transition-delay: 0.25s; }
+    .navigation.active .nav-links li:nth-child(5) .nav-link-wrap { transition-delay: 0.3s; }
+    
     .nav-links a {
       font-family: var(--font-heading);
-      font-size: 5vw;
+      font-size: 4vw;
       color: var(--pure-white);
       text-decoration: none;
       position: relative;
       display: inline-block;
       transition: all var(--transition-fast) ease;
-      overflow: hidden;
+      line-height: 1.1;
     }
     
-    /* Mobile navigation text size adjustment */
     @media (max-width: 768px) {
+      .nav-content {
+        padding: 20px 0;
+      }
       .nav-links a {
         font-size: 8vw;
       }
     }
     
     .nav-links a::before {
-      content: attr(data-text);
+      content: '';
       position: absolute;
-      top: 0;
+      bottom: 0;
       left: 0;
       width: 0;
-      color: var(--pure-black);
+      height: 1px;
       background-color: var(--pure-white);
-      overflow: hidden;
-      white-space: nowrap;
-      transition: width var(--transition-fast) ease;
+      transition: width var(--transition-medium) var(--transition-bezier);
     }
+    
     .nav-links a:hover::before,
     .nav-links a:focus::before {
       width: 100%;
     }
 
+    /* Main content */
     .main {
-      grid-area: main;
       position: relative;
-      overflow: auto;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      padding: 0;
-      max-height: calc(100vh - 120px);
-    }
-
-    /* ---------------------------------------
-       ABOUT PAGE SPECIFIC STYLES
-    ---------------------------------------- */
-    .about-content {
       width: 100%;
-      max-width: 1400px;
-      margin: 0 auto;
-      z-index: 3;
-      position: relative;
-      padding: 20px;
+      padding: 0 80px;
+      z-index: 10;
+    }
+    
+    @media (max-width: 768px) {
+      .main {
+        padding: 0 20px;
+      }
     }
 
-    /* About header */
+    /* About page header */
     .about-header {
       position: relative;
-      overflow: hidden;
-      padding: 40px 0;
-      margin-bottom: 60px;
+      width: 100%;
+      max-width: 1400px;
+      margin: 50px auto 80px;
     }
-
+    
     .about-title {
       font-family: var(--font-heading);
       font-size: calc(3vw + 1rem);
       line-height: 1.2;
-      margin-bottom: 20px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .about-title span {
-      display: block;
+      margin-bottom: 30px;
       opacity: 0;
-      transform: translateY(100%);
-      animation: title-reveal 0.8s var(--transition-bezier) forwards;
-      animation-delay: 0.5s;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s var(--transition-bezier);
     }
-
-    @keyframes title-reveal {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    
+    .about-title.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
-
-    .about-subtitle {
-      font-family: var(--font-body);
+    
+    .about-description {
       font-size: 1.2rem;
       color: var(--light-gray);
-      line-height: 1.6;
-      margin-bottom: 30px;
       max-width: 800px;
+      line-height: 1.6;
       opacity: 0;
-      transform: translateY(20px);
-      animation: fade-in 0.8s var(--transition-bezier) forwards;
-      animation-delay: 1s;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s var(--transition-bezier);
+      transition-delay: 0.2s;
+    }
+    
+    .about-description.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    @keyframes fade-in {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Company story section */
+    /* Story section */
     .story-section {
-      margin-bottom: 80px;
+      max-width: 1400px;
+      margin: 0 auto 100px;
     }
-
+    
     .section-title {
       font-family: var(--font-heading);
-      font-size: 2rem;
-      margin-bottom: 30px;
-      position: relative;
-      display: inline-block;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s var(--transition-bezier);
     }
-
-    .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 0;
-      width: 60px;
-      height: 2px;
-      background-color: var(--pure-white);
+    
+    .section-title.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
-
+    
     .story-content {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 40px;
-      align-items: center;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s var(--transition-bezier);
+      transition-delay: 0.1s;
     }
-
+    
+    .story-content.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
     @media (max-width: 900px) {
       .story-content {
         grid-template-columns: 1fr;
       }
     }
-
+    
     .story-text {
       color: var(--light-gray);
       line-height: 1.8;
     }
-
+    
     .story-text p {
       margin-bottom: 20px;
     }
-
+    
     .story-timeline {
-      position: relative;
+      width: 100%;
       height: 300px;
       background-color: rgba(0, 0, 0, 0.2);
       border: 1px solid rgba(255, 255, 255, 0.05);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    /* Mission and values */
+    /* Mission & Values section */
     .mission-section {
-      margin-bottom: 80px;
+      max-width: 1400px;
+      margin: 0 auto 100px;
     }
-
+    
     .mission-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 30px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s var(--transition-bezier);
+      transition-delay: 0.1s;
     }
-
+    
+    .mission-grid.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
     .mission-card {
       background-color: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.05);
       padding: 30px;
-      border-radius: 2px;
       transition: all var(--transition-medium) var(--transition-bezier);
+      position: relative;
+      overflow: hidden;
     }
-
-    .mission-card:hover {
-      transform: translateY(-10px);
-      background-color: rgba(255, 255, 255, 0.05);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-    }
-
+    
     .mission-card::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--pure-white), transparent);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.8s var(--transition-bezier);
+      width: 3px;
+      height: 0;
+      background: var(--pure-white);
+      transition: height 0.4s var(--transition-bezier);
     }
-
+    
     .mission-card:hover::before {
-      transform: scaleX(1);
+      height: 100%;
     }
-
+    
+    .mission-card:hover {
+      transform: translateY(-10px);
+      background-color: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+    
     .mission-title {
       font-family: var(--font-heading);
       font-size: 1.5rem;
       margin-bottom: 15px;
     }
-
+    
     .mission-text {
       color: var(--light-gray);
       line-height: 1.6;
@@ -582,52 +632,76 @@
 
     /* Team section */
     .team-section {
-      margin-bottom: 80px;
+      max-width: 1400px;
+      margin: 0 auto 100px;
     }
-
+    
     .team-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       gap: 30px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s var(--transition-bezier);
+      transition-delay: 0.1s;
     }
-
+    
+    .team-grid.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
     .team-member {
       background-color: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.05);
       padding: 30px;
-      border-radius: 2px;
       transition: all var(--transition-medium) var(--transition-bezier);
       position: relative;
       overflow: hidden;
       display: flex;
       flex-direction: column;
     }
-
+    
+    .team-member::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 0;
+      background: var(--pure-white);
+      transition: height 0.4s var(--transition-bezier);
+    }
+    
+    .team-member:hover::before {
+      height: 100%;
+    }
+    
     .team-member:hover {
       transform: translateY(-10px);
       background-color: rgba(255, 255, 255, 0.05);
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     }
-
+    
     .member-avatar {
       width: 80px;
       height: 80px;
       margin-bottom: 20px;
       position: relative;
     }
-
+    
     .avatar-svg {
       width: 100%;
       height: 100%;
     }
-
+    
     .member-name {
       font-family: var(--font-heading);
       font-size: 1.2rem;
       margin-bottom: 5px;
     }
-
+    
     .member-title {
       color: var(--light-gray);
       font-size: 0.9rem;
@@ -635,141 +709,345 @@
       letter-spacing: 1px;
       text-transform: uppercase;
     }
-
+    
     .member-bio {
       color: var(--light-gray);
       font-size: 0.9rem;
       line-height: 1.6;
       margin-bottom: 20px;
     }
-
+    
     .member-expertise {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
       margin-top: auto;
     }
-
+    
     .expertise-tag {
       font-size: 0.7rem;
       background-color: rgba(255, 255, 255, 0.05);
       padding: 5px 10px;
-      border-radius: 2px;
       color: var(--pure-white);
     }
 
-    /* Dynamic grid background */
-    .grid-background {
-      position: absolute;
-      top: 0;
-      left: 0;
+    /* Footer */
+    .footer {
       width: 100%;
-      height: 100%;
-      z-index: 0;
+      padding: 80px 80px 40px;
+      background-color: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--gray-05);
+      position: relative;
+      z-index: 10;
+      margin-top: 50px;
+    }
+    
+    @media (max-width: 768px) {
+      .footer {
+        padding: 80px 20px 40px;
+      }
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .footer-logo {
+      grid-column: 1 / 4;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .footer-logo-symbol {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .footer-logo-icon {
+      position: relative;
+      width: 30px;
+      height: 30px;
+      border: 2px solid var(--pure-white);
+      border-radius: 50%;
       overflow: hidden;
+      margin-right: 15px;
     }
     
-    .grid-line {
+    .footer-logo-icon::before {
+      content: '';
       position: absolute;
-      background-color: rgba(255, 255, 255, 0.05);
-    }
-    
-    .grid-horizontal {
-      width: 100%;
-      height: 1px;
-      transform: scaleX(0);
-      transform-origin: 0 0;
-    }
-    
-    .grid-vertical {
-      height: 100%;
-      width: 1px;
-      transform: scaleY(0);
-      transform-origin: 0 0;
-    }
-
-    /* Dynamic noise canvas */
-    #noise-canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0.05;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    /* Progress bar */
-    .progress-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 3px;
+      width: 15px;
+      height: 30px;
       background-color: var(--pure-white);
-      z-index: 999;
+      right: 0;
+      top: 0;
+    }
+    
+    .footer-logo-text {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      letter-spacing: -0.03em;
+    }
+    
+    .footer-tagline {
+      color: var(--light-gray);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-top: 20px;
+      max-width: 260px;
+    }
+    
+    .footer-nav {
+      grid-column: 4 / 6;
+    }
+    
+    .footer-legal {
+      grid-column: 6 / 8;
+    }
+    
+    .footer-contact {
+      grid-column: 8 / 11;
+    }
+    
+    .footer-social {
+      grid-column: 11 / 13;
+    }
+    
+    .footer-heading {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      color: var(--pure-white);
+    }
+    
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-links a {
+      color: var(--light-gray);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+    
+    .footer-links a::before {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: var(--pure-white);
+      transition: width 0.3s var(--transition-bezier);
+    }
+    
+    .footer-links a:hover {
+      color: var(--pure-white);
+    }
+    
+    .footer-links a:hover::before {
+      width: 100%;
+    }
+    
+    .footer-contact-info {
+      color: var(--light-gray);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    
+    .footer-social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .social-icon {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--gray-30);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      border-color: var(--pure-white);
+      transform: translateY(-3px);
+    }
+    
+    .footer-bottom {
+      max-width: 1400px;
+      margin: 60px auto 0;
+      padding: 30px 0 0;
+      border-top: 1px solid var(--gray-05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--light-gray);
+      font-size: 12px;
+    }
+    
+    .footer-copyright {
       opacity: 0.7;
-      transform-origin: 0 0;
-      transform: scaleX(0);
+    }
+    
+    .footer-signature {
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 10px;
+      opacity: 0.5;
+    }
+    
+    @media (max-width: 1024px) {
+      .footer-grid {
+        grid-template-columns: repeat(6, 1fr);
+      }
+      
+      .footer-logo {
+        grid-column: 1 / 4;
+      }
+      
+      .footer-nav {
+        grid-column: 4 / 7;
+      }
+      
+      .footer-legal {
+        grid-column: 1 / 3;
+        margin-top: 40px;
+      }
+      
+      .footer-contact {
+        grid-column: 3 / 5;
+        margin-top: 40px;
+      }
+      
+      .footer-social {
+        grid-column: 5 / 7;
+        margin-top: 40px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+      }
+      
+      .footer-logo,
+      .footer-nav,
+      .footer-legal,
+      .footer-contact,
+      .footer-social {
+        grid-column: auto;
+      }
+      
+      .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
     }
 
-    /* DARK/LIGHT MODE SWITCH */
+    /* Animations */
+    @keyframes fade-in {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Mode Switch Styles */
     .mode-switch {
       position: fixed;
       bottom: 30px;
       right: 30px;
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
-      background-color: var(--pure-white);
+      background-color: var(--pure-black);
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       cursor: pointer;
       z-index: 100;
-      transition: all var(--transition-fast) ease;
-      outline: none;
-    }
-    
-    .mode-switch:focus-visible {
-      box-shadow: 0 0 0 3px var(--light-gray);
+      transition: all var(--transition-medium) ease;
+      overflow: hidden;
+      border: 2px solid var(--pure-white);
     }
     
     .mode-switch::before {
       content: '';
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background-color: var(--pure-black);
-      transition: all var(--transition-fast) ease;
-    }
-    
-    .mode-switch.light-mode {
-      background-color: var(--pure-black);
-    }
-    
-    .mode-switch.light-mode::before {
+      position: absolute;
+      width: 25px;
+      height: 50px;
       background-color: var(--pure-white);
+      right: 0;
+      top: 0;
+      transition: all var(--transition-medium) ease;
+    }
+    
+    body.light-mode .mode-switch {
+      background-color: var(--pure-white);
+      border-color: var(--pure-black);
+    }
+    
+    body.light-mode .mode-switch::before {
+      background-color: var(--pure-black);
+    }
+    
+    .mode-switch:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+    
+    body.light-mode .mode-switch:hover {
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    @media (max-width: 768px) {
+      .mode-switch {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+      }
+      
+      .mode-switch::before {
+        width: 20px;
+        height: 40px;
+      }
     }
 
-    /* LIGHT MODE OVERRIDES */
+    /* Light mode */
     body.light-mode {
       background-color: var(--pure-white);
       color: var(--pure-black);
     }
     
-    body.light-mode .cursor-dot,
-    body.light-mode .cursor-circle {
+    body.light-mode .nav-toggle span {
       background-color: var(--pure-black);
-      border-color: var(--pure-black);
     }
     
     body.light-mode .navigation {
       background-color: var(--pure-white);
-    }
-    
-    body.light-mode .nav-toggle span {
-      background-color: var(--pure-black);
     }
     
     body.light-mode .nav-links a {
@@ -777,152 +1055,155 @@
     }
     
     body.light-mode .nav-links a::before {
-      color: var(--pure-white);
       background-color: var(--pure-black);
     }
     
-    body.light-mode .grid-line {
-      background-color: rgba(0, 0, 0, 0.05);
+    body.light-mode .sidebar-left,
+    body.light-mode .sidebar-right {
+      border-color: rgba(0, 0, 0, 0.05);
     }
     
-    body.light-mode .sidebar-text {
-      color: var(--mid-gray);
-    }
-    
-    body.light-mode .team-member,
-    body.light-mode .mission-card {
-      background-color: rgba(0, 0, 0, 0.03);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-    }
-    
-    body.light-mode .team-member:hover,
-    body.light-mode .mission-card:hover {
-      background-color: rgba(0, 0, 0, 0.05);
-    }
-    
+    body.light-mode .about-description,
     body.light-mode .story-text,
     body.light-mode .mission-text,
     body.light-mode .member-bio,
-    body.light-mode .member-title,
-    body.light-mode .about-subtitle {
+    body.light-mode .member-title {
       color: var(--mid-gray);
+    }
+    
+    body.light-mode .mission-card,
+    body.light-mode .team-member {
+      background-color: rgba(0, 0, 0, 0.02);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+    
+    body.light-mode .mission-card:hover,
+    body.light-mode .team-member:hover {
+      background-color: rgba(0, 0, 0, 0.04);
+      border-color: rgba(0, 0, 0, 0.08);
+    }
+    
+    body.light-mode .mission-card::before,
+    body.light-mode .team-member::before {
+      background: var(--pure-black);
     }
     
     body.light-mode .story-timeline {
       background-color: rgba(0, 0, 0, 0.05);
-      border-color: rgba(0, 0, 0, 0.1);
+      border-color: rgba(0, 0, 0, 0.05);
     }
     
     body.light-mode .expertise-tag {
       background-color: rgba(0, 0, 0, 0.05);
       color: var(--pure-black);
     }
-
-    /* Loading screen */
-    .loading-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+    
+    body.light-mode .logo-symbol {
+      border-color: var(--pure-black);
+    }
+    
+    body.light-mode .logo-symbol::before {
       background-color: var(--pure-black);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      transition: opacity var(--transition-slow) ease, visibility var(--transition-slow) ease;
     }
     
-    .loading-logo {
-      font-family: var(--font-heading);
-      font-size: 48px;
-      letter-spacing: -0.03em;
-      color: var(--pure-white);
-      position: relative;
+    body.light-mode .footer {
+      background-color: rgba(245, 245, 245, 0.7);
+      border-top-color: rgba(0, 0, 0, 0.05);
     }
     
-    .loading-bar {
-      position: absolute;
-      bottom: -20px;
-      left: 0;
-      width: 0%;
-      height: 2px;
-      background-color: var(--pure-white);
-      transition: width 1.5s var(--transition-bezier);
+    body.light-mode .footer-links a {
+      color: var(--mid-gray);
     }
     
-    .loading-screen.loaded {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    /* Skip to content link for accessibility */
-    .skip-link {
-      position: absolute;
-      top: -50px;
-      left: 10px;
-      padding: 10px;
-      background-color: var(--pure-white);
+    body.light-mode .footer-links a:hover {
       color: var(--pure-black);
-      z-index: 9999;
-      transition: top 0.3s ease;
     }
     
-    .skip-link:focus {
-      top: 10px;
+    body.light-mode .footer-links a::before {
+      background-color: var(--pure-black);
+    }
+    
+    body.light-mode .footer-logo-icon {
+      border-color: var(--pure-black);
+    }
+    
+    body.light-mode .footer-logo-icon::before {
+      background-color: var(--pure-black);
+    }
+    
+    body.light-mode .footer-contact-info,
+    body.light-mode .footer-tagline,
+    body.light-mode .footer-copyright,
+    body.light-mode .footer-signature {
+      color: var(--mid-gray);
+    }
+    
+    body.light-mode .social-icon {
+      border-color: rgba(0, 0, 0, 0.2);
+    }
+    
+    body.light-mode .social-icon:hover {
+      border-color: var(--pure-black);
+    }
+    
+    body.light-mode .footer-bottom {
+      border-top-color: rgba(0, 0, 0, 0.05);
     }
   </style>
 </head>
 <body>
-  <!-- Accessibility skip link -->
+  <!-- Skip link for accessibility -->
   <a href="#main-content" class="skip-link">Skip to content</a>
 
   <!-- Loading screen -->
   <div class="loading-screen">
     <div class="loading-logo">
-      FLASH
-      <div class="loading-bar"></div>
+      <div class="loading-text">FLASH</div>
+      <div class="loading-bar-container">
+        <div class="loading-bar"></div>
+      </div>
+      <div class="loading-percentage">0%</div>
     </div>
   </div>
 
   <!-- Progress bar -->
   <div class="progress-bar"></div>
 
-  <!-- Noise Overlay -->
+  <!-- Noise overlay -->
   <div class="noise"></div>
 
-  <!-- 3D Wireframe -->
+  <!-- 3D Wireframe container -->
   <div id="wireframe-container"></div>
 
-  <!-- Advanced custom cursor -->
-  <div class="cursor-container">
-    <div class="cursor-dot" aria-hidden="true"></div>
-    <div class="cursor-circle" aria-hidden="true"></div>
-  </div>
-
-  <!-- Circle-clipped NAV -->
+  <!-- Navigation -->
   <div class="navigation" aria-hidden="true">
-    <ul class="nav-links">
-      <li style="--i:1;"><a href="https://flash.zone/index.html" data-text="HOME">HOME</a></li>
-      <li style="--i:2;"><a href="https://flash.zone/PlatformPage.html" data-text="PLATFORM">PLATFORM</a></li>
-      <li style="--i:3;"><a href="https://flash.zone/TechnologyPage.html" data-text="TECHNOLOGY">TECHNOLOGY</a></li>
-      <li style="--i:4;"><a href="https://flash.zone/AboutPage.html" data-text="ABOUT">ABOUT</a></li>
-      <li style="--i:5;"><a href="https://flash.zone/ContactPage.html" data-text="CONTACT">CONTACT</a></li>
-    </ul>
+    <div class="nav-content">
+      <div class="nav-links-container">
+        <ul class="nav-links">
+          <li><div class="nav-link-wrap"><a href="https://flash.zone/index.html">HOME</a></div></li>
+          <li><div class="nav-link-wrap"><a href="https://flash.zone/PlatformPage.html">PLATFORM</a></div></li>
+          <li><div class="nav-link-wrap"><a href="https://flash.zone/TechnologyPage.html">TECHNOLOGY</a></div></li>
+          <li><div class="nav-link-wrap"><a href="https://flash.zone/AboutPage.html">ABOUT</a></div></li>
+          <li><div class="nav-link-wrap"><a href="https://flash.zone/ContactPage.html">CONTACT</a></div></li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <!-- Main container -->
   <div class="container">
-    <div class="sidebar-left">
-      <div class="sidebar-text">FLASH VENTURES — EST. 2025</div>
-    </div>
+    <!-- Left sidebar -->
+    <div class="sidebar-left"></div>
 
+    <!-- Header -->
     <header class="header">
       <div class="logo" tabindex="0" aria-label="Flash logo">
+        <div class="logo-symbol"></div>
         <a class="logo-link" href="https://flash.zone/index.html">
             <div class="logo-text">FLASH</div>
         </a>
       </div>
+      
       <div class="nav-toggle" tabindex="0" role="button" aria-label="Toggle navigation menu" aria-expanded="false">
         <span></span>
         <span></span>
@@ -930,421 +1211,409 @@
       </div>
     </header>
 
+    <!-- Main content -->
     <main class="main" id="main-content">
-      <!-- Dynamic noise canvas -->
-      <canvas id="noise-canvas"></canvas>
+      <!-- About Header -->
+      <section class="about-header">
+        <h1 class="about-title">About Flash</h1>
+        <p class="about-description">
+          We're a team of mathematicians, data scientists, and investment professionals pioneering new approaches to venture capital through advanced mathematics, high-performance computing, and artificial intelligence.
+        </p>
+      </section>
 
-      <!-- Dynamic grid background -->
-      <div class="grid-background"></div>
-
-      <!-- About content -->
-      <div class="about-content">
-        <!-- About Header -->
-        <div class="about-header">
-          <h1 class="about-title">
-            <span>About FlashDNA</span>
-          </h1>
-          <p class="about-subtitle">
-            We're a team of mathematicians, data scientists, and investment professionals pioneering new approaches to venture capital through advanced mathematics, high-performance computing, and artificial intelligence.
-          </p>
+      <!-- Company Story Section -->
+      <section class="story-section">
+        <h2 class="section-title">Our Story</h2>
+        <div class="story-content">
+          <div class="story-text">
+            <p>
+              FlashDNA began with a simple question: why do traditional venture capital firms rely on intuition and personal networks when evaluating startups, instead of applying rigorous mathematical models?
+            </p>
+            <p>
+              Founded in 2023 by a team of mathematicians and former VCs, FlashDNA emerged from research into the application of partial differential equations and chaos theory to startup growth dynamics. Our insight was that startups can be modeled as complex systems where a rigorous mathematical approach provides predictive power that traditional methods cannot match.
+            </p>
+            <p>
+              Our first model, using a Black-Scholes-style PDE approach to calculate startup meltdown probabilities, demonstrated 76% higher accuracy than traditional methods. This breakthrough led to rapid expansion of our research, incorporating fractal dimensions, chaos theory, agent-based modeling, and quantum-inspired probability calculations.
+            </p>
+            <p>
+              Today, our FlashDNA Infinity platform processes over 10,000 startup data points per evaluation, distilling complex mathematical insights into clear investment recommendations with unparalleled accuracy.
+            </p>
+          </div>
+          <div class="story-timeline">
+            <svg viewBox="0 0 400 300" width="100%" height="100%">
+              <!-- Timeline line -->
+              <line x1="30" y1="20" x2="30" y2="280" stroke="#FFFFFF" stroke-width="2" />
+              
+              <!-- Timeline nodes -->
+              <circle cx="30" cy="60" r="8" fill="#FFFFFF" />
+              <circle cx="30" cy="120" r="8" fill="#FFFFFF" />
+              <circle cx="30" cy="180" r="8" fill="#FFFFFF" />
+              <circle cx="30" cy="240" r="8" fill="#FFFFFF" />
+              
+              <!-- Timeline content -->
+              <text x="50" y="50" fill="#FFFFFF" font-family="var(--font-heading)" font-size="14">2023: Foundation</text>
+              <text x="50" y="70" fill="#AAAAAA" font-size="12">Initial PDE meltdown research begins</text>
+              
+              <text x="50" y="110" fill="#FFFFFF" font-family="var(--font-heading)" font-size="14">2023: First Breakthrough</text>
+              <text x="50" y="130" fill="#AAAAAA" font-size="12">76% higher accuracy with first model</text>
+              
+              <text x="50" y="170" fill="#FFFFFF" font-family="var(--font-heading)" font-size="14">2024: Platform Release</text>
+              <text x="50" y="190" fill="#AAAAAA" font-size="12">FlashDNA Infinity launched</text>
+              
+              <text x="50" y="230" fill="#FFFFFF" font-family="var(--font-heading)" font-size="14">2025: Quantum Integration</text>
+              <text x="50" y="250" fill="#AAAAAA" font-size="12">Quantum-inspired probability models</text>
+            </svg>
+          </div>
         </div>
-        
-        <!-- Company Story Section -->
-        <div class="story-section">
-          <h2 class="section-title">Our Story</h2>
-          <div class="story-content">
-            <div class="story-text">
-              <p>
-                FlashDNA began with a simple question: why do traditional venture capital firms rely on intuition and personal networks when evaluating startups, instead of applying rigorous mathematical models?
-              </p>
-              <p>
-                Founded in 2023 by a team of mathematicians and former VCs, FlashDNA emerged from research into the application of partial differential equations and chaos theory to startup growth dynamics. Our insight was that startups can be modeled as complex systems where a rigorous mathematical approach provides predictive power that traditional methods cannot match.
-              </p>
-              <p>
-                Our first model, using a Black-Scholes-style PDE approach to calculate startup meltdown probabilities, demonstrated 76% higher accuracy than traditional methods. This breakthrough led to rapid expansion of our research, incorporating fractal dimensions, chaos theory, agent-based modeling, and quantum-inspired probability calculations.
-              </p>
-              <p>
-                Today, our FlashDNA Infinity platform processes over 10,000 startup data points per evaluation, distilling complex mathematical insights into clear investment recommendations with unparalleled accuracy.
-              </p>
-            </div>
-            <div class="story-timeline">
-              <svg viewBox="0 0 400 300" width="100%" height="100%">
-                <!-- Timeline line -->
-                <line x1="30" y1="20" x2="30" y2="280" stroke="#FFFFFF" stroke-width="2" />
-                
-                <!-- Timeline nodes -->
-                <circle cx="30" cy="60" r="8" fill="#FFFFFF" />
-                <circle cx="30" cy="120" r="8" fill="#FFFFFF" />
-                <circle cx="30" cy="180" r="8" fill="#FFFFFF" />
-                <circle cx="30" cy="240" r="8" fill="#FFFFFF" />
-                
-                <!-- Timeline content -->
-                <text x="50" y="50" fill="#FFFFFF" font-family="var(--font-heading)" font-size="14">2023: Foundation</text>
-                <text x="50" y="70" fill="#AAAAAA" font-size="12">Initial PDE meltdown research begins</text>
-                
-                <text x="50" y="110" fill="#FFFFFF" font-family="var(--font-heading)" font-size="14">2023: First Breakthrough</text>
-                <text x="50" y="130" fill="#AAAAAA" font-size="12">76% higher accuracy with first model</text>
-                
-                <text x="50" y="170" fill="#FFFFFF" font-family="var(--font-heading)" font-size="14">2024: Platform Release</text>
-                <text x="50" y="190" fill="#AAAAAA" font-size="12">FlashDNA Infinity launched</text>
-                
-                <text x="50" y="230" fill="#FFFFFF" font-family="var(--font-heading)" font-size="14">2025: Quantum Integration</text>
-                <text x="50" y="250" fill="#AAAAAA" font-size="12">Quantum-inspired probability models</text>
+      </section>
+
+      <!-- Mission & Values Section -->
+      <section class="mission-section">
+        <h2 class="section-title">Mission & Values</h2>
+        <div class="mission-grid">
+          <div class="mission-card">
+            <h3 class="mission-title">Our Mission</h3>
+            <p class="mission-text">
+              To transform venture capital through mathematical rigor, removing bias and increasing success rates for worthy innovations that might otherwise be overlooked.
+            </p>
+          </div>
+          
+          <div class="mission-card">
+            <h3 class="mission-title">Mathematical Truth</h3>
+            <p class="mission-text">
+              We believe that complex systems can be understood through mathematical models, and that data-driven insights lead to better investment decisions than intuition alone.
+            </p>
+          </div>
+          
+          <div class="mission-card">
+            <h3 class="mission-title">Radical Transparency</h3>
+            <p class="mission-text">
+              Our models and methodologies are transparent to our clients, allowing them to understand not just what we recommend, but why we recommend it.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Team Section -->
+      <section class="team-section">
+        <h2 class="section-title">Our Team</h2>
+        <div class="team-grid">
+          <!-- Team Member 1 -->
+          <div class="team-member">
+            <div class="member-avatar">
+              <svg class="avatar-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="45" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                <path d="M35,35 Q50,20 65,35 Q80,50 65,65 Q50,80 35,65 Q20,50 35,35" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                <circle cx="50" cy="50" r="15" fill="none" stroke="#FFFFFF" stroke-width="2" />
               </svg>
             </div>
+            <h3 class="member-name">Syed Faraaz</h3>
+            <div class="member-title">CEO</div>
+            <p class="member-bio">
+              Quantum physicist turned venture capitalist with a passion for applying mathematical models to investment decisions. Ph.D. from Stanford in Applied Mathematics.
+            </p>
+            <div class="member-expertise">
+              <span class="expertise-tag">Quantum Computing</span>
+              <span class="expertise-tag">Mathematical Modeling</span>
+              <span class="expertise-tag">Venture Strategy</span>
+            </div>
+          </div>
+          
+          <!-- Team Member 2 -->
+          <div class="team-member">
+            <div class="member-avatar">
+              <svg class="avatar-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="15" y="15" width="70" height="70" rx="15" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                <circle cx="50" cy="40" r="10" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                <path d="M30,65 Q50,85 70,65" fill="none" stroke="#FFFFFF" stroke-width="2" />
+              </svg>
+            </div>
+            <h3 class="member-name">Palchen</h3>
+            <div class="member-title">COO</div>
+            <p class="member-bio">
+              Former research lead at CERN with expertise in complex systems and chaos theory. Revolutionized our approach to pattern detection in startup trajectories.
+            </p>
+            <div class="member-expertise">
+              <span class="expertise-tag">Chaos Theory</span>
+              <span class="expertise-tag">Complex Systems</span>
+              <span class="expertise-tag">Statistical Physics</span>
+            </div>
+          </div>
+          
+          <!-- Team Member 3 -->
+          <div class="team-member">
+            <div class="member-avatar">
+              <svg class="avatar-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="50,15 85,50 50,85 15,50" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                <circle cx="50" cy="50" r="25" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                <circle cx="50" cy="50" r="5" fill="#FFFFFF" />
+                <line x1="50" y1="25" x2="50" y2="15" stroke="#FFFFFF" stroke-width="2" />
+                <line x1="50" y1="75" x2="50" y2="85" stroke="#FFFFFF" stroke-width="2" />
+                <line x1="25" y1="50" x2="15" y2="50" stroke="#FFFFFF" stroke-width="2" />
+                <line x1="75" y1="50" x2="85" y2="50" stroke="#FFFFFF" stroke-width="2" />
+              </svg>
+            </div>
+            <h3 class="member-name">Nagendra</h3>
+            <div class="member-title">CTO</div>
+            <p class="member-bio">
+              Distributed systems architect who built our high-performance computing platform. Previously led engineering at two AI unicorns and Google's quantum computing team.
+            </p>
+            <div class="member-expertise">
+              <span class="expertise-tag">HPC Architecture</span>
+              <span class="expertise-tag">Distributed Systems</span>
+              <span class="expertise-tag">Quantum Algorithms</span>
+            </div>
+          </div>
+          
+          <!-- Team Member 4 -->
+          <div class="team-member">
+            <div class="member-avatar">
+              <svg class="avatar-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="40" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                <path d="M30,40 Q50,20 70,40" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                <path d="M30,60 Q50,80 70,60" fill="none" stroke="#FFFFFF" stroke-width="2" />
+              </svg>
+            </div>
+            <h3 class="member-name">Kshiti</h3>
+            <div class="member-title">CFO</div>
+            <p class="member-bio">
+              Ex-partner at Sequoia with an economics background from Harvard. Bridges the gap between our algorithmic insights and practical investment strategies.
+            </p>
+            <div class="member-expertise">
+              <span class="expertise-tag">Investment Strategy</span>
+              <span class="expertise-tag">Portfolio Optimization</span>
+              <span class="expertise-tag">Risk Assessment</span>
+            </div>
+          </div>
+          
+          <!-- Team Member 5 -->
+          <div class="team-member">
+            <div class="member-avatar">
+              <svg class="avatar-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M25,50 C25,25 75,25 75,50 C75,75 25,75 25,50 Z" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                <circle cx="40" cy="40" r="5" fill="#FFFFFF" />
+                <circle cx="60" cy="40" r="5" fill="#FFFFFF" />
+                <path d="M40,65 Q50,75 60,65" fill="none" stroke="#FFFFFF" stroke-width="2" />
+              </svg>
+            </div>
+            <h3 class="member-name">Catherine</h3>
+            <div class="member-title">Head of Legal & Compliance</div>
+            <p class="member-bio">
+              Machine learning expert who developed our proprietary algorithms for detecting founder capability from intangible data. Ph.D. in AI from Berkeley.
+            </p>
+            <div class="member-expertise">
+              <span class="expertise-tag">Neural Networks</span>
+              <span class="expertise-tag">NLP</span>
+              <span class="expertise-tag">Predictive Modeling</span>
+            </div>
+          </div>
+          
+          <!-- Team Member 6 -->
+          <div class="team-member">
+            <div class="member-avatar">
+              <svg class="avatar-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="20" width="60" height="60" rx="5" fill="none" stroke="#FFFFFF" stroke-width="2" />
+                <line x1="20" y1="40" x2="80" y2="40" stroke="#FFFFFF" stroke-width="2" />
+                <line x1="20" y1="60" x2="80" y2="60" stroke="#FFFFFF" stroke-width="2" />
+                <line x1="40" y1="20" x2="40" y2="80" stroke="#FFFFFF" stroke-width="2" />
+                <line x1="60" y1="20" x2="60" y2="80" stroke="#FFFFFF" stroke-width="2" />
+              </svg>
+            </div>
+            <h3 class="member-name">Amer</h3>
+            <div class="member-title">Head of Marketing</div>
+            <p class="member-bio">
+              Operational excellence expert with experience scaling three startups. MBA from Wharton with a focus on organizational design for high-innovation companies.
+            </p>
+            <div class="member-expertise">
+              <span class="expertise-tag">Scaling Operations</span>
+              <span class="expertise-tag">Process Optimization</span>
+              <span class="expertise-tag">Strategic Planning</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- FOOTER -->
+      <footer class="footer">
+        <div class="footer-grid">
+          <!-- Company info -->
+          <div class="footer-logo">
+            <div class="footer-logo-symbol">
+              <div class="footer-logo-icon"></div>
+              <div class="footer-logo-text">FLASH</div>
+            </div>
+            <p class="footer-tagline">
+              Redefining the future of investments through AI-powered analytics and quantum neural networks.
+            </p>
+          </div>
+          
+          <!-- Navigation -->
+          <div class="footer-nav">
+            <h4 class="footer-heading">Navigation</h4>
+            <ul class="footer-links">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Platform</a></li>
+              <li><a href="#">Technology</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+          
+          <!-- Legal -->
+          <div class="footer-legal">
+            <h4 class="footer-heading">Legal</h4>
+            <ul class="footer-links">
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Cookie Policy</a></li>
+              <li><a href="#">Disclaimer</a></li>
+            </ul>
+          </div>
+          
+          <!-- Contact -->
+          <div class="footer-contact">
+            <h4 class="footer-heading">Contact</h4>
+            <div class="footer-contact-info">
+              <p>600 California Street<br>
+              San Francisco, CA 94108<br>
+              United States</p>
+              <p>contact@flash.zone<br>
+              +1 (415) 555-0123</p>
+            </div>
+          </div>
+          
+          <!-- Social -->
+          <div class="footer-social">
+            <h4 class="footer-heading">Connect</h4>
+            <ul class="footer-links">
+              <li><a href="#">LinkedIn</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">Medium</a></li>
+            </ul>
+            <div class="footer-social-links">
+              <a href="#" class="social-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+              </a>
+              <a href="#" class="social-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+              </a>
+              <a href="#" class="social-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              </a>
+            </div>
           </div>
         </div>
         
-        <!-- Mission & Values Section -->
-        <div class="mission-section">
-          <h2 class="section-title">Mission & Values</h2>
-          <div class="mission-grid">
-            <div class="mission-card">
-              <h3 class="mission-title">Our Mission</h3>
-              <p class="mission-text">
-                To transform venture capital through mathematical rigor, removing bias and increasing success rates for worthy innovations that might otherwise be overlooked.
-              </p>
-            </div>
-            
-            <div class="mission-card">
-              <h3 class="mission-title">Mathematical Truth</h3>
-              <p class="mission-text">
-                We believe that complex systems can be understood through mathematical models, and that data-driven insights lead to better investment decisions than intuition alone.
-              </p>
-            </div>
-            
-            <div class="mission-card">
-              <h3 class="mission-title">Radical Transparency</h3>
-              <p class="mission-text">
-                Our models and methodologies are transparent to our clients, allowing them to understand not just what we recommend, but why we recommend it.
-              </p>
-            </div>
+        <!-- Footer bottom -->
+        <div class="footer-bottom">
+          <div class="footer-copyright">
+            © 2025 Flash Ventures. All rights reserved.
+          </div>
+          <div class="footer-signature">
+            Designed with precision in San Francisco
           </div>
         </div>
-        
-        <!-- Team Section -->
-        <div class="team-section">
-          <h2 class="section-title">Our Team</h2>
-          <div class="team-grid">
-            <!-- Team Member 1 -->
-            <div class="team-member">
-              <div class="member-avatar">
-                <svg class="avatar-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="50" cy="50" r="45" fill="none" stroke="#FFFFFF" stroke-width="2" />
-                  <path d="M30,30 L45,45 L30,60 L45,75 L60,60 L75,45 L60,30 L45,15 Z" fill="none" stroke="#FFFFFF" stroke-width="2" />
-                  <circle cx="50" cy="50" r="15" fill="none" stroke="#FFFFFF" stroke-width="2" />
-                </svg>
-              </div>
-              <h3 class="member-name">Syed Faraaz</h3>
-              <div class="member-title">CEO</div>
-              <p class="member-bio">
-                Serial entrepreneur with a proven track record of successful startups and exits in the technology sector. Expert in strategic growth and business development.
-              </p>
-              <div class="member-expertise">
-                <span class="expertise-tag">Mathematics</span>
-                <span class="expertise-tag">VC Strategy</span>
-                <span class="expertise-tag">PDE Systems</span>
-              </div>
-            </div>
-            
-            <!-- Team Member 2 -->
-            <div class="team-member">
-              <div class="member-avatar">
-                <svg class="avatar-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="10" y="10" width="80" height="80" rx="10" fill="none" stroke="#FFFFFF" stroke-width="2" />
-                  <circle cx="35" cy="40" r="10" fill="none" stroke="#FFFFFF" stroke-width="2" />
-                  <circle cx="65" cy="40" r="10" fill="none" stroke="#FFFFFF" stroke-width="2" />
-                  <path d="M30,70 Q50,90 70,70" fill="none" stroke="#FFFFFF" stroke-width="2" />
-                </svg>
-              </div>
-              <h3 class="member-name">Palchen</h3>
-              <div class="member-title">COO</div>
-              <p class="member-bio">
-                SaaS operations expert with 7 years of consulting experience. Specialized in scaling operations and optimizing business processes.
-              </p>
-              <div class="member-expertise">
-                <span class="expertise-tag">HPC</span>
-                <span class="expertise-tag">Quantum Computing</span>
-                <span class="expertise-tag">AI Architecture</span>
-              </div>
-            </div>
-            
-            <!-- Team Member 3 -->
-            <div class="team-member">
-              <div class="member-avatar">
-                <svg class="avatar-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                  <polygon points="50,10 90,50 50,90 10,50" fill="none" stroke="#FFFFFF" stroke-width="2" />
-                  <line x1="50" y1="10" x2="50" y2="90" stroke="#FFFFFF" stroke-width="2" />
-                  <line x1="10" y1="50" x2="90" y2="50" stroke="#FFFFFF" stroke-width="2" />
-                  <circle cx="50" cy="50" r="20" fill="none" stroke="#FFFFFF" stroke-width="2" />
-                </svg>
-              </div>
-              <h3 class="member-name">Nagendra</h3>
-              <div class="member-title">CTO</div>
-              <p class="member-bio">
-                Pioneer in developing advanced algorithms and predictive analytics systems.
-              </p>
-              <div class="member-expertise">
-                <span class="expertise-tag">Fractal Mathematics</span>
-                <span class="expertise-tag">Chaos Theory</span>
-                <span class="expertise-tag">Complex Systems</span>
-              </div>
-            </div>
-            
-            <!-- Team Member 4 -->
-            <div class="team-member">
-              <div class="member-avatar">
-                <svg class="avatar-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="50" cy="50" r="40" fill="none" stroke="#FFFFFF" stroke-width="2" />
-                  <path d="M30,70 C45,90 55,90 70,70" fill="none" stroke="#FFFFFF" stroke-width="2" />
-                  <path d="M30,30 L40,40 L50,30 L60,40 L70,30" fill="none" stroke="#FFFFFF" stroke-width="2" />
-                </svg>
-              </div>
-              <h3 class="member-name">Kshiti</h3>
-              <div class="member-title">CFO</div>
-              <p class="member-bio">
-                Former Senior Manager at KPMG with extensive experience in financial management and strategy. Expert in tech company financials and IPO preparations.
-              </p>
-              <div class="member-expertise">
-                <span class="expertise-tag">Investment Strategy</span>
-                <span class="expertise-tag">Exit Planning</span>
-                <span class="expertise-tag">Pattern Recognition</span>
-              </div>
-            </div>
-            
-            <!-- Team Member 5 -->
-            <div class="team-member">
-              <div class="member-avatar">
-                <svg class="avatar-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M20,50 Q50,20 80,50 Q50,80 20,50" fill="none" stroke="#FFFFFF" stroke-width="2" />
-                  <path d="M35,50 Q50,35 65,50 Q50,65 35,50" fill="none" stroke="#FFFFFF" stroke-width="2" />
-                  <circle cx="50" cy="50" r="30" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="5,5" />
-                </svg>
-              </div>
-              <h3 class="member-name">Catherine</h3>
-              <div class="member-title">Head of Legal & Compliance</div>
-              <p class="member-bio">
-                Legal technology expert with 20 years of experience in legal department operations. Specialized in regulatory compliance for tech companies.
-              </p>
-              <div class="member-expertise">
-                <span class="expertise-tag">Natural Language Processing</span>
-                <span class="expertise-tag">Large Language Models</span>
-                <span class="expertise-tag">Semantic Analysis</span>
-              </div>
-            </div>
-            
-            <!-- Team Member 6 -->
-            <div class="team-member">
-              <div class="member-avatar">
-                <svg class="avatar-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                  <line x1="20" y1="30" x2="80" y2="30" stroke="#FFFFFF" stroke-width="2" />
-                  <line x1="20" y1="50" x2="80" y2="50" stroke="#FFFFFF" stroke-width="2" />
-                  <line x1="20" y1="70" x2="80" y2="70" stroke="#FFFFFF" stroke-width="2" />
-                  <circle cx="30" cy="30" r="5" fill="#FFFFFF" />
-                  <circle cx="50" cy="50" r="5" fill="#FFFFFF" />
-                  <circle cx="70" cy="70" r="5" fill="#FFFFFF" />
-                </svg>
-              </div>
-              <h3 class="member-name">Amer</h3>
-              <div class="member-title">Head of Marketing</div>
-              <p class="member-bio">
-                Digital marketing strategist with 10 years of experience in the Indian market. Expert in growth marketing and brand development.
-              </p>
-              <div class="member-expertise">
-                <span class="expertise-tag">Agent-Based Modeling</span>
-                <span class="expertise-tag">Reinforcement Learning</span>
-                <span class="expertise-tag">Emergent Behavior</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      </footer>
     </main>
 
-    <div class="sidebar-right">
-      <div class="sidebar-text">DIMENSIONAL QUANTUM ANALYTICS</div>
-    </div>
+    <!-- Right sidebar -->
+    <div class="sidebar-right"></div>
   </div>
 
   <!-- Dark/Light mode switch -->
-  <div class="mode-switch" tabindex="0" role="button" aria-label="Toggle dark and light mode"></div>
+  <div class="mode-switch" tabindex="0" role="button" aria-label="Toggle dark/light mode"></div>
 
   <!-- JavaScript -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Check if user prefers dark or light mode
-      const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const body = document.body;
-      const modeSwitch = document.querySelector('.mode-switch');
-      
-      // Apply user's system preference
-      if (!prefersDarkMode) {
-        body.classList.add('light-mode');
-        modeSwitch.classList.add('light-mode');
-      }
-      
-      /* ------------------------------------------------
-         LOADING SCREEN
-      ------------------------------------------------*/
+      // Loading screen animation
       const loadingScreen = document.querySelector('.loading-screen');
       const loadingBar = document.querySelector('.loading-bar');
-      
-      // Simulate loading progress
+      const loadingPercentage = document.querySelector('.loading-percentage');
       let progress = 0;
+      
       const loadingInterval = setInterval(() => {
-        progress += Math.random() * 10;
+        progress += Math.random() * 8; 
         if (progress >= 100) {
           progress = 100;
-          clearTimeout(loadingInterval);
+          clearInterval(loadingInterval);
           
-          // Hide loading screen after a short delay
           setTimeout(() => {
             loadingScreen.classList.add('loaded');
+            document.body.classList.add('loaded');
+            
+            // Make all elements visible with staggered animations
+            document.querySelector('.about-title').classList.add('visible');
+            document.querySelector('.about-description').classList.add('visible');
+            
+            // Section titles
+            const sectionTitles = document.querySelectorAll('.section-title');
+            sectionTitles.forEach((title, index) => {
+              setTimeout(() => {
+                title.classList.add('visible');
+              }, 100 * index);
+            });
+            
+            // Story content
+            setTimeout(() => {
+              document.querySelector('.story-content').classList.add('visible');
+            }, 200);
+            
+            // Mission cards
+            setTimeout(() => {
+              document.querySelector('.mission-grid').classList.add('visible');
+            }, 300);
+            
+            // Team members
+            setTimeout(() => {
+              document.querySelector('.team-grid').classList.add('visible');
+            }, 400);
           }, 500);
         }
+        
         loadingBar.style.width = `${progress}%`;
-      }, 150);
+        loadingPercentage.textContent = `${Math.floor(progress)}%`;
+      }, 100);
 
-      /* ------------------------------------------------
-         SCROLL PROGRESS INDICATOR
-      ------------------------------------------------*/
+      // Progress bar
       const progressBar = document.querySelector('.progress-bar');
-      
-      window.addEventListener('scroll', () => {
+      function updateProgressBar() {
         const scrollTop = window.scrollY;
         const docHeight = document.documentElement.scrollHeight;
         const winHeight = window.innerHeight;
         const scrollPercent = scrollTop / (docHeight - winHeight);
         
-        progressBar.style.width = `${window.innerWidth * scrollPercent}px`;
-      });
-
-      /* ------------------------------------------------
-         ADVANCED CURSOR
-      ------------------------------------------------*/
-      const cursorDot = document.querySelector('.cursor-dot');
-      const cursorCircle = document.querySelector('.cursor-circle');
-      const cursorContainer = document.querySelector('.cursor-container');
-
-      // Only apply custom cursor on non-touch devices
-      if (!('ontouchstart' in window)) {
-        let mouseX = 0;
-        let mouseY = 0;
-        let dotX = 0;
-        let dotY = 0;
-        let circleX = 0;
-        let circleY = 0;
-        
-        // Use requestAnimationFrame for smoother cursor movement
-        function updateCursor() {
-          // Smooth follow with lerp (linear interpolation)
-          dotX += (mouseX - dotX) * 0.2;
-          dotY += (mouseY - dotY) * 0.2;
-          circleX += (mouseX - circleX) * 0.1;
-          circleY += (mouseY - circleY) * 0.1;
-          
-          cursorDot.style.transform = `translate(${dotX}px, ${dotY}px)`;
-          cursorCircle.style.transform = `translate(${circleX}px, ${circleY}px)`;
-          
-          requestAnimationFrame(updateCursor);
-        }
-        
-        document.addEventListener('mousemove', (e) => {
-          mouseX = e.clientX;
-          mouseY = e.clientY;
-          
-          // Create trail with throttling for performance
-          if (Math.random() > 0.7) {
-            const trail = document.createElement('div');
-            trail.className = 'cursor-trail';
-            cursorContainer.appendChild(trail);
-            
-            trail.style.left = `${mouseX}px`;
-            trail.style.top = `${mouseY}px`;
-            
-            setTimeout(() => {
-              trail.style.opacity = '0';
-              trail.style.transform = 'translate(-50%, -50%) scale(2)';
-              
-              // Remove from DOM after animation
-              setTimeout(() => {
-                trail.remove();
-              }, 1000);
-            }, 10);
-          }
-        });
-        
-        // Start the animation loop
-        updateCursor();
-
-        // Interactive elements cursor effect
-        const interactiveEls = document.querySelectorAll('a, .nav-toggle, .team-member, .mission-card, .mode-switch, [tabindex="0"]');
-        interactiveEls.forEach(el => {
-          el.addEventListener('mouseenter', () => {
-            cursorDot.style.width = '12px';
-            cursorDot.style.height = '12px';
-            gsap.to(cursorCircle, {
-              scale: 1.5,
-              opacity: 0.7,
-              duration: 0.3,
-              ease: "power2.out"
-            });
-          });
-          
-          el.addEventListener('mouseleave', () => {
-            cursorDot.style.width = '8px';
-            cursorDot.style.height = '8px';
-            gsap.to(cursorCircle, {
-              scale: 1,
-              opacity: 1,
-              duration: 0.3,
-              ease: "power2.out"
-            });
-          });
-        });
+        progressBar.style.width = `${scrollPercent * 100}%`;
+        progressBar.style.transform = `scaleX(${scrollPercent})`;
       }
+      
+      window.addEventListener('scroll', updateProgressBar);
+      updateProgressBar();
 
-      /* ------------------------------------------------
-         NAVIGATION TOGGLE
-      ------------------------------------------------*/
+      // Navigation toggle
       const navToggle = document.querySelector('.nav-toggle');
       const navigation = document.querySelector('.navigation');
-      
-      navToggle.addEventListener('click', toggleNav);
-      navToggle.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          toggleNav();
-        }
-      });
       
       function toggleNav() {
         navToggle.classList.toggle('active');
         navigation.classList.toggle('active');
         
-        // Update ARIA attributes
         const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
         navToggle.setAttribute('aria-expanded', !isExpanded);
         navigation.setAttribute('aria-hidden', isExpanded);
-        
-        // Focus trap for keyboard navigation
-        if (!isExpanded) {
-          setTimeout(() => {
-            document.querySelector('.nav-links a').focus();
-          }, 100);
-        }
       }
       
-      // Close navigation when clicking outside
+      navToggle.addEventListener('click', toggleNav);
+      
+      // Close nav on outside click or ESC
       document.addEventListener('click', (e) => {
-        if (navigation.classList.contains('active') && 
-            !navigation.contains(e.target) && 
+        if (navigation.classList.contains('active') &&
+            !navigation.contains(e.target) &&
             !navToggle.contains(e.target)) {
           toggleNav();
         }
       });
       
-      // Close navigation on escape key
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && navigation.classList.contains('active')) {
           toggleNav();
@@ -1352,178 +1621,196 @@
         }
       });
 
-      /* ------------------------------------------------
-         DYNAMIC GRID BACKGROUND
-      ------------------------------------------------*/
-      const gridBackground = document.querySelector('.grid-background');
-      const gridCount = {
-        horizontal: 10,
-        vertical: 10
-      };
-      
-      // Create grid with performance optimization
-      function createGrid() {
-        // Clear existing grid lines
-        gridBackground.innerHTML = '';
-        
-        // Create a document fragment for better performance
-        const fragment = document.createDocumentFragment();
-        
-        // Horizontal lines
-        for (let i = 1; i <= gridCount.horizontal; i++) {
-          const gridLine = document.createElement('div');
-          gridLine.classList.add('grid-line', 'grid-horizontal');
-          gridLine.style.top = `${(i * 100) / (gridCount.horizontal + 1)}%`;
-          fragment.appendChild(gridLine);
+      // 3D Wireframe
+      function initWireframe() {
+        if (typeof THREE === 'undefined') {
+          console.warn('Three.js not loaded');
+          return;
         }
         
-        // Vertical lines
-        for (let i = 1; i <= gridCount.vertical; i++) {
-          const gridLine = document.createElement('div');
-          gridLine.classList.add('grid-line', 'grid-vertical');
-          gridLine.style.left = `${(i * 100) / (gridCount.vertical + 1)}%`;
-          fragment.appendChild(gridLine);
-        }
-        
-        // Add all lines at once
-        gridBackground.appendChild(fragment);
-        
-        // Animate grid lines
-        const horizontalLines = document.querySelectorAll('.grid-horizontal');
-        const verticalLines = document.querySelectorAll('.grid-vertical');
-        
-        horizontalLines.forEach((line, index) => {
-          gsap.to(line, {
-            scaleX: 1,
-            duration: 1.5,
-            delay: 0.05 * index,
-            ease: "power3.inOut"
-          });
-        });
-        
-        verticalLines.forEach((line, index) => {
-          gsap.to(line, {
-            scaleY: 1,
-            duration: 1.5,
-            delay: 0.05 * index,
-            ease: "power3.inOut"
-          });
-        });
-      }
-      
-      // Create grid initially
-      createGrid();
-      
-      // Recreate grid on resize (with debounce)
-      let resizeTimeout;
-      window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(createGrid, 200);
-      });
-
-      /* ------------------------------------------------
-         DARK/LIGHT MODE TOGGLE
-      ------------------------------------------------*/
-      modeSwitch.addEventListener('click', toggleMode);
-      modeSwitch.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          toggleMode();
-        }
-      });
-      
-      function toggleMode() {
-        body.classList.toggle('light-mode');
-        modeSwitch.classList.toggle('light-mode');
-        
-        const isLightMode = body.classList.contains('light-mode');
-        localStorage.setItem('lightMode', isLightMode);
-        
-        // Update ARIA label
-        modeSwitch.setAttribute('aria-label', 
-          isLightMode ? 'Switch to dark mode' : 'Switch to light mode'
-        );
-        
-        // Smooth transition effect
-        gsap.to('.container', {
-          opacity: 0.8,
-          duration: 0.2,
-          onComplete: () => {
-            gsap.to('.container', {
-              opacity: 1,
-              duration: 0.2
-            });
-          }
-        });
-      }
-      
-      // Set initial ARIA label
-      modeSwitch.setAttribute('aria-label', 
-        body.classList.contains('light-mode') ? 'Switch to dark mode' : 'Switch to light mode'
-      );
-
-      /* ------------------------------------------------
-         3D WIREFRAME IN BACKGROUND
-      ------------------------------------------------*/
-      if (typeof THREE !== 'undefined') {
-        // Create scene
         const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(
+          60, 
+          window.innerWidth / window.innerHeight, 
+          0.1, 
+          1000
+        );
+        camera.position.z = 8;
         
-        // Create camera
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 5;
-        
-        // Create renderer
         const renderer = new THREE.WebGLRenderer({ 
           alpha: true, 
           antialias: true,
-          powerPreference: 'high-performance'
+          preserveDrawingBuffer: true
         });
         
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         
-        document.getElementById('wireframe-container').appendChild(renderer.domElement);
+        const container = document.getElementById('wireframe-container');
+        container.innerHTML = '';
+        container.appendChild(renderer.domElement);
         
-        // Complex geometry representing interconnected nodes
-        const geometry = new THREE.IcosahedronGeometry(2, 1);
-        const edges = new THREE.EdgesGeometry(geometry);
+        const group = new THREE.Group();
         
-        // Material
-        const wireframeMaterial = new THREE.LineBasicMaterial({
-          color: 0xffffff,
-          transparent: true,
-          opacity: body.classList.contains('light-mode') ? 0.05 : 0.1
-        });
+        // Get the current mode for coloring
+        const isLightMode = document.body.classList.contains('light-mode');
+        const wireColor = isLightMode ? 0x000000 : 0xffffff;
         
-        const wireframe = new THREE.LineSegments(edges, wireframeMaterial);
-        scene.add(wireframe);
+        // Main icosahedron
+        const icoGeometry = new THREE.IcosahedronGeometry(2.2, 1);
+        const icoEdges = new THREE.EdgesGeometry(icoGeometry);
+        const icoLines = new THREE.LineSegments(
+          icoEdges,
+          new THREE.LineBasicMaterial({ 
+            color: wireColor,
+            transparent: true,
+            opacity: 0.2
+          })
+        );
+        group.add(icoLines);
         
-        // Animation loop
-        function animate() {
-          requestAnimationFrame(animate);
-          
-          wireframe.rotation.x += 0.001;
-          wireframe.rotation.y += 0.002;
-          
-          // Responsive to scroll
-          const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-          wireframe.rotation.z = scrollPercent * Math.PI * 2;
-          wireframe.scale.setScalar(1 + scrollPercent * 0.5);
-          
-          renderer.render(scene, camera);
+        // Outer sphere
+        const sphereGeometry = new THREE.SphereGeometry(3, 24, 24);
+        const sphereEdges = new THREE.EdgesGeometry(sphereGeometry);
+        const sphereLines = new THREE.LineSegments(
+          sphereEdges,
+          new THREE.LineBasicMaterial({ 
+            color: wireColor,
+            transparent: true,
+            opacity: 0.15
+          })
+        );
+        group.add(sphereLines);
+        
+        // Inner shape
+        const dodecGeometry = new THREE.DodecahedronGeometry(1.5, 0);
+        const dodecEdges = new THREE.EdgesGeometry(dodecGeometry);
+        const dodecLines = new THREE.LineSegments(
+          dodecEdges,
+          new THREE.LineBasicMaterial({ 
+            color: wireColor,
+            transparent: true,
+            opacity: 0.25
+          })
+        );
+        group.add(dodecLines);
+        
+        // Add points
+        const pointsGeometry = new THREE.BufferGeometry();
+        const pointsCount = 150;
+        const pointsPositions = new Float32Array(pointsCount * 3);
+        
+        for (let i = 0; i < pointsCount; i++) {
+          const i3 = i * 3;
+          pointsPositions[i3] = (Math.random() - 0.5) * 10;
+          pointsPositions[i3 + 1] = (Math.random() - 0.5) * 10;
+          pointsPositions[i3 + 2] = (Math.random() - 0.5) * 10;
         }
         
-        // Start animation
+        pointsGeometry.setAttribute('position', new THREE.BufferAttribute(pointsPositions, 3));
+        
+        const pointsMaterial = new THREE.PointsMaterial({
+          color: wireColor,
+          size: 0.05,
+          transparent: true,
+          opacity: 0.8
+        });
+        
+        const points = new THREE.Points(pointsGeometry, pointsMaterial);
+        group.add(points);
+        
+        scene.add(group);
+        
+        // Animation
+        let rotationSpeed = { x: 0.0005, y: 0.001 };
+        let lastScrollY = window.scrollY;
+        let animFrame;
+        
+        // Position adjustment
+        group.position.x = 2;
+        
+        function animate() {
+          group.rotation.x += rotationSpeed.x;
+          group.rotation.y += rotationSpeed.y;
+          
+          const time = Date.now() * 0.001;
+          const pulse = Math.sin(time) * 0.05 + 1;
+          group.scale.set(pulse, pulse, pulse);
+          
+          // Respond to scroll but keep the wireframe fixed
+          const scrollY = window.scrollY;
+          if (scrollY !== lastScrollY) {
+            // Just update lastScrollY to avoid transforming the wireframe
+            lastScrollY = scrollY;
+          }
+          
+          renderer.render(scene, camera);
+          animFrame = requestAnimationFrame(animate);
+        }
+        
         animate();
         
-        // Handle resize
+        // Resize handler
         window.addEventListener('resize', () => {
           camera.aspect = window.innerWidth / window.innerHeight;
           camera.updateProjectionMatrix();
           renderer.setSize(window.innerWidth, window.innerHeight);
         });
+        
+        // Handle visibility change
+        document.addEventListener('visibilitychange', () => {
+          if (document.hidden) {
+            cancelAnimationFrame(animFrame);
+          } else {
+            animate();
+          }
+        });
+        
+        // Respond to mouse
+        document.addEventListener('mousemove', (e) => {
+          const mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+          const mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+          
+          rotationSpeed.x = 0.0005 + mouseY * 0.0003;
+          rotationSpeed.y = 0.001 + mouseX * 0.0003;
+        });
       }
+      
+      // Initialize wireframe
+      setTimeout(initWireframe, 500);
+
+      // Color mode toggle functionality
+      const modeSwitch = document.querySelector('.mode-switch');
+      
+      // Check for saved preference in localStorage
+      if (localStorage.getItem('colorMode') === 'light') {
+        document.body.classList.add('light-mode');
+      }
+      
+      // Toggle between dark and light mode
+      function toggleColorMode() {
+        document.body.classList.toggle('light-mode');
+        
+        // Save preference to localStorage
+        if (document.body.classList.contains('light-mode')) {
+          localStorage.setItem('colorMode', 'light');
+        } else {
+          localStorage.setItem('colorMode', 'dark');
+        }
+        
+        // Reinitialize wireframe to ensure it's visible in both modes
+        setTimeout(initWireframe, 100);
+      }
+      
+      modeSwitch.addEventListener('click', toggleColorMode);
+      
+      // Allow toggling with keyboard
+      modeSwitch.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleColorMode();
+        }
+      });
     });
   </script>
 </body>
