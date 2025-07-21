@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Flash Ventures Logo - High quality version -->
+  <defs>
+    <mask id="halfCircle">
+      <rect x="0" y="0" width="128" height="128" fill="white"/>
+      <rect x="64" y="0" width="64" height="128" fill="black"/>
+    </mask>
+  </defs>
+  
+  <!-- Outer circle (border) -->
+  <circle cx="64" cy="64" r="60" fill="none" stroke="#000000" stroke-width="8"/>
+  
+  <!-- Half-filled circle -->
+  <circle cx="64" cy="64" r="60" fill="#000000" mask="url(#halfCircle)"/>
+</svg>
